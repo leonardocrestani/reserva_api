@@ -1,6 +1,6 @@
-import User from '../entities/User'
+import { User } from '../entities'
 
-export default interface CreateUser {
+export interface CreateUser {
     execute: (name: string, surname: string, cpf: string, country: string, email: string, password: string,
         phone_number: string) => Promise<User>
 }

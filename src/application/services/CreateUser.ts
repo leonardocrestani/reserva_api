@@ -1,8 +1,8 @@
-import User from "../../core/entities/User";
-import CreateUser from "../../core/use-cases/create-user";
-import UserRepository from "../repository/User-repository";
+import { User } from "../../core/entities";
+import { CreateUser } from "../../core/use-cases";
+import { UserRepository } from "../repository";
 
-export default class CreateUserService implements CreateUser {
+export class CreateUserService implements CreateUser {
     constructor(private readonly userRepository: UserRepository) { }
 
     async execute(name: string, surname: string, cpf: string, country: string, email: string, password: string,
