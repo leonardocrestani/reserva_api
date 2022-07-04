@@ -1,4 +1,4 @@
-import UserRepository from "../../application/repository/User-repository";
+import UserRepository from "../../application/repository/UserRepository";
 import { UserModel } from "../../application/models/UserModel";
 
 export default class UserRepositoryMemory implements UserRepository {

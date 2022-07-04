@@ -1,5 +1,5 @@
-import UserRepositoryMemory from '../src/infra/repository/user-repository-memory';
-import CreateUserService from '../src/application/services/create-user';
+import UserRepositoryMemory from '../src/infra/repository/UserRepositoryMemory';
+import CreateUserService from '../src/application/services/CreateUser';
 
 describe('Register user', () => {
 
