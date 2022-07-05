@@ -12,6 +12,7 @@
   "author": "Leonardo Crestani",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "4.0.0",
     "express": "4.18.1",
     "prisma": "4.0.0",
     "typescript": "4.7.4"
