@@ -9,7 +9,12 @@ export class UserRepositoryMemory implements UserRepository {
         phone_number: string): Promise<UserModel> {
         this.createdUsers.push({ name, surname, cpf, country, email, password, phone_number });
         const createdUser = this.createdUsers[0]
-        return Promise.resolve(createdUser);
+        return createdUser;
     };
+
+    async findUser(email: string, password: string): Promise<any> {
+        const user = this.createdUsers.find(user => user.email === email && user.password === password);
+        return user;
+    }
 
 }
