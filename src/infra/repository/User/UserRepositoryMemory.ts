@@ -1,5 +1,5 @@
-import { UserRepository } from "../../application/repository";
-import { UserModel } from "../../application/models/UserModel";
+import { UserRepository } from "../../../application/repository";
+import { UserModel } from "../../../application/models/UserModel";
 
 export class UserRepositoryMemory implements UserRepository {
 

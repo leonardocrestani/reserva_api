@@ -1,5 +1,5 @@
 import { User } from '../../core/entities';
-import { GetUserById } from '../../core/use-cases/GetUser';
+import { GetUserById } from '../../core/use-cases';
 import { UserRepository } from '../repository';
 
 export class GetUserService implements GetUserById {
