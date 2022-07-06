@@ -6,6 +6,8 @@
   "scripts": {
     "prebuild": "rm -rf ./dist",
     "build": "tsc --build",
+    "prestart": "rm -rf ./dist",
+    "start": "tsc --build && node ./dist/src/infra/http/server.js",
     "pretest": "rm -rf ./dist",
     "test": "tsc && jest ./dist"
   },
