@@ -14,8 +14,8 @@ model User {
   surname String
   cpf String
   country String
-  email String
-  password String
+  email String @unique
+  password String @unique
   phone_number String
   created_at DateTime @default(now())
   updated_at DateTime @default(now()) @updatedAt

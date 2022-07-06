@@ -7,7 +7,6 @@ export class CreateUserService implements CreateUser {
 
     async execute(name: string, surname: string, cpf: string, country: string, email: string, password: string,
         phone_number: string): Promise<User> {
-        return this.userRepository.create(name, surname, cpf, country, email, password,
-            phone_number);
+        return this.userRepository.create(name, surname, cpf, country, email, password, phone_number);
     }
 }
