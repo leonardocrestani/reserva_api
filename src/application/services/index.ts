@@ -1,2 +1,2 @@
-export * from './CreateUser';
-export * from './GetUser';
+export * from './CreateUserService';
+export * from './GetUserService';

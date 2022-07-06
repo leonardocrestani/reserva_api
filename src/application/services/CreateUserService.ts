@@ -7,6 +7,10 @@ export class CreateUserService implements CreateUser {
 
     async execute(name: string, surname: string, cpf: string, country: string, email: string, password: string,
         phone_number: string): Promise<User> {
-        return this.userRepository.create(name, surname, cpf, country, email, password, phone_number);
+        const user = await this.userRepository.create(name, surname, cpf, country, email, password, phone_number);
+        if (!user) {
+            throw new Error("Nao foi possivel cadastrar novo usuario");
+        }
+        return user;
     }
 }
