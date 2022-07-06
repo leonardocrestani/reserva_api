@@ -1,25 +1,15 @@
 import { UserRepositoryMemory } from '../../src/infra/repository';
 import { CreateUserService } from '../../src/application/services';
 import { GetUserService } from '../../src/application/services';
-import { UserRepositoryPrisma } from '../../src/infra/repository';
-import { prisma } from '../../src/infra/database/index';
 
 describe('Get user', () => {
 
-    beforeAll(async () => {
-        await prisma.user.deleteMany({});
-    });
-
-    afterAll(async () => {
-        await prisma.user.deleteMany({});
-    });
-
     test('Should get user', async () => {
-        const userRepositoryPrisma = new UserRepositoryPrisma();
-        const createUser = new CreateUserService(userRepositoryPrisma);
+        const userRepositoryMemory = new UserRepositoryMemory();
+        const createUser = new CreateUserService(userRepositoryMemory);
         const newUser = await createUser.execute("Leonardo", "Crestani", "1233456789",
             "Brasil", "leonardo@test.com", "123456*", "+5554999435");
-        const getUser = new GetUserService(userRepositoryPrisma);
+        const getUser = new GetUserService(userRepositoryMemory);
         const user = await getUser.execute("leonardo@test.com", "123456*");
         expect(user.email).toBe("leonardo@test.com");
         expect(user.password).toBe("123456*");
