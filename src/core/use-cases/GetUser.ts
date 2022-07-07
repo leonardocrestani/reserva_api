@@ -1,5 +1,5 @@
 import { User } from '../entities/User';
 
-export interface GetUserById {
+export interface GetUser {
     execute: (email: string, password: string) => Promise<object>
 }

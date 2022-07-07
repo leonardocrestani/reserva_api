@@ -17,9 +17,11 @@
   "dependencies": {
     "@prisma/client": "4.0.0",
     "celebrate": "^15.0.1",
+    "cpf-cnpj-validator": "^1.0.3",
     "dotenv": "16.0.1",
     "express": "4.18.1",
     "joi": "17.6.0",
+    "joi-phone-number": "^5.1.1",
     "prisma": "4.0.0",
     "typescript": "4.7.4"
   },

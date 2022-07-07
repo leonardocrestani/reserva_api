@@ -6,7 +6,7 @@ import { userValidator } from '../validators/userValidator';
 
 const userRouter = Router();
 
-userRouter.get('/', ExpressAdapter.create(UserController.findOne));
+userRouter.get('/', celebrate(userValidator.QUERY), ExpressAdapter.create(UserController.findOne));
 userRouter.post('/', celebrate(userValidator.BODY, { abortEarly: true }), ExpressAdapter.create(UserController.register));
 
 export { userRouter };
