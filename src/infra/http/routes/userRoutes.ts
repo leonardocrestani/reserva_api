@@ -1,10 +1,11 @@
-import { Router } from "express";
+import { Router } from 'express';
+import { celebrate } from 'celebrate';
 import { ExpressAdapter } from '../../../adapters';
 import { UserController } from '../../../controllers';
-import registerValidator from '../validators/User/registerValidator';
+import { userValidator } from '../validators/User/registerValidator';
 
 const userRouter = Router();
 
-userRouter.post('/', registerValidator, ExpressAdapter.create(UserController.register));
+userRouter.post('/', celebrate(userValidator.BODY), ExpressAdapter.create(UserController.register));
 
 export { userRouter };
