@@ -3,9 +3,9 @@ import { UserRepository } from '../../../application/repository';
 import { UserModel } from '../../../application/models';
 
 export class UserRepositoryPrisma implements UserRepository {
-    async create(name: string, surname: string, cpf: string, country: string, email: string, password: string,
+    async create(first_name: string, last_name: string, cpf: string, country: string, email: string, password: string,
         phone_number: string): Promise<any> {
-        return prisma.user.create({ data: { name, surname, cpf, country, email, password, phone_number } });
+        return prisma.user.create({ data: { first_name, last_name, cpf, country, email, password, phone_number } });
     }
 
     async findUser(email: string, password: string): Promise<any> {

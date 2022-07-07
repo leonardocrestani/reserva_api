@@ -5,9 +5,9 @@ export class UserRepositoryMemory implements UserRepository {
 
     createdUsers: Array<UserModel> = []
 
-    async create(name: string, surname: string, cpf: string, country: string, email: string, password: string,
+    async create(first_name: string, last_name: string, cpf: string, country: string, email: string, password: string,
         phone_number: string): Promise<UserModel> {
-        this.createdUsers.push({ name, surname, cpf, country, email, password, phone_number });
+        this.createdUsers.push({ first_name, last_name, cpf, country, email, password, phone_number });
         const createdUser = this.createdUsers[0]
         return createdUser;
     };

@@ -5,9 +5,9 @@ import { UserRepository } from "../repository";
 export class CreateUserService implements CreateUser {
     constructor(private readonly userRepository: UserRepository) { }
 
-    async execute(name: string, surname: string, cpf: string, country: string, email: string, password: string,
+    async execute(first_name: string, last_name: string, cpf: string, country: string, email: string, password: string,
         phone_number: string): Promise<User> {
-        const user = await this.userRepository.create(name, surname, cpf, country, email, password, phone_number);
+        const user = await this.userRepository.create(first_name, last_name, cpf, country, email, password, phone_number);
         if (!user) {
             throw new Error("Nao foi possivel cadastrar novo usuario");
         }
