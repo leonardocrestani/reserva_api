@@ -7,7 +7,7 @@ describe('Get user', () => {
     test('Should get user', async () => {
         const userRepositoryMemory = new UserRepositoryMemory();
         const createUser = new CreateUserService(userRepositoryMemory);
-        const newUser = await createUser.execute("Leonardo", "Crestani", "1233456789",
+        await createUser.execute("Leonardo", "Crestani", "63001608072",
             "Brasil", "leonardo@test.com", "123456*", "+5554999435");
         const getUser = new GetUserService(userRepositoryMemory);
         const user = await getUser.execute("leonardo@test.com", "123456*");
@@ -18,7 +18,7 @@ describe('Get user', () => {
     test('Should get error when email are incorrect', async () => {
         const userRepositoryMemory = new UserRepositoryMemory();
         const createUser = new CreateUserService(userRepositoryMemory);
-        await createUser.execute("Leonardo", "Crestani", "1233456789",
+        await createUser.execute("Leonardo", "Crestani", "63001608072",
             "Brasil", "leonardo@test.com", "123456*", "+5554999435");
         const getUser = new GetUserService(userRepositoryMemory);
         try {
@@ -32,7 +32,7 @@ describe('Get user', () => {
     test('Should get error when password are incorrect', async () => {
         const userRepositoryMemory = new UserRepositoryMemory();
         const createUser = new CreateUserService(userRepositoryMemory);
-        await createUser.execute("Leonardo", "Crestani", "1233456789",
+        await createUser.execute("Leonardo", "Crestani", "63001608072",
             "Brasil", "leonardo@test.com", "123456*", "+5554999435");
         const getUser = new GetUserService(userRepositoryMemory);
         try {
