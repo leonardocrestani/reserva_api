@@ -12,7 +12,7 @@ export class UserRepositoryPrisma implements UserRepository {
         return await prisma.user.findFirst({ where: { AND: [{ email }, { password }] } });
     }
 
-    async findUserByEmail(email: string): Promise<any> {
+    async findUserByEmail(email: string): Promise<UserModel | null> {
         return await prisma.user.findUnique({ where: { email } });
     }
 }
