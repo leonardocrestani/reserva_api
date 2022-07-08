@@ -1,7 +1,7 @@
 import { CreateUserService } from '../../application/services';
 import { GetUserService } from '../../application/services';
 import { UserRepositoryPrisma } from '../../infra/repository';
-import { ok, create } from '../contracts/HttpResponse';
+import { ok, created } from '../contracts/HttpResponse';
 
 export class UserController {
     static async register(query: any, params: any, body: any, next: any): Promise<object> {
@@ -9,7 +9,7 @@ export class UserController {
         const userService = new CreateUserService(prismaRepository);
         const newUser = await userService.execute(body.first_name, body.last_name, body.cpf, body.country, body.email,
             body.password, body.phone_number);
-        return create(newUser);
+        return created(newUser);
     }
 
     static async findOne(query: any, params: any, body: any, next: any): Promise<object> {

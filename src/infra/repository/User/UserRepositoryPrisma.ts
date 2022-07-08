@@ -4,11 +4,11 @@ import { UserModel } from '../../../application/models';
 
 export class UserRepositoryPrisma implements UserRepository {
     async create(first_name: string, last_name: string, cpf: string, country: string, email: string, password: string,
-        phone_number: string): Promise<any> {
+        phone_number: string): Promise<UserModel> {
         return await prisma.user.create({ data: { first_name, last_name, cpf, country, email, password, phone_number } });
     }
 
-    async findUser(email: string, password: string): Promise<any> {
+    async findUser(email: string, password: string): Promise<UserModel | null> {
         return await prisma.user.findFirst({ where: { AND: [{ email }, { password }] } });
     }
 

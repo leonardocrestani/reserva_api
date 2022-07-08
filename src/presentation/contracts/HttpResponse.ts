@@ -1,11 +1,15 @@
 const ok = (data: any) => ({
     statusCode: 200,
     data
-})
+});
 
-const create = (data: any) => ({
+const created = (data: any) => ({
     statusCode: 201,
     data
-})
+});
 
-export { ok, create };
+const noContent = () => ({
+    statusCode: 204
+});
+
+export { ok, created };

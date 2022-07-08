@@ -1,4 +1,4 @@
-import { User } from "../../core/entities";
+import { UserModel } from '../models';
 import { CreateUser } from "../../core/use-cases";
 import { UserRepository } from "../repository";
 import cpfValidator from "../../common/utils/cpfValidator";
@@ -8,7 +8,7 @@ export class CreateUserService implements CreateUser {
     constructor(private readonly userRepository: UserRepository) { }
 
     async execute(first_name: string, last_name: string, cpf: string, country: string, email: string, password: string,
-        phone_number: string): Promise<any> {
+        phone_number: string): Promise<object> {
         if (!cpfValidator(cpf)) {
             throw new Error("CPF invalido");
         }
@@ -20,6 +20,6 @@ export class CreateUserService implements CreateUser {
             throw new Error("Nao foi possivel cadastrar novo usuario");
         }
         const token = await generateToken(user);
-        return {user, token};
+        return { user, token };
     }
 }

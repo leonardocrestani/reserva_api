@@ -1,3 +1,3 @@
 import { User } from "../../core/entities"
 
-export type UserModel = User
+export class UserModel extends User { };
