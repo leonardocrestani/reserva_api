@@ -8,7 +8,7 @@ export class ExpressAdapter {
                 res.status(result.statusCode).json(result.data);
             }
             catch (error: any) {
-                res.status(500).json({ message: error.message });
+                return next(error)
             }
         }
     }

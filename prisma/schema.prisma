@@ -20,3 +20,76 @@ model User {
   created_at DateTime @default(now())
   updated_at DateTime @default(now()) @updatedAt
 }
+
+enum States {
+  AC
+  AL
+  AP
+  AM
+  BA
+  CE
+  DF
+  ES
+  GO
+  MA
+  MS
+  MT
+  MG
+  PA
+  PB
+  PR
+  PE
+  PI
+  RJ
+  RN
+  RS
+  RO
+  RR
+  SC
+  SP
+  SE
+  TO
+}
+
+enum Day {
+  SEGUNDA
+  TERCA
+  QUARTA
+  QUINTA
+  SEXTA
+  SABADO
+  DOMINGO
+}
+
+type Address {
+  city_code Int
+  city_name String
+  state States
+  country String
+  street String
+  neighbourhood String
+}
+
+type Contact {
+  name String
+  phone_number String
+}
+
+type Operation_time {
+  open_hour Int
+  open_minutes Int
+  close_hour Int
+  close_minutes Int
+  days Day[]
+}
+
+model Place {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  local_name String
+  number_of_courts Int
+  address Address
+  contact Contact
+  operation_time Operation_time
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+}

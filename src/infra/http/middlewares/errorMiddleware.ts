@@ -9,6 +9,6 @@ export default (error: any, req: Request, res: Response, next: NextFunction) => 
         });
     }
     else {
-        return res.json({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 }
