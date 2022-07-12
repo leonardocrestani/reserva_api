@@ -1,4 +1,3 @@
-
 export type Address = {
     city_code: number,
     city_name: string,
