@@ -3,7 +3,7 @@ import { PlaceRepository } from '../../../application/repository';
 import { PlaceModel } from '../../../application/models';
 
 export class PlaceRepositoryPrisma implements PlaceRepository {
-    async create(data: any): Promise<object> {
+    async create(data: any): Promise<PlaceModel> {
         return await prisma.place.create({
             data: {
                 local_name: data.local_name,

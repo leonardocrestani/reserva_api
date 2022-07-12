@@ -7,15 +7,14 @@ import generateToken from "../../common/utils/generateToken";
 export class CreateUserService implements CreateUser {
     constructor(private readonly userRepository: UserRepository) { }
 
-    async execute(first_name: string, last_name: string, cpf: string, country: string, email: string, password: string,
-        phone_number: string): Promise<object> {
-        if (!cpfValidator(cpf)) {
+    async execute(data: UserModel): Promise<any> {
+        if (!cpfValidator(data.cpf)) {
             throw new Error("CPF invalido");
         }
-        if (await this.userRepository.findUserByEmail(email)) {
+        if (await this.userRepository.findUserByEmail(data.email)) {
             throw new Error("Usuario ja cadastrado");
         }
-        const user = await this.userRepository.create(first_name, last_name, cpf, country, email, password, phone_number);
+        const user = await this.userRepository.create(data);
         if (!user) {
             throw new Error("Nao foi possivel cadastrar novo usuario");
         }

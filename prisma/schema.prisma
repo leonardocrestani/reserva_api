@@ -8,11 +8,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Genre {
+  Male
+  Female
+}
+
 model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   first_name String
   last_name String
   cpf String
+  genre Genre
   country String
   email String @unique
   password String @unique
@@ -52,13 +58,13 @@ enum States {
 }
 
 enum Day {
-  SEGUNDA
-  TERCA
-  QUARTA
-  QUINTA
-  SEXTA
-  SABADO
-  DOMINGO
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+  Sunday
 }
 
 type Address {

@@ -1,4 +1,5 @@
 import { Joi, Segments } from 'celebrate';
+import { genre } from '../../../common/enums';
 const customJoi = Joi.extend(require('joi-phone-number'));
 
 const userValidator = {
@@ -7,6 +8,7 @@ const userValidator = {
             first_name: Joi.string().trim().required(),
             last_name: Joi.string().trim().required(),
             cpf: Joi.string().required(),
+            genre: Joi.string().valid(...Object.values(genre)).required(),
             country: Joi.string().trim().required(),
             email: Joi.string().email().required(),
             password: Joi.string().min(6).required(),
