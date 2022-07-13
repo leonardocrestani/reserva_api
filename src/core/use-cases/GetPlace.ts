@@ -1,5 +1,6 @@
 import { Place } from '../entities';
 
 export interface GetPlace {
-    execute: (place_name: string) => Promise<Place>
+    findByName: (place_name: string) => Promise<Place>;
+    findByCnpj: (cnpj: string) => Promise<Place>;
 }

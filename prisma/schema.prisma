@@ -58,13 +58,13 @@ enum States {
 }
 
 enum Day {
-  Monday
-  Tuesday
-  Wednesday
-  Thursday
-  Friday
-  Saturday
-  Sunday
+  Mon
+  Tue
+  Wed
+  Thu
+  Fri
+  Sat
+  Sun
 }
 
 type Address {
@@ -86,12 +86,13 @@ type Operation_time {
   open_minutes  Int
   close_hour    Int
   close_minutes Int
-  days          String[] \\ VERIFICAR QUANDO COLOCAR DAY COMO RECEBER UMA LISTA DE DAYS
+  days          Day[]
 }
 
 model Place {
   id               String         @id @default(auto()) @map("_id") @db.ObjectId
   place_name       String @unique
+  cnpj String @unique
   number_of_courts Int
   address          Address
   contact          Contact

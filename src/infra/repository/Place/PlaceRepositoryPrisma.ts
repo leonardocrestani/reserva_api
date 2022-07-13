@@ -7,6 +7,7 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
         return await prisma.place.create({
             data: {
                 place_name: data.place_name,
+                cnpj: data.cnpj,
                 number_of_courts: data.number_of_courts, address: {
                     city_code: data.address.city_code,
                     city_name: data.address.city_name, state: data.address.state, country: data.address.country,
@@ -25,6 +26,10 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
     }
 
     async findByName(place_name: string): Promise<any | null> {
-        return await prisma.place.findUnique({where: { place_name }});
+        return await prisma.place.findUnique({ where: { place_name } });
     };
+
+    async findByCnpj(cnpj: string): Promise<any | null> {
+        return await prisma.place.findUnique({ where: { cnpj } });
+    }
 }

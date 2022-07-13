@@ -5,11 +5,19 @@ import { PlaceRepository } from "../repository";
 export class GetPlaceService implements GetPlace {
     constructor(private readonly placeRepository: PlaceRepository) { }
 
-    async execute(place_name: string): Promise<PlaceModel> {
+    async findByName(place_name: string): Promise<PlaceModel> {
         const place = await this.placeRepository.findByName(place_name);
-        if(!place) {
+        if (!place) {
             throw new Error("Local nao encontrado");
         }
         return place;
     };
+
+    async findByCnpj(cnpj: string): Promise<PlaceModel> {
+        const place = await this.placeRepository.findByCnpj(cnpj);
+        if (!place) {
+            throw new Error("Local nao encontrado");
+        }
+        return place;
+    }
 }

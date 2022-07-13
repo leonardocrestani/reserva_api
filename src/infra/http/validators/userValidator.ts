@@ -7,7 +7,7 @@ const userValidator = {
         [Segments.BODY]: customJoi.object().keys({
             first_name: Joi.string().trim().required(),
             last_name: Joi.string().trim().required(),
-            cpf: Joi.string().required(),
+            cpf: Joi.string().trim().required(),
             genre: Joi.string().valid(...Object.values(genre)).required(),
             country: Joi.string().trim().required(),
             email: Joi.string().email().required(),

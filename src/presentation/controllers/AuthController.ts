@@ -7,7 +7,7 @@ export class AuthController {
         const { email, password } = query;
         const prismaRepository = new UserRepositoryPrisma();
         const authenticaUserService = new AuthenticateUserService(prismaRepository);
-        const auth = await authenticaUserService.execute(email, password);
+        const auth = await authenticaUserService.authenticate(email, password);
         return ok(auth);
     }
 }

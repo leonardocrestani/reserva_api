@@ -6,6 +6,7 @@ const placeValidator = {
     BODY: {
         [Segments.BODY]: customJoi.object().keys({
             place_name: Joi.string().trim().required(),
+            cnpj: Joi.string().trim().required(),
             number_of_courts: Joi.number().required(),
             address: customJoi.object().keys({
                 city_code: Joi.number().required(),

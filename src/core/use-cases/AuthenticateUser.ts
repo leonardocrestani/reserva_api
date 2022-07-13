@@ -1,4 +1,4 @@
 
 export interface AuthenticateUser {
-    execute: (email: string, password: string) => Promise<object>
+    authenticate: (email: string, password: string) => Promise<object>
 }

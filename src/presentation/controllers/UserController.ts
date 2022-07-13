@@ -7,14 +7,14 @@ export class UserController {
     static async register(query: any, params: any, body: any, next: any): Promise<object> {
         const prismaRepository = new UserRepositoryPrisma();
         const userService = new CreateUserService(prismaRepository);
-        const newUser = await userService.execute(body);
+        const newUser = await userService.create(body);
         return created(newUser);
     }
 
     static async findOne(query: any, params: any, body: any, next: any): Promise<object> {
         const prismaRepository = new UserRepositoryPrisma();
         const userService = new GetUserService(prismaRepository);
-        const user = await userService.execute(query.email, query.password);
+        const user = await userService.find(query.email, query.password);
         return ok(user);
     }
 }

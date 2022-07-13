@@ -5,7 +5,7 @@ import { UserRepository } from '../repository';
 export class AuthenticateUserService implements AuthenticateUser {
     constructor(private readonly userRepository: UserRepository) { };
 
-    async execute(email: string, password: string): Promise<object> {
+    async authenticate(email: string, password: string): Promise<object> {
         const user = await this.userRepository.findUser(email, password);
         if (!user) {
             throw new Error("Email ou senha invalidos");

@@ -24,6 +24,7 @@ export class Place {
 
     constructor(
         public place_name: string,
+        public cnpj: string,
         public number_of_courts: number,
         public address: Address,
         public contact: Contact,
