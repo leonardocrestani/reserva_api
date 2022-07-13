@@ -86,12 +86,12 @@ type Operation_time {
   open_minutes  Int
   close_hour    Int
   close_minutes Int
-  days          Day[]
+  days          String[] \\ VERIFICAR QUANDO COLOCAR DAY COMO RECEBER UMA LISTA DE DAYS
 }
 
 model Place {
   id               String         @id @default(auto()) @map("_id") @db.ObjectId
-  place_name       String
+  place_name       String @unique
   number_of_courts Int
   address          Address
   contact          Contact

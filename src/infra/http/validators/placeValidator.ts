@@ -5,7 +5,7 @@ const customJoi = Joi.extend(require('joi-phone-number'));
 const placeValidator = {
     BODY: {
         [Segments.BODY]: customJoi.object().keys({
-            local_name: Joi.string().trim().required(),
+            place_name: Joi.string().trim().required(),
             number_of_courts: Joi.number().required(),
             address: customJoi.object().keys({
                 city_code: Joi.number().required(),
@@ -24,7 +24,7 @@ const placeValidator = {
                 open_minutes: Joi.number().required(),
                 close_hour: Joi.number().required(),
                 close_minutes: Joi.number().required(),
-                days: Joi.array().valid(...Object.values(weekendDays))
+                days: Joi.array().items(Joi.string().valid(...Object.values(weekendDays)))
             })
         })
     }

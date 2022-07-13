@@ -23,7 +23,7 @@ export type Operation_Time = {
 export class Place {
 
     constructor(
-        public local_name: string,
+        public place_name: string,
         public number_of_courts: number,
         public address: Address,
         public contact: Contact,
