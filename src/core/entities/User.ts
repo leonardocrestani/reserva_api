@@ -1,3 +1,5 @@
+import { Court } from './'
+
 export class User {
 
     constructor(
@@ -8,6 +10,7 @@ export class User {
         public country: string,
         public email: string,
         public password: string,
-        public phone_number: string) { }
+        public phone_number: string,
+        public courts: Array<Court> = []) { }
 
 }

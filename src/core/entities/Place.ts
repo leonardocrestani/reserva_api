@@ -29,4 +29,22 @@ export class Place {
         public contact: Contact,
         public operation_time: Operation_Time
     ) { }
+
+    isOpen() {
+        const currentHour = new Date().getHours();
+        const currentMinutes = new Date().getMinutes();
+        const [currentDay] = new Date().toDateString().split(' ');
+        if (this.operation_time.days.some(day => day === currentDay)) {
+            if (currentHour < this.operation_time.close_hour && currentHour > this.operation_time.open_hour) {
+                if (currentHour === this.operation_time.close_hour && currentHour == this.operation_time.open_hour) {
+                    if (currentMinutes < this.operation_time.close_minutes && currentMinutes > this.operation_time.open_minutes) {
+                        return true;
+                    }
+                }
+            }
+        }
+        else {
+            return false;
+        }
+    }
 }
