@@ -1,4 +1,4 @@
-import { Schedules } from "./";
+import { Schedule } from "./";
 
 type place = {
     place_id: string,
@@ -7,7 +7,8 @@ type place = {
 
 export class Court {
     constructor(
-        public place: place,
-        public schedules: Array<Schedules> = []
+        public place_id: string,
+        public court_name: string,
+        public schedules: Array<Schedule> = []
     ) { }
 }

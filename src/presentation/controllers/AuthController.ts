@@ -1,5 +1,5 @@
 import { UserRepositoryPrisma } from '../../infra/repository/index';
-import { AuthenticateUserService } from '../../application/services/AuthenticateUserService';
+import { AuthenticateUserService } from '../../application/services/User/AuthenticateUserService';
 import { ok } from '../contracts/HttpResponse';
 
 export class AuthController {

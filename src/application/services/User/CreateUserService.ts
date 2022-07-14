@@ -1,8 +1,8 @@
-import { UserModel } from '../models';
-import { CreateUser } from "../../core/use-cases";
-import { UserRepository } from "../repository";
-import cpfValidator from "../../common/utils/cpfValidator";
-import generateToken from "../../common/utils/generateToken";
+import { UserModel } from '../../models';
+import { CreateUser } from "../../../core/use-cases";
+import { UserRepository } from "../../repository";
+import cpfValidator from "../../../common/utils/cpfValidator";
+import generateToken from "../../../common/utils/generateToken";
 
 export class CreateUserService implements CreateUser {
     constructor(private readonly userRepository: UserRepository) { }

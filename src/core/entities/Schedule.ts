@@ -1,4 +1,4 @@
-export class Schedules {
+export class Schedule {
 
     constructor(
         public court_id: string,

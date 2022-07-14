@@ -1,4 +1,4 @@
 export * from './User';
 export * from './Place';
-export * from './Schedules';
+export * from './Schedule';
 export * from './Court';

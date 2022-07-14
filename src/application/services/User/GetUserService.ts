@@ -1,6 +1,6 @@
-import { UserModel } from '../models';
-import { GetUser } from '../../core/use-cases';
-import { UserRepository } from '../repository';
+import { UserModel } from '../../models';
+import { GetUser } from '../../../core/use-cases';
+import { UserRepository } from '../../repository';
 
 export class GetUserService implements GetUser {
     constructor(private readonly userRepository: UserRepository) { }

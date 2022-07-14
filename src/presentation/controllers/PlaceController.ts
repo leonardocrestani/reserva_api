@@ -14,7 +14,7 @@ export class PlaceController {
     static async find(query: any, params: any, body: any, next: any): Promise<object> {
         const prismaRepository = new PlaceRepositoryPrisma();
         const placeService = new GetPlaceService(prismaRepository);
-        const place = await placeService.findByCnpj(query.cnpj);
+        const place = await placeService.findByName(query.place_name);
         return ok(place);
     }
 }

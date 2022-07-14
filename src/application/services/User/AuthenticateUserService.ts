@@ -1,6 +1,6 @@
-import generateToken from '../../common/utils/generateToken';
-import { AuthenticateUser } from '../../core/use-cases';
-import { UserRepository } from '../repository';
+import generateToken from '../../../common/utils/generateToken';
+import { AuthenticateUser } from '../../../core/use-cases';
+import { UserRepository } from '../../repository';
 
 export class AuthenticateUserService implements AuthenticateUser {
     constructor(private readonly userRepository: UserRepository) { };
