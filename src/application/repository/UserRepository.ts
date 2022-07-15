@@ -1,8 +1,9 @@
-import { UserModel } from "../models/UserModel"
+import { UserModel } from "../models"
 
 export interface UserRepository {
-    create: (name: string, surname: string, cpf: string, country: string, email: string, password: string,
-        phone_number: string) => Promise<UserModel>;
+    create: (user: UserModel) => Promise<any>;
 
-    findUser: (email: string, password: string) => Promise<any>;
+    findUser: (email: string, password: string) => Promise<any | null>;
+
+    findUserByEmail: (email: string) => Promise<any | null>
 }
