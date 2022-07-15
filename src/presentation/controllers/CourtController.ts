@@ -7,7 +7,7 @@ export class CourtController {
     static async register(query: any, params: any, body: any, next: any): Promise<object> {
         const courtRepository = new CourtRepositoryPrisma()
         const courtService = new CreateCourtService(courtRepository);
-        const newCourt = await courtService.create(body, body.place_name);
+        const newCourt = await courtService.create(body);
         return created(newCourt);
     }
 

@@ -1,7 +1,7 @@
 import { CreatePlace } from '../../../core/use-cases';
 import { PlaceModel } from '../../models';
 import { PlaceRepository } from '../../repository/PlaceRepository';
-import { AxiosAdapter } from '../../../presentation/adapters/AxiosAdapter';
+import { makeRequest } from '../../../common/utils/makeRequest';
 import cpnjValidator from '../../../common/utils/cnpjValidator';
 
 export class CreatePlaceService implements CreatePlace {
@@ -18,7 +18,7 @@ export class CreatePlaceService implements CreatePlace {
         const numberOfCourts = data.courts.length;
         if (numberOfCourts < 1) throw new Error('Necessario ao menos uma quadra');
         data.number_of_courts = numberOfCourts;
-        const validCep = await AxiosAdapter.handle('get', `https://ws.apicep.com/cep/${data.address.city_code}.json`);
+        const validCep = await makeRequest('get', `https://ws.apicep.com/cep/${data.address.city_code}.json`);
         if (validCep.status === 400) {
             throw new Error("CEP invalido");
         }
