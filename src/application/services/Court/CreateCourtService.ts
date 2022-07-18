@@ -9,10 +9,10 @@ export class CreateCourtService implements CreateCourt {
 
     async create(data: CourtModel): Promise<object> {
         const placeRepository = new PlaceRepositoryPrisma();
-        const placeService = new GetPlaceService(placeRepository);
-        const place = await placeService.find({place_name: data.court_place_name});
+        const getPlaceService = new GetPlaceService(placeRepository);
+        const place = await getPlaceService.find({ place_name: data.court_place_name });
         place.courts.map((court: any) => {
-            if(court.court_name === data.court_name) {
+            if (court.court_name === data.court_name) {
                 throw new Error("Quadra ja existente");
             }
         })

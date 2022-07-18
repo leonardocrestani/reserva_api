@@ -12,4 +12,4 @@ const noContent = () => ({
     statusCode: 204
 });
 
-export { ok, created };
+export { ok, created, noContent };

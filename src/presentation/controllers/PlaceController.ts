@@ -6,15 +6,15 @@ import { ok, created } from '../contracts/HttpResponse';
 export class PlaceController {
     static async register(query: any, params: any, body: any, next: any): Promise<object> {
         const prismaRepository = new PlaceRepositoryPrisma();
-        const placeService = new CreatePlaceService(prismaRepository);
-        const newPlace = await placeService.create(body);
+        const createPlaceService = new CreatePlaceService(prismaRepository);
+        const newPlace = await createPlaceService.create(body);
         return created(newPlace);
     }
 
     static async find(query: any, params: any, body: any, next: any): Promise<object> {
         const prismaRepository = new PlaceRepositoryPrisma();
-        const placeService = new GetPlaceService(prismaRepository);
-        const place = await placeService.findByName(query.place_name);
+        const getPlaceService = new GetPlaceService(prismaRepository);
+        const place = await getPlaceService.findByName(query.place_name);
         return ok(place);
     }
 }

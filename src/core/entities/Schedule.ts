@@ -8,7 +8,8 @@ export class Schedule {
         public min: number,
         public is_rent: boolean,
         public responsible_person_email: string,
-        public responsible_person_id: string
+        public responsible_person_id: string,
+        public responsible_person_full_name: string
     ) { }
 
 }
