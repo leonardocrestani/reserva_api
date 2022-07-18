@@ -115,10 +115,10 @@ model Court {
 
 model Schedules {
   id                    String   @id @default(auto()) @map("_id") @db.ObjectId
-  place_court_name String
   court                 Court    @relation(fields: [court_id], references: [id])
   court_id              String   @db.ObjectId
   court_name String
+  place_court_name String
   hour                  Int
   minutes               Int
   is_rent               Boolean  @default(false)

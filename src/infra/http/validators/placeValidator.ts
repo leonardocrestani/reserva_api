@@ -26,13 +26,12 @@ const placeValidator = {
                 close_minutes: Joi.number().required(),
                 days_open: Joi.array().items(Joi.string().valid(...Object.values(weekendDays)))
             }),
-            courts: Joi.array().items(Joi.object().keys({court_place_name: Joi.string(), court_name: Joi.string(), schedules: Joi.array().items(Joi.object().keys({
-                court_id: Joi.string(),
-                hour: Joi.number(),
-                minutes: Joi.number(),
-                is_rent: Joi.boolean(),
-                responsible_person_id: Joi.string()
-            })) })).required()
+            courts: Joi.array().items(Joi.object().keys({court_place_name: Joi.string(), court_name: Joi.string() })).required()
+        })
+    },
+    QUERY: {
+        [Segments.QUERY]: customJoi.object().keys({
+            place_name: Joi.string().required()
         })
     }
 }
