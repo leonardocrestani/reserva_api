@@ -36,7 +36,7 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
     }
 
     async findByName(place_name: string): Promise<any | null> {
-        return await prisma.place.findUnique({ where: { place_name }, include: { courts: true } });
+        return await prisma.place.findUnique({ where: { place_name }, include: { courts: {include: {schedules: true}} } });
     };
 
     async findByCnpj(cnpj: string): Promise<any | null> {

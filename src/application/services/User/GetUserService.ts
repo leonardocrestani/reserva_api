@@ -13,4 +13,12 @@ export class GetUserService implements GetUser {
         return user;
     };
 
+    async findByEmail(email: string): Promise<any> {
+        const user = await this.userRepository.findUserByEmail(email);
+        if (!user) {
+            throw new Error("Nao foi possivel encontrar usuario");
+        }
+        return user;
+    }
+
 }

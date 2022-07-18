@@ -7,9 +7,7 @@ export class CourtRepositoryPrisma implements CourtRepository {
             data: {
                 place_id: data.place_id, court_place_name: data.court_place_name, court_name: data.court_name,
                 schedules: {
-                    create: [
-                        ...data.schedules
-                    ]
+                    create: []
                 }
             },
             include: { schedules: true }

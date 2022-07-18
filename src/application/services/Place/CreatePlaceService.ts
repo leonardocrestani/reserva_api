@@ -7,7 +7,7 @@ import cpnjValidator from '../../../common/utils/cnpjValidator';
 export class CreatePlaceService implements CreatePlace {
     constructor(private readonly placeRepository: PlaceRepository) { }
 
-    async create(data: PlaceModel): Promise<object> {
+    async create(data: any): Promise<object> {
         const place = await this.placeRepository.findByCnpj(data.cnpj);
         if (place) {
             throw new Error("Local ja cadastrado")
@@ -22,6 +22,11 @@ export class CreatePlaceService implements CreatePlace {
         if (validCep.status === 400) {
             throw new Error("CEP invalido");
         }
+        data.courts.map((court: any) => {
+            if(court.court_place_name !== data.place_name) {
+                throw new Error("Local da quadra invalido");
+            }
+        })
         return await this.placeRepository.create(data);
     }
 }

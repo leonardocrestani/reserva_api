@@ -11,6 +11,6 @@ export class AuthenticateUserService implements AuthenticateUser {
             throw new Error("Email ou senha invalidos");
         }
         const token = await generateToken(user);
-        return { user: user.email, token }
+        return { user: user.email, access_token: token }
     }
 }
