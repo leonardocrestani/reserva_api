@@ -1,5 +1,5 @@
 enum Errors {
-    NOT_FOUND = "NotFound",
+    NOT_FOUND = "Not Found",
     UNAUTHORIZED = "Unauhtorized",
     UNPROCESSABLE_ENTITY = "Unprocessable Entity",
     CONFLICT = "Conflict",
