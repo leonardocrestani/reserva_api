@@ -1,9 +1,9 @@
 import { UserRepositoryPrisma } from '../../infra/repository/index';
 import { AuthenticateUserService } from '../../application/services/User/AuthenticateUserService';
-import { ok } from '../contracts/HttpResponse';
+import { ok, HttpResponse } from '../contracts/HttpResponse';
 
 export class AuthController {
-    static async authenticate(query: any, params: any, body: any, next: any): Promise<object> {
+    static async authenticate(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const { email, password } = body;
         const prismaRepository = new UserRepositoryPrisma();
         const authenticaUserService = new AuthenticateUserService(prismaRepository);

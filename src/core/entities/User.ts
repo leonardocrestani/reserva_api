@@ -1,4 +1,4 @@
-import { Court } from './'
+import { Schedule } from './'
 
 export class User {
 
@@ -11,6 +11,8 @@ export class User {
         public email: string,
         public password: string,
         public phone_number: string,
-        public courts: Array<Court> = []) { }
+        public schedules: Array<Schedule> = [],
+        public id?: string
+    ) { }
 
 }

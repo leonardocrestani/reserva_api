@@ -1,5 +1,4 @@
 import { GetCourt } from "../../../core/use-cases/Court/GetCourt";
-import { CourtModel } from "../../models";
 import { GetPlaceService } from "../";
 import { CourtRepository } from "../../repository";
 import { PlaceRepositoryPrisma } from "../../../infra/repository";

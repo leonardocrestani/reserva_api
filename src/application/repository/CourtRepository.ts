@@ -1,7 +1,7 @@
-import { Court } from "../../core/entities";
+import { CourtModel } from "../models";
 
 export interface CourtRepository {
-    create: (court: Court) => Promise<object>;
+    create: (court: CourtModel) => Promise<object>;
 
-    find: (place_name: string, court_name: string) => Promise<any | null>;
+    find: (place_name: string, court_name: string) => Promise<CourtModel | null>;
 }

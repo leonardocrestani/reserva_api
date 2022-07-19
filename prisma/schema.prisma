@@ -103,29 +103,29 @@ model Place {
 }
 
 model Court {
-  id         String      @id @default(auto()) @map("_id") @db.ObjectId
-  place      Place       @relation(fields: [place_id], references: [id])
-  place_id   String      @db.ObjectId
-  court_place_name String @unique
-  court_name String
-  schedules  Schedules[]
-  created_at DateTime    @default(now())
-  updated_at DateTime    @default(now()) @updatedAt
+  id               String      @id @default(auto()) @map("_id") @db.ObjectId
+  place            Place       @relation(fields: [place_id], references: [id])
+  place_id         String      @db.ObjectId
+  court_place_name String      @unique
+  court_name       String
+  schedules        Schedules[]
+  created_at       DateTime    @default(now())
+  updated_at       DateTime    @default(now()) @updatedAt
 }
 
 model Schedules {
-  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
-  court                 Court    @relation(fields: [court_id], references: [id])
-  court_id              String   @db.ObjectId
-  court_name String
-  place_court_name String
-  hour                  Int
-  minutes               Int
-  is_rent               Boolean  @default(false)
-  responsible_person    User?     @relation(fields: [responsible_person_id], references: [id])
-  responsible_person_id String?   @unique @db.ObjectId
-  responsible_person_email String?
+  id                           String   @id @default(auto()) @map("_id") @db.ObjectId
+  court                        Court    @relation(fields: [court_id], references: [id])
+  court_id                     String   @db.ObjectId
+  court_name                   String
+  place_court_name             String
+  hour                         Int
+  minutes                      Int
+  is_rent                      Boolean  @default(false)
+  responsible_person           User?    @relation(fields: [responsible_person_id], references: [id])
+  responsible_person_id        String?  @unique @db.ObjectId
+  responsible_person_email     String?
   responsible_person_full_name String?
-  created_at            DateTime @default(now())
-  updated_at            DateTime @default(now()) @updatedAt
+  created_at                   DateTime @default(now())
+  updated_at                   DateTime @default(now()) @updatedAt
 }

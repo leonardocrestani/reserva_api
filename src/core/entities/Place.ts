@@ -31,10 +31,11 @@ export class Place {
         public address: Address,
         public contact: Contact,
         public operation_time: Operation_Time,
-        public courts: Array<Court>
+        public courts: Array<Court>,
+        public id?: string
     ) { }
 
-    isOpen() {
+    /*isOpen() {
         const currentHour = new Date().getHours();
         const currentMinutes = new Date().getMinutes();
         const [currentDay] = new Date().toDateString().split(' ');
@@ -50,5 +51,5 @@ export class Place {
         else {
             return false;
         }
-    }
+    }*/
 }
