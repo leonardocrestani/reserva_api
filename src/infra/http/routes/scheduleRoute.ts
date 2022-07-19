@@ -7,7 +7,7 @@ import authMiddleware from '../middlewares/authMiddleware';
 
 const scheduleRouter = Router();
 
-scheduleRouter.use(authMiddleware);
+//scheduleRouter.use(authMiddleware);
 scheduleRouter.get('/', celebrate(scheduleValidator.QUERY, {abortEarly: true}), ExpressAdapter.create(ScheduleController.find));
 scheduleRouter.post('/', celebrate(scheduleValidator.BODY, {abortEarly: true}), ExpressAdapter.create(ScheduleController.register));
 scheduleRouter.put('/', celebrate(scheduleValidator.UPDATE, {abortEarly: true}), ExpressAdapter.create(ScheduleController.update));

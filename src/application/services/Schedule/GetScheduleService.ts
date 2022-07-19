@@ -2,6 +2,7 @@ import { GetSchedule } from '../../../core/use-cases/Schedule/GetSchedule';
 import { ScheduleRepository } from '../../repository/ScheduleRepository';
 import { GetCourtService } from '../Court/GetCourtService';
 import { CourtRepositoryPrisma } from '../../../infra/repository/Court/CourtRepositoryPrisma';
+import { NotFound } from '../../errors';
 
 export class GetScheduleService implements GetSchedule {
     constructor(private readonly scheduleRepository: ScheduleRepository) { }
@@ -13,7 +14,7 @@ export class GetScheduleService implements GetSchedule {
         const courtId = court.id;
         const schedule = await this.scheduleRepository.find(courtId, hour, minutes);
         if (!schedule) {
-            throw new Error("Horario nao encontrado");
+            throw new NotFound("Horario nao encontrado");
         }
         return schedule;
     }

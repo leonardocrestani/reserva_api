@@ -7,7 +7,7 @@ import authMiddleware from '../middlewares/authMiddleware';
 
 const courtRouter = Router();
 
-courtRouter.use(authMiddleware);
+//courtRouter.use(authMiddleware);
 courtRouter.get('/', celebrate(courtValidator.QUERY, {abortEarly: true}), ExpressAdapter.create(CourtController.find));
 courtRouter.post('/', celebrate(courtValidator.BODY, {abortEarly: true}), ExpressAdapter.create(CourtController.register));
 

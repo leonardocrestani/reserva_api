@@ -3,6 +3,7 @@ import { CourtModel } from "../../models";
 import { GetPlaceService } from "../";
 import { CourtRepository } from "../../repository";
 import { PlaceRepositoryPrisma } from "../../../infra/repository";
+import { NotFound } from "../../errors";
 
 export class GetCourtService implements GetCourt {
     constructor(private readonly courtRepository: CourtRepository) { }
@@ -14,7 +15,7 @@ export class GetCourtService implements GetCourt {
         const place_id = place.id;
         const court = await this.courtRepository.find(place_id, court_name);
         if (!court) {
-            throw new Error("Quadra nao encontrada");
+            throw new NotFound("Quadra nao encontrada");
         }
         return court;
     };

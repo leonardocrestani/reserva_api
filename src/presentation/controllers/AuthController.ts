@@ -4,7 +4,7 @@ import { ok } from '../contracts/HttpResponse';
 
 export class AuthController {
     static async authenticate(query: any, params: any, body: any, next: any): Promise<object> {
-        const { email, password } = query;
+        const { email, password } = body;
         const prismaRepository = new UserRepositoryPrisma();
         const authenticaUserService = new AuthenticateUserService(prismaRepository);
         const auth = await authenticaUserService.authenticate(email, password);

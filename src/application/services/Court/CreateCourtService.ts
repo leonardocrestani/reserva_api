@@ -3,6 +3,7 @@ import { CreateCourt } from "../../../core/use-cases";
 import { PlaceRepositoryPrisma } from "../../../infra/repository";
 import { CourtModel } from "../../models";
 import { CourtRepository } from "../../repository";
+import { Conflict } from "../../errors";
 
 export class CreateCourtService implements CreateCourt {
     constructor(private readonly courtRepository: CourtRepository) { };
@@ -13,7 +14,7 @@ export class CreateCourtService implements CreateCourt {
         const place = await getPlaceService.find({ place_name: data.court_place_name });
         place.courts.map((court: any) => {
             if (court.court_name === data.court_name) {
-                throw new Error("Quadra ja existente");
+                throw new Conflict("Quadra ja existente");
             }
         })
         data.place_id = place.id;
