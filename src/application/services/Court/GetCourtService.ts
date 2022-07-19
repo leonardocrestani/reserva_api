@@ -1,3 +1,4 @@
+import { CourtModel } from "../../models";
 import { GetCourt } from "../../../core/use-cases/Court/GetCourt";
 import { GetPlaceService } from "../";
 import { CourtRepository } from "../../repository";
@@ -7,7 +8,7 @@ import { NotFound } from "../../errors";
 export class GetCourtService implements GetCourt {
     constructor(private readonly courtRepository: CourtRepository) { }
 
-    async find(place_name: string, court_name: string): Promise<any> {
+    async find(place_name: string, court_name: string): Promise<CourtModel> {
         const placeRepository = new PlaceRepositoryPrisma();
         const getPlaceService = new GetPlaceService(placeRepository);
         const place = await getPlaceService.findByName(place_name);

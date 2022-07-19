@@ -14,7 +14,7 @@ export class CourtController {
     static async find(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const courtRepository = new CourtRepositoryPrisma()
         const getCourtService = new GetCourtService(courtRepository);
-        const court = await getCourtService.find(query.place_name, query.court_name);
+        const court = await getCourtService.find(query.court_place_name, query.court_name);
         return ok(court);
     }
 }

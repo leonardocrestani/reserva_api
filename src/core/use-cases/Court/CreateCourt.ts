@@ -1,5 +1,5 @@
 import { Court } from "../../entities";
 
 export interface CreateCourt {
-    create: (court: Court) => Promise<object>
+    create: (court: Court) => Promise<Court>
 }

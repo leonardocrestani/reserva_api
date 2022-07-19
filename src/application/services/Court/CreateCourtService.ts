@@ -8,7 +8,7 @@ import { Conflict } from "../../errors";
 export class CreateCourtService implements CreateCourt {
     constructor(private readonly courtRepository: CourtRepository) { };
 
-    async create(data: CourtModel): Promise<object> {
+    async create(data: CourtModel): Promise<CourtModel> {
         const placeRepository = new PlaceRepositoryPrisma();
         const getPlaceService = new GetPlaceService(placeRepository);
         const place = await getPlaceService.find({ place_name: data.court_place_name });

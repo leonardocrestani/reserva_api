@@ -8,7 +8,7 @@ import generateToken from "../../../common/utils/generateToken";
 export class CreateUserService implements CreateUser {
     constructor(private readonly userRepository: UserRepository) { }
 
-    async create(data: UserModel): Promise<any> {
+    async create(data: UserModel): Promise<object> {
         if (!cpfValidator(data.cpf)) {
             throw new UnprocessableEntity("CPF invalido");
         }

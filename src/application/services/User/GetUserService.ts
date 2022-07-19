@@ -14,7 +14,7 @@ export class GetUserService implements GetUser {
         return user;
     };
 
-    async findByEmail(email: string): Promise<any> {
+    async findByEmail(email: string): Promise<UserModel> {
         const user = await this.userRepository.findUserByEmail(email);
         if (!user) {
             throw new NotFound('User not found');

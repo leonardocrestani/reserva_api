@@ -10,7 +10,7 @@ const courtValidator = {
     },
     QUERY: {
         [Segments.QUERY]: Joi.object().keys({
-            court_place: Joi.string().trim().required(),
+            court_place_name: Joi.string().trim().required(),
             court_name: Joi.string().trim().required()
         }),
     },

@@ -1,3 +1,4 @@
+import { ScheduleModel } from '../../models';
 import { GetSchedule } from '../../../core/use-cases/Schedule/GetSchedule';
 import { ScheduleRepository } from '../../repository/ScheduleRepository';
 import { GetCourtService } from '../Court/GetCourtService';
@@ -7,7 +8,7 @@ import { NotFound } from '../../errors';
 export class GetScheduleService implements GetSchedule {
     constructor(private readonly scheduleRepository: ScheduleRepository) { }
 
-    async find(place_name: string, court_name: string, hour: number, minutes: number): Promise<object> {
+    async find(place_name: string, court_name: string, hour: number, minutes: number): Promise<ScheduleModel> {
         const courtRepository = new CourtRepositoryPrisma();
         const getCourtService = new GetCourtService(courtRepository);
         const court = await getCourtService.find(place_name, court_name);

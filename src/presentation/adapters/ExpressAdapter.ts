@@ -5,7 +5,7 @@ export class ExpressAdapter {
         return async function (req: Request, res: Response, next: NextFunction) {
             try {
                 const result = await fn(req.query, req.params, req.body, next);
-                res.status(result.statusCode).json(result.data);
+                res.status(result.statusCode).json(result.body);
             }
             catch (error: any) {
                 return next(error)
