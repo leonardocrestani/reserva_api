@@ -31,17 +31,18 @@ export class Place {
         public address: Address,
         public contact: Contact,
         public operation_time: Operation_Time,
-        public courts: Array<Court>
+        public courts: Array<Court>,
+        public id?: string
     ) { }
 
-    isOpen() {
+    static isOpen(days_open: Array<string>, close_hour: number, open_hour: number, close_minutes: number, open_minutes: number) {
         const currentHour = new Date().getHours();
         const currentMinutes = new Date().getMinutes();
         const [currentDay] = new Date().toDateString().split(' ');
-        if (this.operation_time.days_open.some(day => day === currentDay)) {
-            if (currentHour < this.operation_time.close_hour && currentHour > this.operation_time.open_hour) {
-                if (currentHour === this.operation_time.close_hour && currentHour == this.operation_time.open_hour) {
-                    if (currentMinutes < this.operation_time.close_minutes && currentMinutes > this.operation_time.open_minutes) {
+        if (days_open.some(day => day === currentDay)) {
+            if (currentHour < close_hour && currentHour > open_hour) {
+                if (currentHour === close_hour && currentHour == open_hour) {
+                    if (currentMinutes < close_minutes && currentMinutes > open_minutes) {
                         return true;
                     }
                 }

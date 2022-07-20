@@ -28,6 +28,11 @@ const placeValidator = {
             }),
             courts: Joi.array().items(Joi.object().keys({court_place_name: Joi.string(), court_name: Joi.string() })).required()
         })
+    },
+    QUERY: {
+        [Segments.QUERY]: customJoi.object().keys({
+            place_name: Joi.string().required()
+        })
     }
 }
 

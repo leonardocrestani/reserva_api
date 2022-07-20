@@ -8,7 +8,7 @@ import authMiddleware from '../middlewares/authMiddleware';
 const userRouter = Router();
 
 userRouter.post('/', celebrate(userValidator.BODY, { abortEarly: true }), ExpressAdapter.create(UserController.register));
-userRouter.use(authMiddleware);
+//userRouter.use(authMiddleware);
 userRouter.get('/', celebrate(userValidator.QUERY, { abortEarly: true }), ExpressAdapter.create(UserController.findOne));
 
 export { userRouter };

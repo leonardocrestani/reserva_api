@@ -3,7 +3,7 @@ import { PlaceRepository } from '../../../application/repository';
 import { PlaceModel } from '../../../application/models';
 
 export class PlaceRepositoryPrisma implements PlaceRepository {
-    async create(data: any): Promise<object> {
+    async create(data: any): Promise<PlaceModel> {
         return await prisma.place.create({
             data: {
                 place_name: data.place_name,
@@ -30,16 +30,15 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
         });
     }
 
-    async find(param: any): Promise<any | null> {
-        
-        return await prisma.place.findFirst({where: param, include: {courts: true}})
+    async find(param: any): Promise<PlaceModel> {
+        return await prisma.place.findFirst({ where: param, include: { courts: true } })
     }
 
-    async findByName(place_name: string): Promise<any | null> {
-        return await prisma.place.findUnique({ where: { place_name }, include: { courts: true } });
+    async findByName(place_name: string): Promise<PlaceModel> {
+        return await prisma.place.findUnique({ where: { place_name }, include: { courts: { include: { schedules: true } } } });
     };
 
-    async findByCnpj(cnpj: string): Promise<any | null> {
+    async findByCnpj(cnpj: string): Promise<PlaceModel> {
         return await prisma.place.findUnique({ where: { cnpj }, include: { courts: true } });
     }
 }

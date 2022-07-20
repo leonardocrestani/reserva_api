@@ -21,7 +21,7 @@ describe('Register user', () => {
             password: "123894**#B*",
             phone_number: "+5554999854874"
         }
-        const user = await createUser.execute(data);
+        const user = await createUser.(data);
         expect(user.user.email).toBe("leonardo@test.com");
         expect(user.user.password).toBe("123894**#B*");
     });

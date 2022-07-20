@@ -1,11 +1,16 @@
 export class Schedule {
 
     constructor(
-        public court_id: string,
+        public place_court_name: string,
+        public court_name: string,
         public hour: number,
-        public min: number,
+        public minutes: number,
         public is_rent: boolean,
-        public responsible_person: string
+        public responsible_person_email?: string | null,
+        public responsible_person_id?: string | null,
+        public responsible_person_full_name?: string | null,
+        public court_id?: string,
+        public id?: string
     ) { }
 
 }
