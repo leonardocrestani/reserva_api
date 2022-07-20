@@ -8,7 +8,7 @@ export class ScheduleRepositoryPrisma implements ScheduleRepository {
     }
 
     async find(court_id: string, hour: number, minutes: number): Promise<ScheduleModel> {
-        return await prisma.schedules.findFirst({ where: { AND: [{ court_id }, { hour }, { minutes }] } });
+        return await prisma.schedules.findFirst({ where: { AND: [{ court_id }, { hour }] } });
     }
 
     async update(id: string, data: any): Promise<void> {

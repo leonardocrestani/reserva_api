@@ -12,8 +12,7 @@ export class CreateScheduleService implements CreateSchedule {
         const placeRepository = new PlaceRepositoryPrisma();
         const getPlaceService = new GetPlaceService(placeRepository);
         const place = await getPlaceService.findByName(data.place_court_name);
-        if (!PlaceModel.isOpen(place.operation_time.days_open, place.operation_time.close_hour,
-            place.operation_time.open_hour, place.operation_time.close_minutes, place.operation_time.open_minutes)) {
+        if (!PlaceModel.isOpen(place.operation_time.days_open, place.operation_time.close_hour, place.operation_time.open_hour)) {
             throw new BadRequest("Local fechado não é possivel cadastrar horario");
         }
         place.courts.map((court: any) => {

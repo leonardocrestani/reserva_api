@@ -83,9 +83,7 @@ type Contact {
 
 type Operation_time {
   open_hour     Int
-  open_minutes  Int
   close_hour    Int
-  close_minutes Int
   days_open     Day[]
 }
 
@@ -120,7 +118,6 @@ model Schedules {
   court_name                   String
   place_court_name             String
   hour                         Int
-  minutes                      Int
   is_rent                      Boolean  @default(false)
   responsible_person           User?    @relation(fields: [responsible_person_id], references: [id])
   responsible_person_id        String?  @unique @db.ObjectId

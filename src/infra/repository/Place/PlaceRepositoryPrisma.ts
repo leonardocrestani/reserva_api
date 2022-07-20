@@ -17,8 +17,8 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
                     phone_number: data.contact.phone_number
                 }, operation_time: {
                     open_hour: data.operation_time.open_hour,
-                    open_minutes: data.operation_time.open_minutes, close_hour: data.operation_time.close_hour,
-                    close_minutes: data.operation_time.close_minutes, days_open: data.operation_time.days_open
+                    close_hour: data.operation_time.close_hour,
+                    days_open: data.operation_time.days_open
                 },
                 courts: {
                     create: [
