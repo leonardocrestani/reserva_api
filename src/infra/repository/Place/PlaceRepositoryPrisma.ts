@@ -30,10 +30,6 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
         });
     }
 
-    async find(param: any): Promise<PlaceModel> {
-        return await prisma.place.findFirst({ where: param, include: { courts: true } })
-    }
-
     async findByName(place_name: string): Promise<PlaceModel> {
         return await prisma.place.findUnique({ where: { place_name }, include: { courts: { include: { schedules: true } } } });
     };

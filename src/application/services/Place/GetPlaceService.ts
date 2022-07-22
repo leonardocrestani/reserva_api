@@ -6,14 +6,6 @@ import { PlaceRepository } from "../../repository";
 export class GetPlaceService implements GetPlace {
     constructor(private readonly placeRepository: PlaceRepository) { }
 
-    async find(params: any): Promise<PlaceModel> {
-        const place = await this.placeRepository.find(params);
-        if (!place) {
-            throw new NotFound("Local nao encontrado")
-        }
-        return place;
-    }
-
     async findByName(place_name: string): Promise<PlaceModel> {
         const place = await this.placeRepository.findByName(place_name);
         if (!place) {

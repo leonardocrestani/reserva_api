@@ -33,14 +33,10 @@ export class Place {
         public id?: string
     ) { }
 
-    static isOpen(days_open: Array<string>, close_hour: number, open_hour: number) {
-        const currentHour = new Date().getHours();
-        const [currentDay] = new Date().toDateString().split(' ');
-        if (days_open.some(day => day === currentDay)) {
-            if (currentHour < close_hour && currentHour > open_hour) {
-                if (currentHour === close_hour && currentHour == open_hour) {
-                    return true;
-                }
+    static isOpen(day_schedule: string, hour: number, days_open: Array<string>, close_hour: number, open_hour: number) {
+        if (days_open.some(day => day === day_schedule)) {
+            if (hour < close_hour && hour > open_hour) {
+                return true;
             }
         }
         else {

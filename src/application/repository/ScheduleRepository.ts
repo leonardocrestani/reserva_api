@@ -2,6 +2,6 @@ import { ScheduleModel } from '../models/ScheduleModel';
 
 export interface ScheduleRepository {
     create: (schedule: ScheduleModel) => Promise<ScheduleModel>;
-    find: (court_id: string, hour: number, minutes: number) => Promise<ScheduleModel>
-    update: (schedule_id: string, data: any) => Promise<void>;
+    find: (place_court_name: string, court_name: string, hour: number) => Promise<ScheduleModel>
+    update: (hour: number, data: any) => Promise<void>;
 }

@@ -2,7 +2,7 @@ import { UserRepositoryMemory } from '../../../src/infra/repository';
 import { CreateUserService } from '../../../src/application/services';
 import { GetUserService } from '../../../src/application/services';
 
-describe('Get user', () => {
+describe('Find user', () => {
 
     let createUser: CreateUserService;
     let getUser: GetUserService;

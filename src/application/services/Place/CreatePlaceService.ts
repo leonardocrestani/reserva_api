@@ -16,13 +16,12 @@ export class CreatePlaceService implements CreatePlace {
         if (!cpnjValidator(data.cnpj)) {
             throw new UnprocessableEntity('CNPJ invalido');
         }
-        if(data.operation_time.open_hour < 0 || data.operation_time.close_hour > 23 || data.operation_time.open_hour >= data.operation_time.close_hour) {
+        if (data.operation_time.open_hour < 0 || data.operation_time.close_hour > 23 || data.operation_time.open_hour >= data.operation_time.close_hour) {
             throw new BadRequest("Horario de funcionamento invalido");
         }
         const numberOfCourts = data.courts.length;
-        if (numberOfCourts < 1) throw new UnprocessableEntity('Necessario ao menos uma quadra');
         data.number_of_courts = numberOfCourts;
-        const validCep = await makeRequest('get', `https://ws.apicep.com/cep/${data.address.city_code}.json`);
+        const validCep = await makeRequest('get', `https://cep.awesomeapi.com.br/json/${data.address.city_code}`);
         if (validCep.status === 400) {
             throw new UnprocessableEntity("CEP invalido");
         }

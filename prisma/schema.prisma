@@ -117,8 +117,9 @@ model Schedules {
   court_id                     String   @db.ObjectId
   court_name                   String
   place_court_name             String
-  hour                         Int
+  hour                         Int @unique
   is_rent                      Boolean  @default(false)
+  day String
   responsible_person           User?    @relation(fields: [responsible_person_id], references: [id])
   responsible_person_id        String?  @unique @db.ObjectId
   responsible_person_email     String?

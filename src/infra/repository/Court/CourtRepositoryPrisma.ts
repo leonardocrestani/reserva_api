@@ -15,7 +15,7 @@ export class CourtRepositoryPrisma implements CourtRepository {
         });
     }
 
-    async find(place_id: string, court_name: string): Promise<CourtModel> {
-        return await prisma.court.findFirst({ where: { AND: [{ court_name: court_name }, { place_id: place_id }] }, include: { schedules: true } })
+    async find(court_place_name: string, court_name: string): Promise<CourtModel> {
+        return await prisma.court.findFirst({ where: { AND: [{ court_name: court_name }, { court_place_name: court_place_name }] }, include: { schedules: true } })
     }
 }
