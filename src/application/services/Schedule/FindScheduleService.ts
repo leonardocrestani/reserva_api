@@ -1,12 +1,11 @@
 import { ScheduleModel } from '../../models';
-import { GetSchedule } from '../../../core/use-cases/Schedule/GetSchedule';
+import { FindSchedule } from '../../../core/use-cases/Schedule/FindSchedule';
 import { ScheduleRepository } from '../../repository/ScheduleRepository';
-import { GetCourtService } from '../Court/GetCourtService';
 import { NotFound } from '../../errors';
 import { CourtRepository, PlaceRepository } from '../../repository';
-import { GetPlaceService } from '../Place/GetPlaceService';
+import { FindPlaceService } from '../Place/FindPlaceService';
 
-export class GetScheduleService implements GetSchedule {
+export class FindScheduleService implements FindSchedule {
     constructor(
         private readonly scheduleRepository: ScheduleRepository,
         private readonly courtRepository: CourtRepository,
@@ -14,7 +13,7 @@ export class GetScheduleService implements GetSchedule {
     ) { }
 
     async find(place_court_name: string, court_name: string, hour: number): Promise<ScheduleModel> {
-        const getPlaceService = new GetPlaceService(this.placeRepository);
+        const getPlaceService = new FindPlaceService(this.placeRepository);
         const place = await getPlaceService.findByName(place_court_name);
         const exist = place.courts.some((court: any) => {
             return court.court_name === court_name;

@@ -1,16 +1,16 @@
 import { PlaceRepositoryMemory } from '../../../src/infra/repository';
-import { GetPlaceService, CreatePlaceService } from '../../../src/application/services';
+import { FindPlaceService, CreatePlaceService } from '../../../src/application/services';
 import { body } from '../../fixtures/placeRegister.json';
 
 describe('Find place', () => {
 
-    let getPlace: GetPlaceService
+    let getPlace: FindPlaceService
     let createPlace: CreatePlaceService;
 
     beforeEach(async () => {
         const placeRepository = new PlaceRepositoryMemory();
         createPlace = new CreatePlaceService(placeRepository);
-        getPlace = new GetPlaceService(placeRepository);
+        getPlace = new FindPlaceService(placeRepository);
     });
 
     test('Should get place by name', async () => {

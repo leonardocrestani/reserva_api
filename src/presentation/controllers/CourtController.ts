@@ -1,5 +1,5 @@
 import { CreateCourtService } from '../../application/services';
-import { GetCourtService } from '../../application/services/Court/GetCourtService';
+import { FindCourtService } from '../../application/services/Court/FindCourtService';
 import { CourtRepositoryPrisma, PlaceRepositoryPrisma } from '../../infra/repository';
 import { ok, created, HttpResponse } from '../contracts/HttpResponse';
 
@@ -15,7 +15,7 @@ export class CourtController {
     static async find(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const courtRepository = new CourtRepositoryPrisma();
         const placeRepository = new PlaceRepositoryPrisma()
-        const getCourtService = new GetCourtService(courtRepository, placeRepository);
+        const getCourtService = new FindCourtService(courtRepository, placeRepository);
         const court = await getCourtService.find(query.court_place_name, query.court_name);
         return ok(court);
     }

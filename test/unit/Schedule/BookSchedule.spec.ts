@@ -1,5 +1,5 @@
 import { CourtRepositoryMemory, PlaceRepositoryMemory, ScheduleRepositoryMemory, UserRepositoryMemory } from '../../../src/infra/repository';
-import { BookScheduleService, CreatePlaceService, CreateScheduleService, CreateUserService, GetScheduleService } from '../../../src/application/services';
+import { BookScheduleService, CreatePlaceService, CreateScheduleService, CreateUserService, FindScheduleService } from '../../../src/application/services';
 import { body } from '../../fixtures/placeRegister.json';
 
 describe('Book place', () => {
@@ -7,7 +7,7 @@ describe('Book place', () => {
     let createPlace: CreatePlaceService;
     let createSchedule: CreateScheduleService;
     let bookSchedule: BookScheduleService;
-    let getSchedule: GetScheduleService;
+    let getSchedule: FindScheduleService;
     let createUser: CreateUserService;
 
     beforeEach(async () => {
@@ -18,7 +18,7 @@ describe('Book place', () => {
         createPlace = new CreatePlaceService(placeRepository);
         createSchedule = new CreateScheduleService(scheduleRepository, placeRepository);
         bookSchedule = new BookScheduleService(scheduleRepository, courtRepository, placeRepository, userRepository);
-        getSchedule = new GetScheduleService(scheduleRepository, courtRepository, placeRepository);
+        getSchedule = new FindScheduleService(scheduleRepository, courtRepository, placeRepository);
         createUser = new CreateUserService(userRepository);
         await createPlace.create(body);
         let schedules: Array<any> = [];

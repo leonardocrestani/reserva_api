@@ -1,9 +1,9 @@
 import { UserModel } from '../../models';
-import { GetUser } from '../../../core/use-cases';
+import { FindUser } from '../../../core/use-cases';
 import { UserRepository } from '../../repository';
 import { NotFound } from '../../errors/NotFound';
 
-export class GetUserService implements GetUser {
+export class FindUserService implements FindUser {
     constructor(private readonly userRepository: UserRepository) { }
 
     async find(email: string, password: string): Promise<UserModel> {

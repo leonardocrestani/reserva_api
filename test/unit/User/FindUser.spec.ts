@@ -1,16 +1,16 @@
 import { UserRepositoryMemory } from '../../../src/infra/repository';
 import { CreateUserService } from '../../../src/application/services';
-import { GetUserService } from '../../../src/application/services';
+import { FindUserService } from '../../../src/application/services';
 
 describe('Find user', () => {
 
     let createUser: CreateUserService;
-    let getUser: GetUserService;
+    let getUser: FindUserService;
 
     beforeEach(async () => {
         const userRepositoryMemory = new UserRepositoryMemory();
         createUser = new CreateUserService(userRepositoryMemory);
-        getUser = new GetUserService(userRepositoryMemory);
+        getUser = new FindUserService(userRepositoryMemory);
     });
 
     test('Should get user', async () => {

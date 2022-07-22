@@ -1,7 +1,7 @@
 import { CreateUser } from "../../../core/use-cases";
 import { UserRepository } from "../../repository";
 import { UnprocessableEntity, Conflict, BadRequest } from '../../errors';
-import { UserModel, AuthModel } from '../../models';
+import { UserModel } from '../../models';
 import cpfValidator from "../../../common/utils/cpfValidator";
 import generateToken from "../../../common/utils/generateToken";
 

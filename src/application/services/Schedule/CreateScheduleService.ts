@@ -1,9 +1,9 @@
 import { ScheduleModel, PlaceModel } from '../../models';
 import { CreateSchedule } from "../../../core/use-cases/Schedule/CreateSchedule";
 import { ScheduleRepository } from "../../repository/ScheduleRepository";
-import { GetPlaceService } from "../Place/GetPlaceService";
+import { FindPlaceService } from "../Place/FindPlaceService";
 import { BadRequest, NotFound } from '../../errors';
-import { CourtRepository, PlaceRepository } from '../../repository';
+import { PlaceRepository } from '../../repository';
 
 export class CreateScheduleService implements CreateSchedule {
     constructor(
@@ -12,7 +12,7 @@ export class CreateScheduleService implements CreateSchedule {
     ) { }
 
     async create(data: ScheduleModel): Promise<ScheduleModel> {
-        const getPlaceService = new GetPlaceService(this.placeRepository);
+        const getPlaceService = new FindPlaceService(this.placeRepository);
         const place = await getPlaceService.findByName(data.place_court_name);
         if (!PlaceModel.isOpen(data.day, data.hour, place.operation_time.days_open, place.operation_time.close_hour, place.operation_time.open_hour)) {
             throw new BadRequest("Local fechado não é possivel cadastrar horario");

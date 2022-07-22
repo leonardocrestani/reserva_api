@@ -1,6 +1,5 @@
-import { GetPlaceService } from "..";
+import { FindPlaceService } from "..";
 import { CreateCourt } from "../../../core/use-cases";
-import { PlaceRepositoryPrisma } from "../../../infra/repository";
 import { CourtModel } from "../../models";
 import { CourtRepository, PlaceRepository } from "../../repository";
 import { Conflict } from "../../errors";
@@ -12,7 +11,7 @@ export class CreateCourtService implements CreateCourt {
     ) { };
 
     async create(data: CourtModel): Promise<CourtModel> {
-        const getPlaceService = new GetPlaceService(this.placeRepository);
+        const getPlaceService = new FindPlaceService(this.placeRepository);
         const place = await getPlaceService.findByName(data.court_place_name);
         place.courts.map((court: any) => {
             if (court.court_name === data.court_name) {

@@ -1,5 +1,5 @@
 import { Court } from '../../entities';
 
-export interface GetCourt {
+export interface FindCourt {
     find: (place_name: string, court_name: string) => Promise<Court>;
 }

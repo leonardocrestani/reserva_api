@@ -1,5 +1,5 @@
 import { CreateScheduleService } from '../../application/services/Schedule/CreateScheduleService';
-import { GetScheduleService } from '../../application/services/Schedule/GetScheduleService';
+import { FindScheduleService } from '../../application/services/Schedule/FindScheduleService';
 import { BookScheduleService } from '../../application/services/Schedule/BookScheduleService';
 import { ScheduleRepositoryPrisma } from '../../infra/repository/Schedule/ScheduleRepositoryPrisma';
 import { ok, created, noContent, HttpResponse } from '../contracts/HttpResponse';
@@ -18,7 +18,7 @@ export class ScheduleController {
         const scheduleRepository = new ScheduleRepositoryPrisma();
         const courtRepository = new CourtRepositoryPrisma();
         const placeRepository = new PlaceRepositoryPrisma();
-        const getScheduleService = new GetScheduleService(scheduleRepository, courtRepository, placeRepository);
+        const getScheduleService = new FindScheduleService(scheduleRepository, courtRepository, placeRepository);
         const hour = parseInt(query.hour, 10);
         const schedule = await getScheduleService.find(query.place_name, query.court_name, hour);
         return ok(schedule);

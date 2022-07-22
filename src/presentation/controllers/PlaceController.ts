@@ -1,5 +1,5 @@
 import { CreatePlaceService } from '../../application/services';
-import { GetPlaceService } from '../../application/services';
+import { FindPlaceService } from '../../application/services';
 import { PlaceRepositoryPrisma } from '../../infra/repository';
 import { ok, created, HttpResponse } from '../contracts/HttpResponse';
 
@@ -13,7 +13,7 @@ export class PlaceController {
 
     static async find(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const prismaRepository = new PlaceRepositoryPrisma();
-        const getPlaceService = new GetPlaceService(prismaRepository);
+        const getPlaceService = new FindPlaceService(prismaRepository);
         const place = await getPlaceService.findByName(query.place_name);
         return ok(place);
     }

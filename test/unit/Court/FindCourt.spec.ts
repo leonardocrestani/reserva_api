@@ -1,12 +1,12 @@
 import { CourtRepositoryMemory, PlaceRepositoryMemory } from '../../../src/infra/repository';
-import { CreateCourtService, CreatePlaceService, GetCourtService } from '../../../src/application/services';
+import { CreateCourtService, CreatePlaceService, FindCourtService } from '../../../src/application/services';
 import { body } from '../../fixtures/placeRegister.json';
 
 describe('Find court', () => {
 
     let createCourt: CreateCourtService;
     let createPlace: CreatePlaceService;
-    let getCourt: GetCourtService;
+    let getCourt: FindCourtService;
     let courtRepository: CourtRepositoryMemory;
     let placeRepository: PlaceRepositoryMemory;
 
@@ -15,7 +15,7 @@ describe('Find court', () => {
         placeRepository = new PlaceRepositoryMemory();
         createCourt = new CreateCourtService(courtRepository, placeRepository);
         createPlace = new CreatePlaceService(placeRepository);
-        getCourt = new GetCourtService(courtRepository, placeRepository);
+        getCourt = new FindCourtService(courtRepository, placeRepository);
     });
 
     test('Should find court', async () => {

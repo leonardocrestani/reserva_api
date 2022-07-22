@@ -1,9 +1,6 @@
 import { BookSchedule } from '../../../core/use-cases/Schedule/BookSchedule';
 import { ScheduleRepository } from '../../repository/ScheduleRepository';
-import { GetCourtService } from '../Court/GetCourtService';
-import { CourtRepositoryPrisma } from '../../../infra/repository/Court/CourtRepositoryPrisma';
-import { UserRepositoryPrisma } from "../../../infra/repository/User/UserRepositoryPrisma";
-import { GetPlaceService, GetUserService, } from "../";
+import { FindPlaceService, FindUserService, } from "../";
 import { CourtRepository, PlaceRepository, UserRepository } from '../../repository';
 import { BadRequest, NotFound } from '../../errors';
 
@@ -19,7 +16,7 @@ export class BookScheduleService implements BookSchedule {
         if (!data.is_rent) {
             throw new BadRequest('Esta reservado nao pode ser falso');
         }
-        const getPlaceService = new GetPlaceService(this.placeRepository);
+        const getPlaceService = new FindPlaceService(this.placeRepository);
         const place = await getPlaceService.findByName(place_name);
         const exist = place.courts.some((court: any) => {
             return court.court_name === court_name;
@@ -37,7 +34,7 @@ export class BookScheduleService implements BookSchedule {
             throw new NotFound("Horario nao encontrado");
         }
         const { id: schedule_id } = await this.scheduleRepository.find(place_name, court_name, hour);
-        const getUserService = new GetUserService(this.userRepository);
+        const getUserService = new FindUserService(this.userRepository);
         const user = await getUserService.findByEmail(data.responsible_person_email);
         data.responsible_person_id = user.id;
         const fullName = user.first_name.concat(' ', `${user.last_name}`);

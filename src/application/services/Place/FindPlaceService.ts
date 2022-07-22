@@ -1,9 +1,9 @@
-import { GetPlace } from "../../../core/use-cases";
+import { FindPlace } from "../../../core/use-cases";
 import { PlaceModel } from "../../models";
 import { NotFound } from "../../errors";
 import { PlaceRepository } from "../../repository";
 
-export class GetPlaceService implements GetPlace {
+export class FindPlaceService implements FindPlace {
     constructor(private readonly placeRepository: PlaceRepository) { }
 
     async findByName(place_name: string): Promise<PlaceModel> {
