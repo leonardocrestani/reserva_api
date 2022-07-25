@@ -10,7 +10,7 @@
     "start": "prisma generate && tsc --build && node ./dist/src/infra/http/server.js",
     "dev": "prisma generate && tsnd --respawn ./src/infra/http/server.ts",
     "pretest": "rm -rf ./dist",
-    "test": "tsc && jest ./dist"
+    "test:unit": "tsc && jest ./dist"
   },
   "author": "Leonardo Crestani",
   "license": "ISC",
