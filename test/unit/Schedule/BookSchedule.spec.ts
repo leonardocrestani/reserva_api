@@ -17,7 +17,7 @@ describe('Book place', () => {
         const userRepository = new UserRepositoryMemory();
         createPlace = new CreatePlaceService(placeRepository);
         createSchedule = new CreateScheduleService(scheduleRepository, placeRepository);
-        bookSchedule = new BookScheduleService(scheduleRepository, courtRepository, placeRepository, userRepository);
+        bookSchedule = new BookScheduleService(scheduleRepository, placeRepository, userRepository);
         getSchedule = new FindScheduleService(scheduleRepository, courtRepository, placeRepository);
         createUser = new CreateUserService(userRepository);
         await createPlace.create(body);

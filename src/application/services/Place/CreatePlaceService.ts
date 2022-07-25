@@ -26,7 +26,7 @@ export class CreatePlaceService implements CreatePlace {
             throw new UnprocessableEntity("CEP invalido");
         }
         data.courts.map((court: any) => {
-            if (court.court_place_name !== data.place_name) {
+            if (court.place_court_name !== data.place_name) {
                 throw new UnprocessableEntity("Local da quadra invalido");
             }
         })

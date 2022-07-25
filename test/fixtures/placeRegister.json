@@ -23,11 +23,11 @@
         },
         "courts": [
             {
-                "court_place_name": "sports",
+                "place_court_name": "sports",
                 "court_name": "Quadra 1"
             },
             {
-                "court_place_name": "sports",
+                "place_court_name": "sports",
                 "court_name": "Quadra 2"
             }
         ]

@@ -16,7 +16,7 @@ export class CourtController {
         const courtRepository = new CourtRepositoryPrisma();
         const placeRepository = new PlaceRepositoryPrisma()
         const getCourtService = new FindCourtService(courtRepository, placeRepository);
-        const court = await getCourtService.find(query.court_place_name, query.court_name);
+        const court = await getCourtService.find(query.place_court_name, query.court_name);
         return ok(court);
     }
 }

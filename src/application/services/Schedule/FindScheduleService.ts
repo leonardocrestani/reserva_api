@@ -21,11 +21,6 @@ export class FindScheduleService implements FindSchedule {
         if (!exist) {
             throw new NotFound("Quadra nao encontrada");
         }
-        place.courts.find((court) => {
-            if (court.court_name === court_name) {
-                const court_id = court.id;
-            }
-        });
         const schedule = await this.scheduleRepository.find(place_court_name, court_name, hour);
         if (!schedule) {
             throw new NotFound("Horario nao encontrado");

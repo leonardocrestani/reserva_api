@@ -1,13 +1,12 @@
 import { BookSchedule } from '../../../core/use-cases/Schedule/BookSchedule';
 import { ScheduleRepository } from '../../repository/ScheduleRepository';
 import { FindPlaceService, FindUserService, } from "../";
-import { CourtRepository, PlaceRepository, UserRepository } from '../../repository';
-import { BadRequest, NotFound } from '../../errors';
+import { PlaceRepository, UserRepository } from '../../repository';
+import { BadRequest, Conflict, NotFound } from '../../errors';
 
 export class BookScheduleService implements BookSchedule {
     constructor(
         private readonly scheduleRepository: ScheduleRepository,
-        private readonly courtRepository: CourtRepository,
         private readonly placeRepository: PlaceRepository,
         private readonly userRepository: UserRepository
     ) { }
@@ -24,16 +23,13 @@ export class BookScheduleService implements BookSchedule {
         if (!exist) {
             throw new NotFound("Quadra nao encontrada");
         }
-        place.courts.find((court) => {
-            if (court.court_name === court_name) {
-                const court_id = court.id;
-            }
-        });
         const schedule = await this.scheduleRepository.find(place_name, court_name, hour);
         if (!schedule) {
             throw new NotFound("Horario nao encontrado");
         }
-        const { id: schedule_id } = await this.scheduleRepository.find(place_name, court_name, hour);
+        if (schedule.is_rent === true) {
+            throw new Conflict("Horario ja reservado");
+        }
         const getUserService = new FindUserService(this.userRepository);
         const user = await getUserService.findByEmail(data.responsible_person_email);
         data.responsible_person_id = user.id;

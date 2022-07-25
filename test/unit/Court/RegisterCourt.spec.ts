@@ -19,18 +19,18 @@ describe('Register court', () => {
     test('Should register new court', async () => {
         await createPlace.create(body);
         const data = {
-            court_place_name: "sports",
+            place_court_name: "sports",
             court_name: "Quadra 3"
         };
         const court = await createCourt.create(data);
-        expect(court.court_place_name).toBe('sports');
+        expect(court.place_court_name).toBe('sports');
         expect(court.court_name).toBe('Quadra 3');
     });
 
     test('Should get error when try to register court already registered', async () => {
         await createPlace.create(body);
         const data = {
-            court_place_name: "sports",
+            place_court_name: "sports",
             court_name: "Quadra 1"
         };
         try {

@@ -2,7 +2,7 @@ import { ScheduleModel, PlaceModel } from '../../models';
 import { CreateSchedule } from "../../../core/use-cases/Schedule/CreateSchedule";
 import { ScheduleRepository } from "../../repository/ScheduleRepository";
 import { FindPlaceService } from "../Place/FindPlaceService";
-import { BadRequest, NotFound } from '../../errors';
+import { BadRequest, Conflict, NotFound } from '../../errors';
 import { PlaceRepository } from '../../repository';
 
 export class CreateScheduleService implements CreateSchedule {
@@ -28,6 +28,12 @@ export class CreateScheduleService implements CreateSchedule {
                 data.court_id = court.id;
             }
         })
+        const schedules = await this.scheduleRepository.findAllByCourt(data.place_court_name, data.court_name);
+        schedules.find((schedule) => {
+            if (schedule.hour === data.hour) {
+                throw new Conflict('Horario ja cadastrado');
+            }
+        });
         return await this.scheduleRepository.create(data);
     }
 }

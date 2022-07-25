@@ -12,7 +12,7 @@ export class CourtRepositoryMemory implements CourtRepository {
 
     async find(place_name: string, court_name: string): Promise<CourtModel> {
         const courts = this.createdCourts.find((court) => {
-            if (court.court_place_name === place_name && court.court_name === court_name) {
+            if (court.place_court_name === place_name && court.court_name === court_name) {
                 return court
             }
         });

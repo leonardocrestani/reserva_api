@@ -26,12 +26,11 @@ export class ScheduleController {
 
     static async update(query: any, params: any, body: any, next: any): Promise<object> {
         const scheduleRepository = new ScheduleRepositoryPrisma();
-        const courtRepository = new CourtRepositoryPrisma();
         const placeRepository = new PlaceRepositoryPrisma();
         const userRepository = new UserRepositoryPrisma();
-        const bookScheduleService = new BookScheduleService(scheduleRepository, courtRepository, placeRepository, userRepository);
+        const bookScheduleService = new BookScheduleService(scheduleRepository, placeRepository, userRepository);
         const hour = parseInt(query.hour, 10);
-        await bookScheduleService.update(query.court_name, query.place_name, hour, body);
+        await bookScheduleService.update(query.place_name, query.court_name, hour, body);
         return noContent();
     }
 }

@@ -24,7 +24,7 @@ const placeValidator = {
                 close_hour: Joi.number().required(),
                 days_open: Joi.array().items(Joi.string().valid(...Object.values(weekendDays)))
             }),
-            courts: Joi.array().items(Joi.object().keys({court_place_name: Joi.string(), court_name: Joi.string() })).required()
+            courts: Joi.array().items(Joi.object().keys({ place_court_name: Joi.string(), court_name: Joi.string() })).required()
         })
     },
     QUERY: {

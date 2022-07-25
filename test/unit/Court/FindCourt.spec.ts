@@ -21,12 +21,12 @@ describe('Find court', () => {
     test('Should find court', async () => {
         await createPlace.create(body);
         const data = {
-            court_place_name: "sports",
+            place_court_name: "sports",
             court_name: "Quadra 3"
         };
         await createCourt.create(data);
         const court = await getCourt.find('sports', 'Quadra 3');
-        expect(court.court_place_name).toBe('sports');
+        expect(court.place_court_name).toBe('sports');
         expect(court.court_name).toBe('Quadra 3');
     });
 

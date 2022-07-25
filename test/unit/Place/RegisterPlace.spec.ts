@@ -98,7 +98,7 @@ describe('Register place', () => {
             ...body,
             courts: [{
                 ...body.courts[0],
-                court_place_name: 'incorrect'
+                place_court_name: 'incorrect'
             }
             ]
         };

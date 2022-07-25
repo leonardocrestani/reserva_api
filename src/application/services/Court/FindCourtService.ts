@@ -13,7 +13,6 @@ export class FindCourtService implements FindCourt {
     async find(place_name: string, court_name: string): Promise<CourtModel> {
         const getPlaceService = new FindPlaceService(this.placeRepository);
         const place = await getPlaceService.findByName(place_name);
-        const place_id = place.id;
         const court = await this.courtRepository.find(place.place_name, court_name);
         if (!court) {
             throw new NotFound("Quadra nao encontrada");
