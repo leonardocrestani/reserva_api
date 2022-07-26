@@ -10,6 +10,10 @@ export class PlaceRepositoryMemory implements PlaceRepository {
         return newPlace;
     }
 
+    async findAll(): Promise<PlaceModel[]> {
+        return this.createdPlaces;
+    }
+
     async findByName(name: string): Promise<PlaceModel> {
         const place = this.createdPlaces.find(place => place.place_name === name);
         return place;
@@ -17,6 +21,12 @@ export class PlaceRepositoryMemory implements PlaceRepository {
 
     async findByCnpj(cnpj: string): Promise<PlaceModel> {
         const place = this.createdPlaces.find(place => place.cnpj === cnpj);
+        return place;
+    }
+
+    async updateNumberOfCourts(place_name: string): Promise<PlaceModel> {
+        const place = this.createdPlaces.find(place => place.place_name === place_name);
+        place.number_of_courts += 1;
         return place;
     }
 }

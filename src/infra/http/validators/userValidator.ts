@@ -21,6 +21,11 @@ const userValidator = {
             password: Joi.string().min(6).max(25).required()
         }),
     },
+    DELETE: {
+        [Segments.QUERY]: Joi.object().keys({
+            email: Joi.string().email().max(70).required()
+        }),
+    }
 }
 
 export { userValidator };

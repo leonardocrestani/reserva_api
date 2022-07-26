@@ -11,10 +11,19 @@ export class PlaceController {
         return created(newPlace);
     }
 
-    static async find(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
+    static async findAll(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const prismaRepository = new PlaceRepositoryPrisma();
         const getPlaceService = new FindPlaceService(prismaRepository);
-        const place = await getPlaceService.findByName(query.place_name);
+        const limit = parseInt(query.limit, 10);
+        const offset = parseInt(query.offset, 10);
+        const places = await getPlaceService.findAll(limit, offset);
+        return ok(places);
+    }
+
+    static async findOne(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
+        const prismaRepository = new PlaceRepositoryPrisma();
+        const getPlaceService = new FindPlaceService(prismaRepository);
+        const place = await getPlaceService.findByName(params.place_name);
         return ok(place);
     }
 }

@@ -30,11 +30,40 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
         });
     }
 
+    async findAll(limit: number, offset: number): Promise<PlaceModel[]> {
+        return await prisma.place.findMany({
+            skip: offset,
+            take: limit,
+            select: {
+                created_at: false,
+                updated_at: false,
+                place_name: true,
+                cnpj: true,
+                number_of_courts: true,
+                address: true,
+                contact: true,
+                operation_time: true,
+                courts: {
+                    select: {
+                        place_court_name: true,
+                        court_name: true,
+                        created_at: false,
+                        updated_at: false,
+                    }
+                }
+            }
+        });
+    }
+
     async findByName(place_name: string): Promise<PlaceModel> {
         return await prisma.place.findUnique({ where: { place_name }, include: { courts: { include: { schedules: true } } } });
     };
 
     async findByCnpj(cnpj: string): Promise<PlaceModel> {
         return await prisma.place.findUnique({ where: { cnpj }, include: { courts: true } });
+    }
+
+    async updateNumberOfCourts(place_name: string): Promise<PlaceModel> {
+        return await prisma.place.update({ where: { place_name }, data: { number_of_courts: { increment: 1 } }, include: { courts: true } });
     }
 }

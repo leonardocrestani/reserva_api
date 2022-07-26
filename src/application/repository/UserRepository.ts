@@ -6,4 +6,6 @@ export interface UserRepository {
     findUser: (email: string, password: string) => Promise<UserModel>;
 
     findUserByEmail: (email: string) => Promise<UserModel>
+
+    remove: (email: string) => Promise<UserModel>;
 }

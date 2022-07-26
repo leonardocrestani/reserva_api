@@ -1,6 +1,7 @@
 export * from './User/CreateUserService';
 export * from './User/FindUserService';
 export * from './User/AuthenticateUserService';
+export * from './User/DeleteUserService';
 export * from './Place/CreatePlaceService';
 export * from './Place/FindPlaceService';
 export * from './Court/CreateCourtService';

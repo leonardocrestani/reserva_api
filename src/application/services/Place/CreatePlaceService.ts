@@ -9,7 +9,7 @@ export class CreatePlaceService implements CreatePlace {
     constructor(private readonly placeRepository: PlaceRepository) { }
 
     async create(data: any): Promise<PlaceModel> {
-        const place = await this.placeRepository.findByCnpj(data.cnpj);
+        const place = await this.placeRepository.findByCnpj(data.cnpj) || await this.placeRepository.findByName(data.place_name) ? true : false;
         if (place) {
             throw new Conflict("Local ja cadastrado");
         }

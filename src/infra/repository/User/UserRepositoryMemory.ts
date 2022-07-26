@@ -21,4 +21,12 @@ export class UserRepositoryMemory implements UserRepository {
         return user;
     }
 
+    async remove(email: string): Promise<any> {
+        this.createdUsers.find((user) => {
+            if (user.email === email) {
+                this.createdUsers.pop();
+            }
+        });
+    }
+
 }

@@ -19,4 +19,8 @@ export class UserRepositoryPrisma implements UserRepository {
     async findUserByEmail(email: string): Promise<UserModel> {
         return await prisma.user.findUnique({ where: { email }, include: { schedules: true } });
     }
+
+    async remove(email: string): Promise<UserModel> {
+        return await prisma.user.delete({ where: { email }, include: { schedules: true } });
+    }
 }

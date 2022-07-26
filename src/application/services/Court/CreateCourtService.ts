@@ -19,6 +19,8 @@ export class CreateCourtService implements CreateCourt {
             }
         })
         data.place_id = place.id;
-        return await this.courtRepository.create(data);
+        const court = await this.courtRepository.create(data);
+        await this.placeRepository.updateNumberOfCourts(data.place_court_name);
+        return court;
     }
 }
