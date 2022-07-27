@@ -30,7 +30,7 @@ describe('Delete user', () => {
         await createUser.create(data);
         try {
             await deleteUser.remove("leonardo@test.com");
-            await findUser.findByEmail("leonardo@test.com");
+            await findUser.findOne("leonardo@test.com");
         }
         catch (error: any) {
             expect(error.message).toBe("Usuario nao encontrado");

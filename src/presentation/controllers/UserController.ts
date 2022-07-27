@@ -15,7 +15,7 @@ export class UserController {
     static async findOne(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const prismaRepository = new UserRepositoryPrisma();
         const getUserService = new FindUserService(prismaRepository);
-        const user = await getUserService.find(query.email, query.password);
+        const user = await getUserService.findOne(query.email);
         return ok(user);
     }
 

@@ -6,20 +6,12 @@ import { NotFound } from '../../errors/NotFound';
 export class FindUserService implements FindUser {
     constructor(private readonly userRepository: UserRepository) { }
 
-    async find(email: string, password: string): Promise<UserModel> {
-        const user = await this.userRepository.findUser(email, password);
+    async findOne(email: string): Promise<UserModel> {
+        const user = await this.userRepository.findOne(email);
         if (!user) {
             throw new NotFound('User not found');
         }
         return user;
     };
-
-    async findByEmail(email: string): Promise<UserModel> {
-        const user = await this.userRepository.findUserByEmail(email);
-        if (!user) {
-            throw new NotFound('Usuario nao encontrado');
-        }
-        return user;
-    }
 
 }

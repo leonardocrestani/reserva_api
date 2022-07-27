@@ -17,8 +17,7 @@ const userValidator = {
     },
     QUERY: {
         [Segments.QUERY]: Joi.object().keys({
-            email: Joi.string().email().max(70).required(),
-            password: Joi.string().min(6).max(25).required()
+            email: Joi.string().email().max(70).required()
         }),
     },
     DELETE: {

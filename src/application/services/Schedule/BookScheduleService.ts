@@ -29,7 +29,7 @@ export class BookScheduleService implements BookSchedule {
         }
         data.is_rent = true;
         const getUserService = new FindUserService(this.userRepository);
-        const user = await getUserService.findByEmail(data.responsible_person_email);
+        const user = await getUserService.findOne(data.responsible_person_email);
         data.responsible_person_id = user.id;
         const fullName = user.first_name.concat(' ', `${user.last_name}`);
         data.responsible_person_full_name = fullName;

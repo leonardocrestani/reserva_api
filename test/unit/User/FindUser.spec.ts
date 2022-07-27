@@ -5,12 +5,12 @@ import { FindUserService } from '../../../src/application/services';
 describe('Find user', () => {
 
     let createUser: CreateUserService;
-    let getUser: FindUserService;
+    let findUser: FindUserService;
 
     beforeEach(async () => {
         const userRepositoryMemory = new UserRepositoryMemory();
         createUser = new CreateUserService(userRepositoryMemory);
-        getUser = new FindUserService(userRepositoryMemory);
+        findUser = new FindUserService(userRepositoryMemory);
     });
 
     test('Should get user', async () => {
@@ -27,9 +27,8 @@ describe('Find user', () => {
             schedules: schedules
         }
         await createUser.create(data);
-        const user = await getUser.find("leonardo@test.com", "123894**#B*");
+        const user = await findUser.findOne("leonardo@test.com");
         expect(user.email).toBe("leonardo@test.com");
-        expect(user.password).toBe("123894**#B*");
     });
 
     test('Should get error when email are incorrect', async () => {
@@ -47,7 +46,7 @@ describe('Find user', () => {
         }
         await createUser.create(data);
         try {
-            await getUser.find("leonardo@erro.com", "123456*");
+            await findUser.findOne("leonardo@erro.com");
         }
         catch (error: any) {
             expect(error.message).toBe("User not found");
@@ -69,7 +68,7 @@ describe('Find user', () => {
         }
         await createUser.create(data);
         try {
-            await getUser.find("leonardo@test.com", "123*%$");
+            await findUser.findOne("leonardo@test.com");
         }
         catch (error: any) {
             expect(error.message).toBe("User not found");
