@@ -1,5 +1,5 @@
-import { CourtRepositoryMemory, PlaceRepositoryMemory } from '../../../src/infra/repository';
-import { CreateCourtService, CreatePlaceService } from '../../../src/application/services';
+import { CourtRepositoryMemory, PlaceRepositoryMemory } from '../../../infra/repository';
+import { CreateCourtService, CreatePlaceService } from '../../../application/services';
 import { body } from '../../fixtures/placeRegister.json';
 
 describe('Register court', () => {

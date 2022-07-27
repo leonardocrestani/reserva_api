@@ -1,5 +1,5 @@
-import { PlaceRepositoryMemory } from '../../../src/infra/repository';
-import { FindPlaceService, CreatePlaceService } from '../../../src/application/services';
+import { PlaceRepositoryMemory } from '../../../infra/repository';
+import { FindPlaceService, CreatePlaceService } from '../../../application/services';
 import { body } from '../../fixtures/placeRegister.json';
 
 describe('Find place', () => {
@@ -23,7 +23,7 @@ describe('Find place', () => {
             courts:
                 body.courts.map((court) => {
                     const name = court.court_name;
-                    return {place_court_name: "place test", court_name: `${name}`}
+                    return { place_court_name: "place test", court_name: `${name}` }
                 })
         }
         await createPlace.create(data2);

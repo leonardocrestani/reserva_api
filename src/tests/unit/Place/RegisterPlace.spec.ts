@@ -1,5 +1,5 @@
-import { PlaceRepositoryMemory } from '../../../src/infra/repository';
-import { CreatePlaceService } from '../../../src/application/services';
+import { PlaceRepositoryMemory } from '../../../infra/repository';
+import { CreatePlaceService } from '../../../application/services';
 import { body } from '../../fixtures/placeRegister.json';
 
 describe('Register place', () => {

@@ -1,5 +1,5 @@
-import { PlaceRepositoryMemory, ScheduleRepositoryMemory } from '../../../src/infra/repository';
-import { CreatePlaceService, CreateScheduleService } from '../../../src/application/services';
+import { PlaceRepositoryMemory, ScheduleRepositoryMemory } from '../../../infra/repository';
+import { CreatePlaceService, CreateScheduleService } from '../../../application/services';
 import { body } from '../../fixtures/placeRegister.json';
 
 describe('Register schedule', () => {

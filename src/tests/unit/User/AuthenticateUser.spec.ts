@@ -1,5 +1,6 @@
-import { UserRepositoryMemory } from '../../../src/infra/repository';
-import { CreateUserService, AuthenticateUserService } from '../../../src/application/services';
+import { UserRepositoryMemory } from '../../../infra/repository';
+import { CreateUserService, AuthenticateUserService } from '../../../application/services';
+import encryptPassword from '../../../common/utils/encryptPassword';
 
 describe('Authenticate user', () => {
 
@@ -21,7 +22,7 @@ describe('Authenticate user', () => {
             genre: "Male",
             country: "Brasil",
             email: "leonardo@test.com",
-            password: "123894**#B*",
+            password: '123894**#B*',
             phone_number: "+5554999854874",
             schedules: schedules
         }
@@ -40,7 +41,7 @@ describe('Authenticate user', () => {
             genre: "Male",
             country: "Brasil",
             email: "leonardo@test.com",
-            password: "123894**#B*",
+            password: `${await encryptPassword('123894**#B*')}`,
             phone_number: "+5554999854874",
             schedules: schedules
         }
@@ -48,8 +49,8 @@ describe('Authenticate user', () => {
         try {
             await authenticaUser.authenticate('leonardo@incorrect.com', '123894**#B*');
         }
-        catch(error) {
-            expect(error.message).toBe('Email ou senha invalidos')
+        catch (error) {
+            expect(error.message).toBe('Email ou senha incorretos')
         }
     });
 
@@ -62,7 +63,7 @@ describe('Authenticate user', () => {
             genre: "Male",
             country: "Brasil",
             email: "leonardo@test.com",
-            password: "123894**#B*",
+            password: `${await encryptPassword('123894**#B*')}`,
             phone_number: "+5554999854874",
             schedules: schedules
         }
@@ -70,8 +71,8 @@ describe('Authenticate user', () => {
         try {
             await authenticaUser.authenticate('leonardo@test.com', 'ifdj3487@');
         }
-        catch(error) {
-            expect(error.message).toBe('Email ou senha invalidos')
+        catch (error) {
+            expect(error.message).toBe('Email ou senha incorretos')
         }
     });
 

@@ -1,5 +1,5 @@
-import { UserRepositoryMemory } from '../../../src/infra/repository';
-import { CreateUserService } from '../../../src/application/services';
+import { UserRepositoryMemory } from '../../../infra/repository';
+import { CreateUserService } from '../../../application/services';
 
 describe('Register user', () => {
 
@@ -19,13 +19,12 @@ describe('Register user', () => {
             genre: "Male",
             country: "Brasil",
             email: "leonardo@test.com",
-            password: "123894**#B*",
+            password: '123894**#B*',
             phone_number: "+5554999854874",
             schedules: schedules
         }
         const user = await createUser.create(data);
         expect(user.user.email).toBe("leonardo@test.com");
-        expect(user.user.password).toBe("123894**#B*");
         expect(user).toHaveProperty('access_token');
     });
 
@@ -83,5 +82,5 @@ describe('Register user', () => {
             expect(error.message).toBe("Usuario ja cadastrado");
         }
     });
-    
+
 });

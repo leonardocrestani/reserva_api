@@ -1,5 +1,5 @@
-import { PlaceRepositoryMemory } from '../../../src/infra/repository';
-import { CreatePlaceService, DeletePlaceService, FindPlaceService } from '../../../src/application/services';
+import { PlaceRepositoryMemory } from '../../../infra/repository';
+import { CreatePlaceService, DeletePlaceService, FindPlaceService } from '../../../application/services';
 import { body } from '../../fixtures/placeRegister.json';
 
 describe('Delete place', () => {

@@ -1,5 +1,5 @@
-import { CourtRepositoryMemory, PlaceRepositoryMemory, ScheduleRepositoryMemory, UserRepositoryMemory } from '../../../src/infra/repository';
-import { BookScheduleService, CreatePlaceService, CreateScheduleService, CreateUserService, FindScheduleService } from '../../../src/application/services';
+import { CourtRepositoryMemory, PlaceRepositoryMemory, ScheduleRepositoryMemory, UserRepositoryMemory } from '../../../infra/repository';
+import { BookScheduleService, CreatePlaceService, CreateScheduleService, CreateUserService, FindScheduleService } from '../../../application/services';
 import { body } from '../../fixtures/placeRegister.json';
 
 describe('Book place', () => {

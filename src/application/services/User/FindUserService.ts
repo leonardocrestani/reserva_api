@@ -9,7 +9,7 @@ export class FindUserService implements FindUser {
     async findOne(email: string): Promise<UserModel> {
         const user = await this.userRepository.findOne(email);
         if (!user) {
-            throw new NotFound('User not found');
+            throw new NotFound('Usuario nao encontrado');
         }
         return user;
     };
