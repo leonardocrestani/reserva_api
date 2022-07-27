@@ -31,6 +31,11 @@ const placeValidator = {
         [Segments.PARAMS]: customJoi.object().keys({
             place_name: Joi.string().required()
         })
+    },
+    DELETE: {
+        [Segments.QUERY]: customJoi.object().keys({
+            cnpj: Joi.string().required()
+        })
     }
 }
 

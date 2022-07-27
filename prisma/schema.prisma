@@ -102,7 +102,7 @@ model Place {
 
 model Court {
   id               String      @id @default(auto()) @map("_id") @db.ObjectId
-  place            Place       @relation(fields: [place_id], references: [id])
+  place            Place       @relation(onDelete: Cascade, fields: [place_id], references: [id])
   place_id         String      @db.ObjectId
   place_court_name String      @unique
   court_name       String
@@ -113,14 +113,14 @@ model Court {
 
 model Schedules {
   id                           String   @id @default(auto()) @map("_id") @db.ObjectId
-  court                        Court    @relation(fields: [court_id], references: [id])
+  court                        Court    @relation(onDelete: Cascade, fields: [court_id], references: [id])
   court_id                     String   @db.ObjectId
   court_name                   String
   place_court_name             String
   hour                         Int @unique
   is_rent                      Boolean  @default(false)
   day String
-  responsible_person           User?    @relation(fields: [responsible_person_id], references: [id])
+  responsible_person           User?    @relation(onDelete: SetNull, fields: [responsible_person_id], references: [id])
   responsible_person_id        String?  @unique @db.ObjectId
   responsible_person_email     String?
   responsible_person_full_name String?

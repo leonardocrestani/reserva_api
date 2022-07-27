@@ -30,4 +30,12 @@ export class PlaceRepositoryMemory implements PlaceRepository {
         place.number_of_courts += 1;
         return place;
     }
+
+    async delete(cnpj: string): Promise<any> {
+        this.createdPlaces.find((place) => {
+            if (place.cnpj === cnpj) {
+                this.createdPlaces.pop();
+            }
+        });
+    }
 }

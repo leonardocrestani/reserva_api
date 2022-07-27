@@ -1,7 +1,7 @@
 import { UserRepositoryMemory } from '../../../src/infra/repository';
 import { CreateUserService, DeleteUserService, FindUserService } from '../../../src/application/services';
 
-describe('Find user', () => {
+describe('Delete user', () => {
 
     let createUser: CreateUserService;
     let deleteUser: DeleteUserService;

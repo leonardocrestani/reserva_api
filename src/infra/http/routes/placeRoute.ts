@@ -11,5 +11,6 @@ const placeRouter = Router();
 placeRouter.get('/', ExpressAdapter.create(PlaceController.findAll));
 placeRouter.get('/:place_name', celebrate(placeValidator.PARAMS, { abortEarly: true }), ExpressAdapter.create(PlaceController.findOne));
 placeRouter.post('/', celebrate(placeValidator.BODY, { abortEarly: true }), ExpressAdapter.create(PlaceController.register));
+placeRouter.delete('/', celebrate(placeValidator.DELETE, { abortEarly: true }), ExpressAdapter.create(PlaceController.delete));
 
 export { placeRouter };

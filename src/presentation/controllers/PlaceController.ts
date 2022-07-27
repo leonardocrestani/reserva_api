@@ -1,7 +1,7 @@
 import { CreatePlaceService } from '../../application/services';
-import { FindPlaceService } from '../../application/services';
+import { FindPlaceService, DeletePlaceService } from '../../application/services';
 import { PlaceRepositoryPrisma } from '../../infra/repository';
-import { ok, created, HttpResponse } from '../contracts/HttpResponse';
+import { ok, created, HttpResponse, noContent } from '../contracts/HttpResponse';
 
 export class PlaceController {
     static async register(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
@@ -25,5 +25,12 @@ export class PlaceController {
         const getPlaceService = new FindPlaceService(prismaRepository);
         const place = await getPlaceService.findByName(params.place_name);
         return ok(place);
+    }
+
+    static async delete(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
+        const prismaRepository = new PlaceRepositoryPrisma();
+        const deletePlaceService = new DeletePlaceService(prismaRepository);
+        await deletePlaceService.delete(query.cnpj);
+        return noContent();
     }
 }

@@ -66,4 +66,8 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
     async updateNumberOfCourts(place_name: string): Promise<PlaceModel> {
         return await prisma.place.update({ where: { place_name }, data: { number_of_courts: { increment: 1 } }, include: { courts: true } });
     }
+
+    async delete(cnpj: string): Promise<void> {
+        await prisma.place.delete({ where: { cnpj: cnpj }, include: { courts: true } });
+    }
 }
