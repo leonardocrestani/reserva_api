@@ -20,8 +20,7 @@ const scheduleValidator = {
     },
     UPDATE: {
         [Segments.BODY]: customJoi.object().keys({
-            responsible_person_email: Joi.string().trim().required(),
-            is_rent: Joi.boolean().required()
+            responsible_person_email: Joi.string().trim().required()
         }),
         [Segments.QUERY]: Joi.object().keys({
             place_name: Joi.string().trim().required(),

@@ -13,6 +13,24 @@ describe('Find place', () => {
         getPlace = new FindPlaceService(placeRepository);
     });
 
+    test('Should get all places', async () => {
+        const data = body;
+        await createPlace.create(data);
+        const data2 = {
+            ...body,
+            place_name: "place test",
+            cnpj: "79.487.553/0001-70",
+            courts:
+                body.courts.map((court) => {
+                    const name = court.court_name;
+                    return {place_court_name: "place test", court_name: `${name}`}
+                })
+        }
+        await createPlace.create(data2);
+        const places = await getPlace.findAll(10, 0);
+        expect(places.length).toBeGreaterThan(1);
+    });
+
     test('Should get place by name', async () => {
         const data = body;
         await createPlace.create(data);

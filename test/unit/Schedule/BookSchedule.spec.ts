@@ -53,26 +53,6 @@ describe('Book place', () => {
         expect(schedule.responsible_person_email).toBe('leonardo@test.com');
     });
 
-    test('Should get error when is rent false', async () => {
-        await createSchedule.create({
-            place_court_name: "sports",
-            court_name: "Quadra 2",
-            hour: 10,
-            is_rent: false,
-            day: "Wed"
-        });
-        const data = {
-            responsible_person_email: "leonardo@test.com",
-            is_rent: false
-        }
-        try {
-            await bookSchedule.update('sports', 'Quadra 2', 10, data);
-        }
-        catch (error) {
-            expect(error.message).toBe('Esta reservado nao pode ser falso');
-        }
-    });
-
     test('Should get error when place is incorrect', async () => {
         await createSchedule.create({
             place_court_name: "sports",

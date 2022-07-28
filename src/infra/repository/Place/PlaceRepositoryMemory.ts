@@ -10,8 +10,9 @@ export class PlaceRepositoryMemory implements PlaceRepository {
         return newPlace;
     }
 
-    async findAll(): Promise<PlaceModel[]> {
-        return this.createdPlaces;
+    async findAll(limit: number, offset: number): Promise<PlaceModel[]> {
+        const places = this.createdPlaces.slice(offset, limit);
+        return places;
     }
 
     async findByName(name: string): Promise<PlaceModel> {
