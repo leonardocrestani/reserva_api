@@ -104,8 +104,8 @@ model Court {
   id               String      @id @default(auto()) @map("_id") @db.ObjectId
   place            Place       @relation(onUpdate: Cascade, onDelete: Cascade, fields: [place_id], references: [id])
   place_id         String      @db.ObjectId
-  place_court_name String      @unique
-  court_name       String
+  place_court_name String
+  court_name       String @unique
   schedules        Schedules[]
   created_at       DateTime    @default(now())
   updated_at       DateTime    @default(now()) @updatedAt

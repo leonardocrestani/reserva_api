@@ -18,4 +18,10 @@ export class CourtRepositoryMemory implements CourtRepository {
         });
         return courts;
     }
+
+    async updatePlaceName(id: string, data: any): Promise<CourtModel> {
+        let court = this.createdCourts.find(court => court.place_court_name === id && court.court_name === id);
+        court = data;
+        return court;
+    }
 }

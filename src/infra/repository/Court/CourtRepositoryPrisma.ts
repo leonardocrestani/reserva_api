@@ -18,4 +18,12 @@ export class CourtRepositoryPrisma implements CourtRepository {
     async find(place_court_name: string, court_name: string): Promise<CourtModel> {
         return await prisma.court.findFirst({ where: { AND: [{ court_name: court_name }, { place_court_name: place_court_name }] }, include: { schedules: true } })
     }
+
+    async updatePlaceName(court_name: string, data: any): Promise<CourtModel> {
+        return await prisma.court.update({
+            where: {court_name},
+            data,
+            include: {schedules: true}
+        })
+    }
 }
