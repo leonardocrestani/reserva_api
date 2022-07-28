@@ -32,6 +32,32 @@ const placeValidator = {
             place_name: Joi.string().required()
         })
     },
+    UPDATE: {
+        [Segments.QUERY]: customJoi.object().keys({
+            cnpj: Joi.string().required()
+        }),
+        [Segments.BODY]: customJoi.object().keys({
+            place_name: Joi.string().trim().optional(),
+            cnpj: Joi.string().trim().optional(),
+            address: customJoi.object().keys({
+                city_code: Joi.number().optional(),
+                city_name: Joi.string().trim().optional(),
+                state: Joi.string().valid(...Object.values(states)).optional(),
+                country: Joi.string().trim().optional(),
+                street: Joi.string().trim().optional(),
+                neighborhood: Joi.string().trim().optional()
+            }),
+            contact: customJoi.object().keys({
+                name: Joi.string().trim().optional(),
+                phone_number: customJoi.string().phoneNumber({ defaultCountry: 'BR', strict: true }).optional(),
+            }),
+            operation_time: customJoi.object().keys({
+                open_hour: Joi.number().optional(),
+                close_hour: Joi.number().optional(),
+                days_open: Joi.array().items(Joi.string().valid(...Object.values(weekendDays)))
+            })
+        })
+    },
     DELETE: {
         [Segments.QUERY]: customJoi.object().keys({
             cnpj: Joi.string().required()

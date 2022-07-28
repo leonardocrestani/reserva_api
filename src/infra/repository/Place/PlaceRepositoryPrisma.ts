@@ -63,6 +63,10 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
         return await prisma.place.findUnique({ where: { cnpj }, include: { courts: true } });
     }
 
+    async update(cnpj: string, data: any): Promise<PlaceModel> {
+        return await prisma.place.update({ where: {cnpj}, data: data, include: {courts: true} });
+    }
+
     async updateNumberOfCourts(place_name: string): Promise<PlaceModel> {
         return await prisma.place.update({ where: { place_name }, data: { number_of_courts: { increment: 1 } }, include: { courts: true } });
     }

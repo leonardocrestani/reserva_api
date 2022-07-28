@@ -4,6 +4,7 @@ export * from './User/AuthenticateUserService';
 export * from './User/DeleteUserService';
 export * from './Place/CreatePlaceService';
 export * from './Place/FindPlaceService';
+export * from './Place/UpdatePlaceService';
 export * from './Place/DeletePlaceService';
 export * from './Court/CreateCourtService';
 export * from './Court/FindCourtService';

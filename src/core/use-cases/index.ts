@@ -4,6 +4,7 @@ export * from './User/AuthenticateUser';
 export * from './User/DeleteUser';
 export * from './Place/FindPlace';
 export * from './Place/CreatePlace';
+export * from './Place/UpdatePlace';
 export * from './Place/DeletePlace';
 export * from './Court/FindCourt';
 export * from './Court/CreateCourt';

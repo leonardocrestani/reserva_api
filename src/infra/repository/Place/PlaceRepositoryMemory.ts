@@ -25,6 +25,12 @@ export class PlaceRepositoryMemory implements PlaceRepository {
         return place;
     }
 
+    async update(cnpj: string, data: any): Promise<PlaceModel> {
+        let place = this.createdPlaces.find(place => place.cnpj === cnpj);
+        place = data;
+        return place;
+    }
+
     async updateNumberOfCourts(place_name: string): Promise<PlaceModel> {
         const place = this.createdPlaces.find(place => place.place_name === place_name);
         place.number_of_courts += 1;
