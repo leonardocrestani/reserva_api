@@ -109,6 +109,7 @@ model Court {
   schedules        Schedules[]
   created_at       DateTime    @default(now())
   updated_at       DateTime    @default(now()) @updatedAt
+  @@unique ([place_court_name, court_name])
 }
 
 model Schedules {

@@ -15,10 +15,17 @@ export class ScheduleRepositoryPrisma implements ScheduleRepository {
         return await prisma.schedules.findMany({ where: { AND: [{ place_court_name }, { court_name }] } });
     }
 
-    async updatePlaceName(hour: number, data: any): Promise<ScheduleModel> {
+    async updatePlaceName(hour: number, place_name: string): Promise<ScheduleModel> {
         return await prisma.schedules.update({
             where: { hour },
-            data
+            data: {place_court_name: place_name}
+        })
+    }
+
+    async updateCourtName(hour: number, court_name: string): Promise<ScheduleModel> {
+        return await prisma.schedules.update({
+            where: { hour },
+            data: {court_name: court_name}
         })
     }
 
