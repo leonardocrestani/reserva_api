@@ -6,4 +6,6 @@ export interface CourtRepository {
     find: (place_court_name: string, court_name: string) => Promise<CourtModel>;
 
     updatePlaceName: (court_name: string, data: any) => Promise<CourtModel>;
+
+    update: (place_name: string, court_name: string, data: any) => Promise<CourtModel>;
 }

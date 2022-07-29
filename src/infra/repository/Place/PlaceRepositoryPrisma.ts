@@ -22,7 +22,8 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
                 },
                 courts: {
                     create: [
-                        ...data.courts
+                        // ver como fazer para criar a propriedade horarios array vazio para poder tirar schedules de opcional da entidade de court
+                        ...data.courts,
                     ]
                 }
             },
@@ -47,6 +48,7 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
                     select: {
                         place_court_name: true,
                         court_name: true,
+                        schedules: true,
                         created_at: false,
                         updated_at: false,
                     }

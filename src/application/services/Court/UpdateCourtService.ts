@@ -11,6 +11,10 @@ export class UpdateCourtService implements UpdateCourt {
         private readonly scheduleRepository: ScheduleRepository
     ) { };
 
+    async update(place_name: string, court_name: string, data: any): Promise<void> {
+        
+    }
+
     async updatePlaceName(place_name: string): Promise<void> {
         const getPlaceService = new FindPlaceService(this.placeRepository);
         const place = await getPlaceService.findByName(place_name);
