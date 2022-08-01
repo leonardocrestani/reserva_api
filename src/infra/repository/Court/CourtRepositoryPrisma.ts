@@ -21,17 +21,24 @@ export class CourtRepositoryPrisma implements CourtRepository {
 
     async updatePlaceName(court_name: string, data: any): Promise<CourtModel> {
         return await prisma.court.update({
-            where: {court_name},
+            where: { court_name },
             data,
-            include: {schedules: true}
+            include: { schedules: true }
         })
     }
 
     async update(place_name: string, court_name: string, data: any): Promise<CourtModel> {
         return await prisma.court.update({
-            where: { place_court_name_court_name: {place_court_name: place_name, court_name: court_name}},
+            where: { place_court_name_court_name: { place_court_name: place_name, court_name: court_name } },
             data,
-            include: {schedules: true}
+            include: { schedules: true }
         })
+    }
+
+    async delete(place_name: string, court_name: string): Promise<void> {
+        await prisma.court.delete({
+            where: { place_court_name_court_name: { place_court_name: place_name, court_name: court_name } },
+            include: { schedules: true }
+        });
     }
 }

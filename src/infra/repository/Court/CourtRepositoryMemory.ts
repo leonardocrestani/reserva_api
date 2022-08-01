@@ -30,4 +30,12 @@ export class CourtRepositoryMemory implements CourtRepository {
         court = data;
         return court;
     }
+
+    async delete(place_name: string, court_name: string): Promise<void> {
+        this.createdCourts.find((court) => {
+            if (court.place_court_name === place_name && court.court_name === court_name) {
+                this.createdCourts.pop();
+            }
+        });
+    }
 }

@@ -8,4 +8,6 @@ export interface CourtRepository {
     updatePlaceName: (court_name: string, data: any) => Promise<CourtModel>;
 
     update: (place_name: string, court_name: string, data: any) => Promise<CourtModel>;
+
+    delete: (place_name: string, court_name: string) => Promise<void>;
 }

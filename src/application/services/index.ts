@@ -8,6 +8,8 @@ export * from './Place/UpdatePlaceService';
 export * from './Place/DeletePlaceService';
 export * from './Court/CreateCourtService';
 export * from './Court/FindCourtService';
+export * from './Court/UpdateCourtService';
+export * from './Court/DeleteCourtService';
 export * from './Schedule/BookScheduleService';
 export * from './Schedule/CreateScheduleService';
 export * from './Schedule/FindScheduleService';

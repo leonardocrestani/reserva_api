@@ -1,6 +1,4 @@
-import { CreateCourtService } from '../../application/services';
-import { FindCourtService } from '../../application/services/Court/FindCourtService';
-import { UpdateCourtService } from '../../application/services/Court/UpdateCourtService';
+import { CreateCourtService, DeleteCourtService, UpdateCourtService, FindCourtService } from '../../application/services';
 import { CourtRepositoryPrisma, PlaceRepositoryPrisma, ScheduleRepositoryPrisma } from '../../infra/repository';
 import { ok, created, HttpResponse, noContent } from '../contracts/HttpResponse';
 
@@ -27,6 +25,14 @@ export class CourtController {
         const scheduleRepository = new ScheduleRepositoryPrisma();
         const updateCourtService = new UpdateCourtService(courtRepository, placeRepository, scheduleRepository);
         await updateCourtService.update(query.place_name, query.court_name, body);
+        return noContent();
+    }
+
+    static async delete(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
+        const courtRepository = new CourtRepositoryPrisma();
+        const placeRepository = new PlaceRepositoryPrisma();
+        const deleteCourtService = new DeleteCourtService(courtRepository, placeRepository);
+        await deleteCourtService.delete(query.place_name, query.court_name);
         return noContent();
     }
 }

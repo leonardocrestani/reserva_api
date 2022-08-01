@@ -22,6 +22,12 @@ const courtValidator = {
         [Segments.BODY]: customJoi.object().keys({
             court_name: Joi.string().trim().optional()
         })
+    },
+    DELETE: {
+        [Segments.QUERY]: Joi.object().keys({
+            place_name: Joi.string().trim().required(),
+            court_name: Joi.string().trim().required()
+        })
     }
 }
 
