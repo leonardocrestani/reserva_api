@@ -13,3 +13,4 @@ export * from './Court/DeleteCourt';
 export * from './Schedule/FindSchedule';
 export * from './Schedule/CreateSchedule';
 export * from './Schedule/BookSchedule';
+export * from './Schedule/DeleteSchedule';

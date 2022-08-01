@@ -6,8 +6,8 @@ import { NotFound } from '../../errors/NotFound';
 export class FindUserService implements FindUser {
     constructor(private readonly userRepository: UserRepository) { }
 
-    async findOne(email: string): Promise<UserModel> {
-        const user = await this.userRepository.findOne(email);
+    async findByEmail(email: string): Promise<UserModel> {
+        const user = await this.userRepository.findByEmail(email);
         if (!user) {
             throw new NotFound('Usuario nao encontrado');
         }

@@ -22,10 +22,13 @@ const scheduleValidator = {
         [Segments.BODY]: customJoi.object().keys({
             responsible_person_email: Joi.string().trim().required()
         }),
-        [Segments.QUERY]: Joi.object().keys({
-            place_name: Joi.string().trim().required(),
-            court_name: Joi.string().trim().required(),
-            hour: Joi.number().required()
+        [Segments.PARAMS]: Joi.object().keys({
+            id: Joi.string().trim().required()
+        })
+    },
+    DELETE: {
+        [Segments.PARAMS]: customJoi.object().keys({
+            id: Joi.string().trim().required()
         })
     }
 }

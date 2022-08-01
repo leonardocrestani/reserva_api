@@ -7,20 +7,11 @@ import { BadRequest, Conflict, NotFound } from '../../errors';
 export class BookScheduleService implements BookSchedule {
     constructor(
         private readonly scheduleRepository: ScheduleRepository,
-        private readonly placeRepository: PlaceRepository,
         private readonly userRepository: UserRepository
     ) { }
 
-    async update(place_name: string, court_name: string, hour: number, data: any): Promise<void> {
-        const getPlaceService = new FindPlaceService(this.placeRepository);
-        const place = await getPlaceService.findByName(place_name);
-        const exist = place.courts.some((court: any) => {
-            return court.court_name === court_name;
-        });
-        if (!exist) {
-            throw new NotFound("Quadra nao encontrada");
-        }
-        const schedule = await this.scheduleRepository.find(place_name, court_name, hour);
+    async update(id: string, data: any): Promise<void> {
+        const schedule = await this.scheduleRepository.findById(id);
         if (!schedule) {
             throw new NotFound("Horario nao encontrado");
         }
@@ -29,10 +20,10 @@ export class BookScheduleService implements BookSchedule {
         }
         data.is_rent = true;
         const getUserService = new FindUserService(this.userRepository);
-        const user = await getUserService.findOne(data.responsible_person_email);
+        const user = await getUserService.findByEmail(data.responsible_person_email);
         data.responsible_person_id = user.id;
         const fullName = user.first_name.concat(' ', `${user.last_name}`);
         data.responsible_person_full_name = fullName;
-        await this.scheduleRepository.update(hour, data);
+        await this.scheduleRepository.update(id, data);
     }
 }

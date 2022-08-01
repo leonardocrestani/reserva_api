@@ -9,9 +9,9 @@ const placeRouter = Router();
 
 //placeRouter.use(authMiddleware);
 placeRouter.get('/', ExpressAdapter.create(PlaceController.findAll));
-placeRouter.get('/:place_name', celebrate(placeValidator.PARAMS, { abortEarly: true }), ExpressAdapter.create(PlaceController.findOne));
+placeRouter.get('/:place_name', celebrate(placeValidator.PARAMS, { abortEarly: true }), ExpressAdapter.create(PlaceController.findByName));
 placeRouter.post('/', celebrate(placeValidator.BODY, { abortEarly: true }), ExpressAdapter.create(PlaceController.register));
-placeRouter.put('/', celebrate(placeValidator.UPDATE, { abortEarly: true }), ExpressAdapter.create(PlaceController.update));
-placeRouter.delete('/', celebrate(placeValidator.DELETE, { abortEarly: true }), ExpressAdapter.create(PlaceController.delete));
+placeRouter.put('/:cnpj', celebrate(placeValidator.UPDATE, { abortEarly: true }), ExpressAdapter.create(PlaceController.update));
+placeRouter.delete('/:cnpj', celebrate(placeValidator.DELETE, { abortEarly: true }), ExpressAdapter.create(PlaceController.delete));
 
 export { placeRouter };

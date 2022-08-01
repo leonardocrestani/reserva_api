@@ -33,7 +33,7 @@ const placeValidator = {
         })
     },
     UPDATE: {
-        [Segments.QUERY]: customJoi.object().keys({
+        [Segments.PARAMS]: customJoi.object().keys({
             cnpj: Joi.string().required()
         }),
         [Segments.BODY]: customJoi.object().keys({
@@ -59,7 +59,7 @@ const placeValidator = {
         })
     },
     DELETE: {
-        [Segments.QUERY]: customJoi.object().keys({
+        [Segments.PARAMS]: customJoi.object().keys({
             cnpj: Joi.string().required()
         })
     }

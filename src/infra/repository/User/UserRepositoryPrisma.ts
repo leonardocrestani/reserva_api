@@ -13,7 +13,7 @@ export class UserRepositoryPrisma implements UserRepository {
         });
     }
 
-    async findOne(email: string): Promise<any> {
+    async findByEmail(email: string): Promise<any> {
         // verificar como criar um retorno que aceite sem password
         return await prisma.user.findUnique({
             where: { email }, select: {

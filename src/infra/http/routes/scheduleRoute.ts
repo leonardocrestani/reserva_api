@@ -8,8 +8,9 @@ import authMiddleware from '../middlewares/authMiddleware';
 const scheduleRouter = Router();
 
 //scheduleRouter.use(authMiddleware);
-scheduleRouter.get('/', celebrate(scheduleValidator.QUERY, {abortEarly: true}), ExpressAdapter.create(ScheduleController.find));
-scheduleRouter.post('/', celebrate(scheduleValidator.BODY, {abortEarly: true}), ExpressAdapter.create(ScheduleController.register));
-scheduleRouter.put('/', celebrate(scheduleValidator.UPDATE, {abortEarly: true}), ExpressAdapter.create(ScheduleController.update));
+scheduleRouter.get('/:id', celebrate(scheduleValidator.QUERY, { abortEarly: true }), ExpressAdapter.create(ScheduleController.findById));
+scheduleRouter.post('/', celebrate(scheduleValidator.BODY, { abortEarly: true }), ExpressAdapter.create(ScheduleController.register));
+scheduleRouter.put('/:id', celebrate(scheduleValidator.UPDATE, { abortEarly: true }), ExpressAdapter.create(ScheduleController.update));
+scheduleRouter.delete('/:id', celebrate(scheduleValidator.DELETE, { abortEarly: true }), ExpressAdapter.create(ScheduleController.delete));
 
 export { scheduleRouter };

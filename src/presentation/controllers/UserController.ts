@@ -12,17 +12,17 @@ export class UserController {
         return created(newUser);
     }
 
-    static async findOne(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
+    static async findByEmail(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const prismaRepository = new UserRepositoryPrisma();
         const getUserService = new FindUserService(prismaRepository);
-        const user = await getUserService.findOne(query.email);
+        const user = await getUserService.findByEmail(params.email);
         return ok(user);
     }
 
     static async delete(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const prismaRepository = new UserRepositoryPrisma();
         const deleteUserService = new DeleteUserService(prismaRepository);
-        await deleteUserService.remove(query.email);
+        await deleteUserService.remove(params.email);
         return noContent();
     }
 }

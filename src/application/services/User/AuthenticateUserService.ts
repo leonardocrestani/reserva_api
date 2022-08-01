@@ -9,7 +9,7 @@ export class AuthenticateUserService implements AuthenticateUser {
     constructor(private readonly userRepository: UserRepository) { };
 
     async authenticate(email: string, password: string): Promise<AuthModel> {
-        const user = await this.userRepository.findOne(email);
+        const user = await this.userRepository.findByEmail(email);
         if (user && await passwordValidator(user, password)) {
             const token = await generateToken(user);
             return { user: user.email, access_token: token }

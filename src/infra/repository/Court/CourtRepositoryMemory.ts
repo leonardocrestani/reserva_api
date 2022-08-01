@@ -10,30 +10,30 @@ export class CourtRepositoryMemory implements CourtRepository {
         return court;
     }
 
-    async find(place_name: string, court_name: string): Promise<CourtModel> {
+    async findById(id: string): Promise<CourtModel> {
         const courts = this.createdCourts.find((court) => {
-            if (court.place_court_name === place_name && court.court_name === court_name) {
+            if (court.id === id) {
                 return court
             }
         });
         return courts;
     }
 
-    async updatePlaceName(id: string, data: any): Promise<CourtModel> {
-        let court = this.createdCourts.find(court => court.place_court_name === id && court.court_name === id);
+    async updatePlaceName(court_name: string, place_name: string): Promise<CourtModel> {
+        let court = this.createdCourts.find(court => court.court_name === court_name);
+        court.place_name = place_name;
+        return court;
+    }
+
+    async update(id: string, data: any): Promise<CourtModel> {
+        let court = this.createdCourts.find(court => court.id === id);
         court = data;
         return court;
     }
 
-    async update(place_name: string, court_name: string, data: any): Promise<CourtModel> {
-        let court = this.createdCourts.find(court => court.place_court_name === place_name && court.court_name === court_name);
-        court = data;
-        return court;
-    }
-
-    async delete(place_name: string, court_name: string): Promise<void> {
+    async delete(id: string): Promise<void> {
         this.createdCourts.find((court) => {
-            if (court.place_court_name === place_name && court.court_name === court_name) {
+            if (court.id === id) {
                 this.createdCourts.pop();
             }
         });

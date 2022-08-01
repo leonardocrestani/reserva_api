@@ -13,3 +13,4 @@ export * from './Court/DeleteCourtService';
 export * from './Schedule/BookScheduleService';
 export * from './Schedule/CreateScheduleService';
 export * from './Schedule/FindScheduleService';
+export * from './Schedule/DeleteScheduleService';

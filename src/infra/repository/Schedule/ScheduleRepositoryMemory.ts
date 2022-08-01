@@ -11,14 +11,14 @@ export class ScheduleRepositoryMemory implements ScheduleRepository {
         return schedule;
     }
 
-    async find(place_court_name: string, court_name: string, hour: number): Promise<ScheduleModel> {
-        const schedule = this.createdSchedules.find(schedule => schedule.place_court_name === place_court_name && schedule.court_name === court_name && schedule.hour === hour);
+    async findById(id: string): Promise<ScheduleModel> {
+        const schedule = this.createdSchedules.find(schedule => schedule.id === id);
         return schedule;
     }
 
     async findAllByCourt(place_court_name: string, court_name: string): Promise<ScheduleModel[]> {
         const schedules = this.createdSchedules.map((schedule) => {
-            if (schedule.place_court_name === place_court_name && schedule.court_name === court_name) {
+            if (schedule.place_name === place_court_name && schedule.court_name === court_name) {
                 return schedule;
             }
         });
@@ -27,7 +27,7 @@ export class ScheduleRepositoryMemory implements ScheduleRepository {
 
     async updatePlaceName(hour: number, place_name: string): Promise<ScheduleModel> {
         let schedule = this.createdSchedules.find(schedule => schedule.hour === hour);
-        schedule.place_court_name = place_name;
+        schedule.place_name = place_name;
         return schedule;
     }
 
@@ -37,9 +37,13 @@ export class ScheduleRepositoryMemory implements ScheduleRepository {
         return schedule;
     }
 
-    async update(hour: number, data: any): Promise<void> {
-        const schedule = this.createdSchedules.find(schedule => schedule.hour === hour);
+    async update(id: string, data: any): Promise<void> {
+        const schedule = this.createdSchedules.find(schedule => schedule.id === id);
         schedule.is_rent = data.is_rent;
         schedule.responsible_person_email = data.responsible_person_email;
+    }
+
+    async delete(id: string): Promise<void> {
+
     }
 }

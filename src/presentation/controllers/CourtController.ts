@@ -11,11 +11,10 @@ export class CourtController {
         return created(newCourt);
     }
 
-    static async find(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
+    static async findById(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const courtRepository = new CourtRepositoryPrisma();
-        const placeRepository = new PlaceRepositoryPrisma();
-        const getCourtService = new FindCourtService(courtRepository, placeRepository);
-        const court = await getCourtService.find(query.place_court_name, query.court_name);
+        const getCourtService = new FindCourtService(courtRepository);
+        const court = await getCourtService.findById(params.id);
         return ok(court);
     }
 
@@ -24,15 +23,14 @@ export class CourtController {
         const placeRepository = new PlaceRepositoryPrisma();
         const scheduleRepository = new ScheduleRepositoryPrisma();
         const updateCourtService = new UpdateCourtService(courtRepository, placeRepository, scheduleRepository);
-        await updateCourtService.update(query.place_name, query.court_name, body);
+        await updateCourtService.update(params.id, body);
         return noContent();
     }
 
     static async delete(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const courtRepository = new CourtRepositoryPrisma();
-        const placeRepository = new PlaceRepositoryPrisma();
-        const deleteCourtService = new DeleteCourtService(courtRepository, placeRepository);
-        await deleteCourtService.delete(query.place_name, query.court_name);
+        const deleteCourtService = new DeleteCourtService(courtRepository);
+        await deleteCourtService.delete(params.id);
         return noContent();
     }
 }

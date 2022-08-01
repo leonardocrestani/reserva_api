@@ -13,7 +13,7 @@ export class CreateUserService implements CreateUser {
         if (!cpfValidator(data.cpf)) {
             throw new UnprocessableEntity("CPF invalido");
         }
-        if (await this.userRepository.findOne(data.email)) {
+        if (await this.userRepository.findByEmail(data.email)) {
             throw new Conflict("Usuario ja cadastrado");
         }
         const encryptedPassword = await encryptPassword(data.password);

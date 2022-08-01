@@ -14,23 +14,23 @@ export class UpdatePlaceService implements UpdatePlace {
 
     async update(cnpj: string, data: any): Promise<void> {
         const place = await this.placeRepository.findByCnpj(cnpj);
-        if(!place) {
+        if (!place) {
             throw new NotFound("Local nao encontrado");
         }
-        if(data.hasOwnProperty('place_name')) {
+        if (data.hasOwnProperty('place_name')) {
             // chamar funcao de update do court para atualizar o nome tambem
         }
-        if(data.hasOwnProperty('cnpj')) {
+        if (data.hasOwnProperty('cnpj')) {
             if (!cnpjValidator(data.cnpj)) {
                 throw new UnprocessableEntity('CNPJ invalido');
             }
         }
-        if(data.hasOwnProperty('operation_time')) {
+        if (data.hasOwnProperty('operation_time')) {
             if (data.operation_time.open_hour < 0 || data.operation_time.close_hour > 23 || data.operation_time.open_hour >= data.operation_time.close_hour) {
                 throw new BadRequest("Horario de funcionamento invalido");
             }
         }
-        if(data.hasOwnProperty('address')) {
+        if (data.hasOwnProperty('address')) {
             const validCep = await makeRequest('get', `https://cep.awesomeapi.com.br/json/${data.address.city_code}`);
             if (validCep.status === 400) {
                 throw new UnprocessableEntity("CEP invalido");
@@ -38,8 +38,6 @@ export class UpdatePlaceService implements UpdatePlace {
         }
         const updateCourtService = new UpdateCourtService(this.courtRepository, this.placeRepository, this.scheduleRepository);
         await this.placeRepository.update(cnpj, data);
-        for(const court of place.courts) {
-            await updateCourtService.updatePlaceName(data.place_name);
-        }
+        await updateCourtService.updatePlaceName(data.place_name);
     }
 }

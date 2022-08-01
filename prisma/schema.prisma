@@ -104,12 +104,12 @@ model Court {
   id               String      @id @default(auto()) @map("_id") @db.ObjectId
   place            Place       @relation(onUpdate: Cascade, onDelete: Cascade, fields: [place_id], references: [id])
   place_id         String      @db.ObjectId
-  place_court_name String
+  place_name String
   court_name       String @unique
   schedules        Schedules[]
   created_at       DateTime    @default(now())
   updated_at       DateTime    @default(now()) @updatedAt
-  @@unique ([place_court_name, court_name])
+  @@unique ([place_name, court_name])
 }
 
 model Schedules {
@@ -117,7 +117,7 @@ model Schedules {
   court                        Court    @relation(onDelete: Cascade, fields: [court_id], references: [id])
   court_id                     String   @db.ObjectId
   court_name                   String
-  place_court_name             String
+  place_name             String
   hour                         Int @unique
   is_rent                      Boolean  @default(false)
   day String
@@ -127,4 +127,5 @@ model Schedules {
   responsible_person_full_name String?
   created_at                   DateTime @default(now())
   updated_at                   DateTime @default(now()) @updatedAt
+  @@unique ([place_name, court_name, hour])
 }

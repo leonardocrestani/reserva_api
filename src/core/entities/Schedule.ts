@@ -1,7 +1,7 @@
 export class Schedule {
 
     constructor(
-        public place_court_name: string,
+        public place_name: string,
         public court_name: string,
         public hour: number,
         public day: string,
