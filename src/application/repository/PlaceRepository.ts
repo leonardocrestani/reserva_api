@@ -9,9 +9,9 @@ export interface PlaceRepository {
 
     findByCnpj: (cnpj: string) => Promise<PlaceModel>;
 
-    update: (cnpj: string, data: any) => Promise<PlaceModel>;
+    update: (place_name: string, data: any) => Promise<PlaceModel>;
 
     updateNumberOfCourts: (place_name: string) => Promise<PlaceModel>;
 
-    delete: (cnpj: string) => Promise<void>
+    delete: (place_name: string) => Promise<void>
 }

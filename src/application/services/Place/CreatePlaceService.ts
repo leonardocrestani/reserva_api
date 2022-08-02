@@ -4,6 +4,7 @@ import { PlaceRepository } from '../../repository/PlaceRepository';
 import { makeRequest } from '../../../common/utils/makeRequest';
 import { UnprocessableEntity, Conflict, BadRequest } from '../../errors';
 import cpnjValidator from '../../../common/utils/cnpjValidator';
+import cnpjFormatter from '../../../common/utils/cnpjFormatter';
 
 export class CreatePlaceService implements CreatePlace {
     constructor(private readonly placeRepository: PlaceRepository) { }
@@ -13,6 +14,7 @@ export class CreatePlaceService implements CreatePlace {
         if (place) {
             throw new Conflict("Local ja cadastrado");
         }
+        data.cnpj = cnpjFormatter(data.cnpj);
         if (!cpnjValidator(data.cnpj)) {
             throw new UnprocessableEntity('CNPJ invalido');
         }

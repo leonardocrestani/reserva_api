@@ -9,7 +9,7 @@ const userRouter = Router();
 
 userRouter.post('/', celebrate(userValidator.BODY, { abortEarly: true }), ExpressAdapter.create(UserController.register));
 //userRouter.use(authMiddleware);
-userRouter.get('/:email', celebrate(userValidator.QUERY, { abortEarly: true }), ExpressAdapter.create(UserController.findByEmail));
+userRouter.get('/email', celebrate(userValidator.QUERY, { abortEarly: true }), ExpressAdapter.create(UserController.findByEmail));
 userRouter.delete('/:email', celebrate(userValidator.DELETE, { abortEarly: true }), ExpressAdapter.create(UserController.delete));
 
 export { userRouter };

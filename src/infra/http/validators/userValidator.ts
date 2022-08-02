@@ -21,7 +21,7 @@ const userValidator = {
         }),
     },
     DELETE: {
-        [Segments.QUERY]: Joi.object().keys({
+        [Segments.PARAMS]: Joi.object().keys({
             email: Joi.string().email().max(70).required()
         }),
     }

@@ -13,7 +13,7 @@ export class CreateScheduleService implements CreateSchedule {
 
     async create(data: ScheduleModel): Promise<ScheduleModel> {
         const getPlaceService = new FindPlaceService(this.placeRepository);
-        const place = await getPlaceService.findByName(data.place_name);
+        const place = await getPlaceService.findByName(data.place_court_name);
         if (!PlaceModel.isOpen(data.day, data.hour, place.operation_time.days_open, place.operation_time.close_hour, place.operation_time.open_hour)) {
             throw new BadRequest("Local fechado não é possivel cadastrar horario");
         }
@@ -28,7 +28,7 @@ export class CreateScheduleService implements CreateSchedule {
                 data.court_id = court.id;
             }
         })
-        const schedules = await this.scheduleRepository.findAllByCourt(data.place_name, data.court_name);
+        const schedules = await this.scheduleRepository.findAllByCourt(data.place_court_name, data.court_name);
         schedules.find((schedule) => {
             if (schedule.hour === data.hour) {
                 throw new Conflict('Horario ja cadastrado');

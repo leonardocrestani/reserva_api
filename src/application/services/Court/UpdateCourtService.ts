@@ -28,7 +28,7 @@ export class UpdateCourtService implements UpdateCourt {
         const place = await getPlaceService.findByName(place_name);
         const updateScheduleService = new UpdateScheduleService(this.scheduleRepository);
         for (const court of place.courts) {
-            await this.courtRepository.updatePlaceName(court.court_name, place_name);
+            await this.courtRepository.updatePlaceName(court.id, place_name);
             for (const schedule of court.schedules) {
                 await updateScheduleService.updatePlaceName(schedule.hour, place_name);
             }

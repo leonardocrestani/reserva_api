@@ -27,14 +27,14 @@ const placeValidator = {
             courts: Joi.array().items(Joi.object().keys({ place_court_name: Joi.string(), court_name: Joi.string() })).required()
         })
     },
-    PARAMS: {
+    QUERY: {
         [Segments.PARAMS]: customJoi.object().keys({
             place_name: Joi.string().required()
         })
     },
     UPDATE: {
         [Segments.PARAMS]: customJoi.object().keys({
-            cnpj: Joi.string().required()
+            place_name: Joi.string().required()
         }),
         [Segments.BODY]: customJoi.object().keys({
             place_name: Joi.string().trim().optional(),
@@ -60,7 +60,7 @@ const placeValidator = {
     },
     DELETE: {
         [Segments.PARAMS]: customJoi.object().keys({
-            cnpj: Joi.string().required()
+            place_name: Joi.string().required()
         })
     }
 }

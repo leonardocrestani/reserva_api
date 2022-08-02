@@ -5,7 +5,7 @@ export interface CourtRepository {
 
     findById: (id: string) => Promise<CourtModel>;
 
-    updatePlaceName: (court_name: string, place_name: string) => Promise<CourtModel>;
+    updatePlaceName: (id: string, place_name: string) => Promise<CourtModel>;
 
     update: (id: string, data: any) => Promise<CourtModel>;
 
