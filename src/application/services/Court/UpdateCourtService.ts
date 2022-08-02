@@ -19,7 +19,7 @@ export class UpdateCourtService implements UpdateCourt {
         const updatedCourt = await this.courtRepository.update(court.id, data);
         const updateScheduleService = new UpdateScheduleService(this.scheduleRepository);
         for (const schedule of updatedCourt.schedules) {
-            await updateScheduleService.updateCourtName(schedule.hour, updatedCourt.court_name);
+            await updateScheduleService.updateCourtName(schedule.id, updatedCourt.court_name);
         }
     }
 
@@ -30,7 +30,7 @@ export class UpdateCourtService implements UpdateCourt {
         for (const court of place.courts) {
             await this.courtRepository.updatePlaceName(court.id, place_name);
             for (const schedule of court.schedules) {
-                await updateScheduleService.updatePlaceName(schedule.hour, place_name);
+                await updateScheduleService.updatePlaceName(schedule.id, place_name);
             }
         }
     }
