@@ -16,6 +16,10 @@ export class UserRepositoryMemory implements UserRepository {
         return user;
     }
 
+    async update(email: string, data: any): Promise<any> {
+
+    }
+
     async remove(email: string): Promise<any> {
         this.createdUsers.find((user) => {
             if (user.email === email) {

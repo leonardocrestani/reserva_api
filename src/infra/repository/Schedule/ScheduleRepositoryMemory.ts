@@ -25,14 +25,14 @@ export class ScheduleRepositoryMemory implements ScheduleRepository {
         return schedules;
     }
 
-    async updatePlaceName(hour: number, place_name: string): Promise<ScheduleModel> {
-        let schedule = this.createdSchedules.find(schedule => schedule.hour === hour);
+    async updatePlaceName(id: string, place_name: string): Promise<ScheduleModel> {
+        let schedule = this.createdSchedules.find(schedule => schedule.id === id);
         schedule.place_court_name = place_name;
         return schedule;
     }
 
-    async updateCourtName(hour: number, court_name: string): Promise<ScheduleModel> {
-        let schedule = this.createdSchedules.find(schedule => schedule.hour === hour);
+    async updateCourtName(id: string, court_name: string): Promise<ScheduleModel> {
+        let schedule = this.createdSchedules.find(schedule => schedule.id === id);
         schedule.court_name = court_name;
         return schedule;
     }

@@ -1,6 +1,7 @@
 export * from './User/FindUser';
 export * from './User/CreateUser';
 export * from './User/AuthenticateUser';
+export * from './User/UpdateUser';
 export * from './User/DeleteUser';
 export * from './Place/FindPlace';
 export * from './Place/CreatePlace';

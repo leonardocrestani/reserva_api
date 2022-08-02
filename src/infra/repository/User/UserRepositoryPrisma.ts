@@ -23,6 +23,14 @@ export class UserRepositoryPrisma implements UserRepository {
         });
     }
 
+    async update(email: string, data: any): Promise<UserModel> {
+        return await prisma.user.update({
+            where: { email },
+            data,
+            include: { schedules: true }
+        });
+    }
+
     async remove(email: string): Promise<UserModel> {
         return await prisma.user.delete({ where: { email }, include: { schedules: true } });
     }
