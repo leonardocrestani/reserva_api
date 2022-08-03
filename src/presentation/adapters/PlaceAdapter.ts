@@ -1,5 +1,5 @@
 import { PlaceModel, CourtModel } from "../../application/models";
-import { Address, Contact, operationTime } from "../../core/entities";
+import { Address, Contact, Operation_Time } from "../../core/entities";
 // REVER PARA TIRAR O ANY E RECEBER AS PROPRIEDADES CORRETAS
 export default class PlaceAdapter {
     static create(
@@ -8,7 +8,7 @@ export default class PlaceAdapter {
         numberOfCourts: number,
         address: Address,
         contact: Contact,
-        operationTime: operationTime,
+        operationTime: Operation_Time,
         courts: Array<CourtModel>,
         id?: string
     ) {

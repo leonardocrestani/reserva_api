@@ -1,6 +1,7 @@
 import { CreateUserService } from '../../application/services';
 import { FindUserService } from '../../application/services';
 import { DeleteUserService } from '../../application/services/User/DeleteUserService';
+import { UpdateUserService } from '../../application/services/User/UpdateUserService';
 import { UserRepositoryPrisma } from '../../infra/repository';
 import { ok, created, noContent, HttpResponse } from '../contracts/HttpResponse';
 
@@ -17,6 +18,13 @@ export class UserController {
         const getUserService = new FindUserService(prismaRepository);
         const user = await getUserService.findByEmail(params.email);
         return ok(user);
+    }
+
+    static async update(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
+        const prismaRepository = new UserRepositoryPrisma();
+        const updateUserService = new UpdateUserService(prismaRepository);
+        await updateUserService.update(params.id, body);
+        return noContent();
     }
 
     static async delete(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
