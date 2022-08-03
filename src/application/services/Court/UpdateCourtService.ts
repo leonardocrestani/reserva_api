@@ -7,7 +7,6 @@ import { UpdateScheduleService } from "../Schedule/UpdateScheduleService";
 export class UpdateCourtService implements UpdateCourt {
     constructor(
         private readonly courtRepository: CourtRepository,
-        private readonly placeRepository: PlaceRepository,
         private readonly scheduleRepository: ScheduleRepository
     ) { };
 
@@ -18,20 +17,14 @@ export class UpdateCourtService implements UpdateCourt {
         }
         const updatedCourt = await this.courtRepository.update(court.id, data);
         const updateScheduleService = new UpdateScheduleService(this.scheduleRepository);
-        for (const schedule of updatedCourt.schedules) {
-            await updateScheduleService.updateCourtName(schedule.id, updatedCourt.court_name);
-        }
+        await updateScheduleService.updateCourtName(updatedCourt);
     }
 
-    async updatePlaceName(place_name: string): Promise<void> {
-        const getPlaceService = new FindPlaceService(this.placeRepository);
-        const place = await getPlaceService.findByName(place_name);
+    async updatePlaceName(place: any): Promise<void> {
         const updateScheduleService = new UpdateScheduleService(this.scheduleRepository);
         for (const court of place.courts) {
-            await this.courtRepository.updatePlaceName(court.id, place_name);
-            for (const schedule of court.schedules) {
-                await updateScheduleService.updatePlaceName(schedule.id, place_name);
-            }
+            const courtUpdated = await this.courtRepository.updatePlaceName(court.id, place.place_name);
+            await updateScheduleService.updatePlaceName(courtUpdated);
         }
     }
 }

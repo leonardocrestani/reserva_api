@@ -6,11 +6,15 @@ export class UpdateScheduleService implements UpdateSchedule {
         private readonly scheduleRepository: ScheduleRepository
     ) { };
 
-    async updatePlaceName(id: string, place_name: string): Promise<void> {
-        await this.scheduleRepository.updatePlaceName(id, place_name);
+    async updatePlaceName(court: any): Promise<void> {
+        for (const schedule of court.schedules) {
+            await this.scheduleRepository.updatePlaceName(schedule.id, court.place_court_name);
+        }
     }
 
-    async updateCourtName(id: string, court_name: string): Promise<void> {
-        await this.scheduleRepository.updateCourtName(id, court_name);
+    async updateCourtName(court: any): Promise<void> {
+        for (const schedule of court.schedules) {
+            await this.scheduleRepository.updateCourtName(schedule.id, court.court_name);
+        }
     }
 }
