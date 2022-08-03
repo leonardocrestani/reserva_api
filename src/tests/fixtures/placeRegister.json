@@ -1,6 +1,6 @@
 {
     "body": {
-        "place_name": "sports",
+        "name": "sports",
         "cnpj": "77.285.431/0001-76",
         "address": {
             "city_code": 95320000,
@@ -23,11 +23,11 @@
         },
         "courts": [
             {
-                "place_court_name": "sports",
+                "place_name": "sports",
                 "court_name": "Quadra 1"
             },
             {
-                "place_court_name": "sports",
+                "place_name": "sports",
                 "court_name": "Quadra 2"
             }
         ]

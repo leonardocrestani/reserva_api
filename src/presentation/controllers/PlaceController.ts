@@ -23,7 +23,7 @@ export class PlaceController {
     static async findByName(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const placeRepository = new PlaceRepositoryPrisma();
         const getPlaceService = new FindPlaceService(placeRepository);
-        const place = await getPlaceService.findByName(params.place_name);
+        const place = await getPlaceService.findByName(params.name);
         return ok(place);
     }
 
@@ -32,14 +32,14 @@ export class PlaceController {
         const courtRepository = new CourtRepositoryPrisma();
         const scheduleRepository = new ScheduleRepositoryPrisma();
         const updatePlaceService = new UpdatePlaceService(placeRepository, courtRepository, scheduleRepository);
-        await updatePlaceService.update(params.place_name, body);
+        await updatePlaceService.update(params.name, body);
         return noContent();
     }
 
     static async delete(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const placeRepository = new PlaceRepositoryPrisma();
         const deletePlaceService = new DeletePlaceService(placeRepository);
-        await deletePlaceService.delete(params.place_name);
+        await deletePlaceService.delete(params.name);
         return noContent();
     }
 }

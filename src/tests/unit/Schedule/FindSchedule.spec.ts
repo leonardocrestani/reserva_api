@@ -20,7 +20,7 @@ describe('Find place', () => {
 
     test('Should get schedule by hour', async () => {
         await createSchedule.create({
-            place_court_name: "sports",
+            place_name: "sports",
             court_name: "Quadra 2",
             hour: 10,
             is_rent: false,
@@ -34,7 +34,7 @@ describe('Find place', () => {
 
     test('Should get error when hour is incorrect', async () => {
         await createSchedule.create({
-            place_court_name: "sports",
+            place_name: "sports",
             court_name: "Quadra 2",
             hour: 10,
             is_rent: false,
@@ -50,7 +50,7 @@ describe('Find place', () => {
 
     test('Should get error when place is incorrect', async () => {
         await createSchedule.create({
-            place_court_name: "sports",
+            place_name: "sports",
             court_name: "Quadra 2",
             hour: 10,
             is_rent: false,
@@ -66,7 +66,7 @@ describe('Find place', () => {
 
     test('Should get error when court is incorrect', async () => {
         await createSchedule.create({
-            place_court_name: "sports",
+            place_name: "sports",
             court_name: "Quadra 2",
             hour: 10,
             is_rent: false,

@@ -5,7 +5,7 @@ const customJoi = Joi.extend(require('joi-phone-number'));
 const courtValidator = {
     BODY: {
         [Segments.BODY]: customJoi.object().keys({
-            place_court_name: Joi.string().trim().required(),
+            place_name: Joi.string().trim().required(),
             court_name: Joi.string().trim().required()
         })
     },

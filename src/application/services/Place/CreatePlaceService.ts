@@ -10,7 +10,7 @@ export class CreatePlaceService implements CreatePlace {
     constructor(private readonly placeRepository: PlaceRepository) { }
 
     async create(data: any): Promise<PlaceModel> {
-        const place = await this.placeRepository.findByCnpj(data.cnpj) || await this.placeRepository.findByName(data.place_name) ? true : false;
+        const place = await this.placeRepository.findByCnpj(data.cnpj) || await this.placeRepository.findByName(data.name) ? true : false;
         if (place) {
             throw new Conflict("Local ja cadastrado");
         }
@@ -28,7 +28,7 @@ export class CreatePlaceService implements CreatePlace {
             throw new UnprocessableEntity("CEP invalido");
         }
         data.courts.map((court: any) => {
-            if (court.place_court_name !== data.place_name) {
+            if (court.place_name !== data.name) {
                 throw new UnprocessableEntity("Local da quadra invalido");
             }
         })

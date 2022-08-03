@@ -17,7 +17,7 @@ describe('Register schedule', () => {
 
     test('Should register new schedule for a court', async () => {
         const data = {
-            place_court_name: "sports",
+            place_name: "sports",
             court_name: "Quadra 1",
             hour: 10,
             is_rent: false,
@@ -31,7 +31,7 @@ describe('Register schedule', () => {
 
     test('Should get error when try to register a schedule when hour of the place is closed', async () => {
         const data = {
-            place_court_name: "sports",
+            place_name: "sports",
             court_name: "Quadra 2",
             hour: 5,
             is_rent: false,
@@ -47,7 +47,7 @@ describe('Register schedule', () => {
 
     test('Should get error when try to register a schedule when day of the place is closed', async () => {
         const data = {
-            place_court_name: "sports",
+            place_name: "sports",
             court_name: "Quadra 2",
             hour: 14,
             is_rent: false,
@@ -63,7 +63,7 @@ describe('Register schedule', () => {
 
     test('Should get error when try to register a schedule with inexistent place', async () => {
         const data = {
-            place_court_name: "inexistent",
+            place_name: "inexistent",
             court_name: "Quadra 1",
             hour: 14,
             is_rent: false,
@@ -79,7 +79,7 @@ describe('Register schedule', () => {
 
     test('Should get error when try to register a schedule with inexistent court', async () => {
         const data = {
-            place_court_name: "sports",
+            place_name: "sports",
             court_name: "Quadra 5",
             hour: 14,
             is_rent: false,

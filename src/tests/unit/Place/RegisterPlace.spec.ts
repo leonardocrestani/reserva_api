@@ -14,7 +14,7 @@ describe('Register place', () => {
     test('Should register new place', async () => {
         const data = body;
         const place = await createPlace.create(data);
-        expect(place.place_name).toBe('sports');
+        expect(place.name).toBe('sports');
         expect(place.cnpj).toBe('77.285.431/0001-76');
         expect(place).toHaveProperty('address');
         expect(place).toHaveProperty('contact');
@@ -98,7 +98,7 @@ describe('Register place', () => {
             ...body,
             courts: [{
                 ...body.courts[0],
-                place_court_name: 'incorrect'
+                place_name: 'incorrect'
             }
             ]
         };

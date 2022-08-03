@@ -1,8 +1,8 @@
-import { FindPlaceService } from "..";
 import { UpdateCourt } from "../../../core/use-cases";
-import { CourtRepository, PlaceRepository, ScheduleRepository } from "../../repository";
+import { CourtRepository, ScheduleRepository } from "../../repository";
 import { Conflict } from "../../errors";
 import { UpdateScheduleService } from "../Schedule/UpdateScheduleService";
+import { PlaceModel } from "../../models";
 
 export class UpdateCourtService implements UpdateCourt {
     constructor(
@@ -20,10 +20,10 @@ export class UpdateCourtService implements UpdateCourt {
         await updateScheduleService.updateCourtName(updatedCourt);
     }
 
-    async updatePlaceName(place: any): Promise<void> {
+    async updatePlaceName(place: PlaceModel): Promise<void> {
         const updateScheduleService = new UpdateScheduleService(this.scheduleRepository);
         for (const court of place.courts) {
-            const courtUpdated = await this.courtRepository.updatePlaceName(court.id, place.place_name);
+            const courtUpdated = await this.courtRepository.updatePlaceName(court.id, place.name);
             await updateScheduleService.updatePlaceName(courtUpdated);
         }
     }

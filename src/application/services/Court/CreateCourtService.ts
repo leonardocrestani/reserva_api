@@ -12,7 +12,7 @@ export class CreateCourtService implements CreateCourt {
 
     async create(data: CourtModel): Promise<CourtModel> {
         const getPlaceService = new FindPlaceService(this.placeRepository);
-        const place = await getPlaceService.findByName(data.place_court_name);
+        const place = await getPlaceService.findByName(data.place_name);
         place.courts.map((court: any) => {
             if (court.court_name === data.court_name) {
                 throw new Conflict("Quadra ja existente");
@@ -20,7 +20,7 @@ export class CreateCourtService implements CreateCourt {
         })
         data.place_id = place.id;
         const court = await this.courtRepository.create(data);
-        await this.placeRepository.updateNumberOfCourts(data.place_court_name);
+        await this.placeRepository.updateNumberOfCourts(data.place_name);
         return court;
     }
 }

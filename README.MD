@@ -85,10 +85,10 @@ npm run test:unit
 
 ### Locais
 - (POST) Cadastro '/api/places'
-- (GET) Listagem de um local pelo nome '/api/places/:place_name'
+- (GET) Listagem de um local pelo nome '/api/places/:name'
 - (GET) Listagem de todos os locais '/api/places?limit=&offset='
-- (PUT) Atualização dos dados de um local '/api/places/:place_name'
-- (DELETE) Exclusão de um local '/api/places/:place_name'
+- (PUT) Atualização dos dados de um local '/api/places/:name'
+- (DELETE) Exclusão de um local '/api/places/:name'
 
 ### Quadras
 - (POST) Cadastro 'api/courts'

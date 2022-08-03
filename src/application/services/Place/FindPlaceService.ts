@@ -11,8 +11,8 @@ export class FindPlaceService implements FindPlace {
         return places
     }
 
-    async findByName(place_name: string): Promise<PlaceModel> {
-        const place = await this.placeRepository.findByName(place_name);
+    async findByName(name: string): Promise<PlaceModel> {
+        const place = await this.placeRepository.findByName(name);
         if (!place) {
             throw new NotFound("Local nao encontrado");
         }

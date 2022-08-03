@@ -173,7 +173,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"place_name\": \"sports np\",\r\n    \"cnpj\": \"46.392.338/0001-37\",\r\n\t\"address\": {\r\n\t\t\"city_code\": 95320000,\r\n\t\t\"city_name\": \"Nova Prata\",\r\n\t\t\"state\": \"RS\",\r\n\t\t\"country\": \"Brasil\",\r\n\t\t\"street\": \"Estrada BR\",\r\n\t\t\"neighborhood\": \"Industrial\"\r\n\t},\r\n\t\"contact\": {\r\n\t\t\"name\": \"Leonardo\",\r\n\t\t\"phone_number\": \"+5554999580934\"\r\n\t},\r\n\t\"operation_time\": {\r\n\t\t\"open_hour\": 8,\r\n\t\t\"close_hour\": 21,\r\n\t\t\"days_open\": [\"Mon\", \"Tue\", \"Wed\"]\r\n\t},\r\n    \"courts\": [\r\n        {\"place_court_name\": \"sports np\", \"court_name\": \"Quadra 1\"}\r\n    ]\r\n}",
+							"raw": "{\r\n    \"place_name\": \"sports np\",\r\n    \"cnpj\": \"46.392.338/0001-37\",\r\n\t\"address\": {\r\n\t\t\"city_code\": 95320000,\r\n\t\t\"city_name\": \"Nova Prata\",\r\n\t\t\"state\": \"RS\",\r\n\t\t\"country\": \"Brasil\",\r\n\t\t\"street\": \"Estrada BR\",\r\n\t\t\"neighborhood\": \"Industrial\"\r\n\t},\r\n\t\"contact\": {\r\n\t\t\"name\": \"Leonardo\",\r\n\t\t\"phone_number\": \"+5554999580934\"\r\n\t},\r\n\t\"operation_time\": {\r\n\t\t\"open_hour\": 8,\r\n\t\t\"close_hour\": 21,\r\n\t\t\"days_open\": [\"Mon\", \"Tue\", \"Wed\"]\r\n\t},\r\n    \"courts\": [\r\n        {\"place_name\": \"sports np\", \"court_name\": \"Quadra 1\"}\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -322,7 +322,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"place_court_name\": \"sports\",\r\n    \"court_name\": \"Quadra 2\"\r\n}",
+							"raw": "{\r\n    \"place_name\": \"sports\",\r\n    \"court_name\": \"Quadra 2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -442,7 +442,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"place_court_name\": \"gooo sports\",\r\n    \"court_name\": \"Quadra 1\",\r\n    \"hour\": 18,\r\n    \"day\": \"Wed\"\r\n}",
+							"raw": "{\r\n    \"place_name\": \"gooo sports\",\r\n    \"court_name\": \"Quadra 1\",\r\n    \"hour\": 18,\r\n    \"day\": \"Wed\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
