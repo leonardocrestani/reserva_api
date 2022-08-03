@@ -27,36 +27,6 @@ model User {
   updated_at   DateTime    @default(now()) @updatedAt
 }
 
-enum States {
-  AC
-  AL
-  AP
-  AM
-  BA
-  CE
-  DF
-  ES
-  GO
-  MA
-  MS
-  MT
-  MG
-  PA
-  PB
-  PR
-  PE
-  PI
-  RJ
-  RN
-  RS
-  RO
-  RR
-  SC
-  SP
-  SE
-  TO
-}
-
 enum Day {
   Mon
   Tue
@@ -70,7 +40,7 @@ enum Day {
 type Address {
   city_code    Int
   city_name    String
-  state        States
+  state        String
   country      String
   street       String
   neighborhood String
