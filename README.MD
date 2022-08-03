@@ -13,22 +13,29 @@
     - Possui validações de CPF, email e demais campos    
 - Listagem de um usuário pelo seu email
 - Procura de um usuário cruzando email e senha para validar e autenticar
+- Atualização das informações de um usuário
+- Exclusão de um usuário
 ### Locais
 - Cadastro de um novo local
     - O cadastro de um novo local pode contar com quadras iniciais ou podem ser cadastradas posteriormente
     - Possui validações de CNPJ, CEP e demais campos
 - Listagem de um local pelo nome
-- Listagem de um local pelo CNPJ
+- Listagem de todos os locais cadastrados
+- Atualização das informações de um local
+- Exclusão de um local
 ### Quadras
 - Cadastro de um nova quadra
     - O cadastro de um nova quadra sempre vai estar conectado a um local que a quadra pertence
     - As quadras possuem horarios que são criados posteriormente pelo endpoint de "schedules"
-- Listagem de quadras pelo nome e local que pertence
+- Listagem de quadras pelo id
+- Atualização do nome de uma quadra
+- Exclusão de uma quadra
 ### Horários
 - Cadastro de um novo horário
     - O cadastro de um novo horário vai pertencer a uma quadra e deve respeitar as validações de horário do local, sendo possível cadastrar um horário a cada hora
     - O horário possui ligação com e sempre vai pertencer a uma determinada quadra, e após ele ser reservado vai pertencer ao usuário que reservou
-- Listagem de horários pelo nome do local, quadra e hora
+- Listagem de horários pelo id
+- Exclusão de um horário
 - Reserva de um horário
     - A reserva de horário é feita por um usuário e assim aquele horário vai pertencer a ele e possuir a "flag" que está reservado
 
@@ -58,7 +65,7 @@ npm run dev
 > A API estará disponível na URL http://localhost:3000
 
 ## Testes
-- Testes locais unitarios foram implementados
+- Testes locais unitarios foram implementados mas não estão completamente funcionais e precisam de correções
 Rodar testes
 ```bash
 npm run test:unit
@@ -72,17 +79,25 @@ npm run test:unit
 
 ### Usuários
 - (POST) Cadastro '/api/users'
-- (GET) Listagem de um usuário pelo email e senha '/api/users?email=&password='
+- (GET) Listagem de um usuário pelo email '/api/users/:email'
+- (PUT) Autenticação dos dados de um usuario '/api/users/:email'
+- (DELETE) Exclusão de um usuario 'api/users/:email'
 
 ### Locais
 - (POST) Cadastro '/api/places'
-- (GET) Listagem de um local pelo nome '/api/places?place_name='
+- (GET) Listagem de um local pelo nome '/api/places/:place_name'
+- (GET) Listagem de todos os locais '/api/places?limit=&offset='
+- (PUT) Atualização dos dados de um local '/api/places/:place_name'
+- (DELETE) Exclusão de um local '/api/places/:place_name'
 
 ### Quadras
 - (POST) Cadastro 'api/courts'
-- (GET) Listagem de uma quadra pelo local e nome da quadra 'api/courts?place_court_name=&court_name='
+- (GET) Listagem de uma quadra pelo id 'api/courts/:id'
+- (PUT) Atualização do nome de uma quadra '/api/courts/:id'
+- (DELETE) Exclusão de uma quadra '/api/courts/:id'
 
 ### Horários
 - (POST) Cadastro 'api/schedules'
-- (GET) Listagem de um horário pelo local, quadra e hora 'api/schedules?place_name=&court_name=&hour='
-- (PUT) Reserva de um horario 'api/schedules?place_name=&court_name=&hour='
+- (GET) Listagem de um horário pelo id 'api/schedules/:id'
+- (PUT) Reserva de um horario 'api/schedules/book/:id'
+- (DELETE) Exclusão de um horario '/api/schedules/:id'

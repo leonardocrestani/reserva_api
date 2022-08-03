@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"first_name\": \"Leonardo\",\r\n\t\"last_name\": \"Crestani\",\r\n\t\"cpf\": \"02238874046\",\r\n    \"genre\": \"Male\",\r\n\t\"country\": \"Brasil\",\r\n    \"email\": \"leonardo@test.com\",\r\n\t\"password\": \"1234*1s2\",\r\n\t\"phone_number\": \"+5554999580934\"\r\n}",
+							"raw": "{\r\n\t\"first_name\": \"Leonardo\",\r\n\t\"last_name\": \"Crestani\",\r\n\t\"cpf\": \"02238874046\",\r\n    \"genre\": \"Male\",\r\n\t\"country\": \"Zimbábue\",\r\n    \"email\": \"leonardo@testss.com\",\r\n\t\"password\": \"1234*1s2\",\r\n\t\"phone_number\": \"+5554999580934\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -121,6 +121,41 @@
 							"path": [
 								"api",
 								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"counrty\": \"Argentina\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/users/:email",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								":email"
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": null
+								}
 							]
 						}
 					},
@@ -268,7 +303,7 @@
 							"variable": [
 								{
 									"key": "place_name",
-									"value": "gooo sports"
+									"value": "teste sports"
 								}
 							]
 						}
@@ -327,7 +362,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": null
+									"value": "62e944769cd9809cf2cb049a"
 								}
 							]
 						}
