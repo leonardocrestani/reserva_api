@@ -1,0 +1,537 @@
+{
+	"info": {
+		"_postman_id": "56ab4dc0-c1fd-4482-b1d0-286ad12ed07e",
+		"name": "Reserva APP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "POST User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"first_name\": \"Leonardo\",\r\n\t\"last_name\": \"Crestani\",\r\n\t\"cpf\": \"02238874046\",\r\n    \"genre\": \"Male\",\r\n\t\"country\": \"Brasil\",\r\n    \"email\": \"leonardo@test.com\",\r\n\t\"password\": \"1234*1s2\",\r\n\t\"phone_number\": \"+5554999580934\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/users",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDAyZGMxZWEyM2U3NmVkNjM5OWJmZSIsImlhdCI6MTY1ODE3NDQ1NSwiZXhwIjoxNjU4MTc4MDU1fQ.qQzswaUKj9ObsxhI1zSiM2FNw2vEBadFNs-J9GVYfho",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/users/:email",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								":email"
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": "leonardo@test.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/users/:email",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								":email"
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": "leonardo@test.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Auth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"leonardo@test.com\",\r\n\t\"password\": \"1234*1s2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/auth",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Place",
+			"item": [
+				{
+					"name": "POST Place",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"place_name\": \"sports np\",\r\n    \"cnpj\": \"46.392.338/0001-37\",\r\n\t\"address\": {\r\n\t\t\"city_code\": 95320000,\r\n\t\t\"city_name\": \"Nova Prata\",\r\n\t\t\"state\": \"RS\",\r\n\t\t\"country\": \"Brasil\",\r\n\t\t\"street\": \"Estrada BR\",\r\n\t\t\"neighborhood\": \"Industrial\"\r\n\t},\r\n\t\"contact\": {\r\n\t\t\"name\": \"Leonardo\",\r\n\t\t\"phone_number\": \"+5554999580934\"\r\n\t},\r\n\t\"operation_time\": {\r\n\t\t\"open_hour\": 8,\r\n\t\t\"close_hour\": 21,\r\n\t\t\"days_open\": [\"Mon\", \"Tue\", \"Wed\"]\r\n\t},\r\n    \"courts\": [\r\n        {\"place_court_name\": \"sports np\", \"court_name\": \"Quadra 1\"}\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/places",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"places"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Place by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/places/:place_name",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"places",
+								":place_name"
+							],
+							"variable": [
+								{
+									"key": "place_name",
+									"value": "sports pf"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All places",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/places?limit=5&offset=0",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"places"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Place",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/places/:place_name",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"places",
+								":place_name"
+							],
+							"variable": [
+								{
+									"key": "place_name",
+									"value": "place_name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Place",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"place_name\": \"gozin sports\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/places/:place_name",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"places",
+								":place_name"
+							],
+							"variable": [
+								{
+									"key": "place_name",
+									"value": "gooo sports"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Court",
+			"item": [
+				{
+					"name": "POST Court",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"place_court_name\": \"sports\",\r\n    \"court_name\": \"Quadra 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/courts",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"courts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Court",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/courts/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"courts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Court",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/courts/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"courts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Court",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"court_name\": \"test name court\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/courts/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"courts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Schedule",
+			"item": [
+				{
+					"name": "POST Schedule",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"place_court_name\": \"gooo sports\",\r\n    \"court_name\": \"Quadra 1\",\r\n    \"hour\": 18,\r\n    \"day\": \"Wed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/schedules",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"schedules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Schedule",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/schedules?place_name=bolinha fora&court_name=Quadra 1 Areia&hour=18",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"schedules"
+							],
+							"query": [
+								{
+									"key": "place_name",
+									"value": "bolinha fora"
+								},
+								{
+									"key": "court_name",
+									"value": "Quadra 1 Areia"
+								},
+								{
+									"key": "hour",
+									"value": "18"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BOOK Schedule",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"responsible_person_email\": \"leonardo@test.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/schedules/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"schedules",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62e81a0fad5c10dc1b964094"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Schedule",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/schedules/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"schedules",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62e81a0fad5c10dc1b964094"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

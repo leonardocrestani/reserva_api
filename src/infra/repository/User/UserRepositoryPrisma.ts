@@ -8,15 +8,30 @@ export class UserRepositoryPrisma implements UserRepository {
             data: {
                 first_name: data.first_name, last_name: data.last_name, cpf: data.cpf,
                 genre: data.genre, country: data.country, email: data.email, password: data.password, phone_number: data.phone_number
-            }, include: { schedules: true }
+            },
+            include: { schedules: true }
         });
     }
 
-    async findUser(email: string, password: string): Promise<UserModel> {
-        return await prisma.user.findFirst({ where: { AND: [{ email }, { password }] }, include: { schedules: true } });
+    async findByEmail(email: string): Promise<any> {
+        // verificar como criar um retorno que aceite sem password
+        return await prisma.user.findUnique({
+            where: { email }, select: {
+                first_name: true, last_name: true, cpf: true,
+                genre: true, country: true, email: true, password: false, phone_number: true, schedules: true
+            }
+        });
     }
 
-    async findUserByEmail(email: string): Promise<UserModel> {
-        return await prisma.user.findUnique({ where: { email }, include: { schedules: true } });
+    async update(email: string, data: any): Promise<UserModel> {
+        return await prisma.user.update({
+            where: { email },
+            data,
+            include: { schedules: true }
+        });
+    }
+
+    async remove(email: string): Promise<UserModel> {
+        return await prisma.user.delete({ where: { email }, include: { schedules: true } });
     }
 }

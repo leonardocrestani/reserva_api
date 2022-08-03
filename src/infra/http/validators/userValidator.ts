@@ -1,5 +1,5 @@
 import { Joi, Segments } from 'celebrate';
-import { genre } from '../../../common/enums';
+import { countries, genre } from '../../../common/enums';
 const customJoi = Joi.extend(require('joi-phone-number'));
 
 const userValidator = {
@@ -9,18 +9,22 @@ const userValidator = {
             last_name: Joi.string().trim().required(),
             cpf: Joi.string().trim().required(),
             genre: Joi.string().valid(...Object.values(genre)).required(),
-            country: Joi.string().trim().required(),
+            country: Joi.string().valid(...Object.values(countries)).required(),
             email: Joi.string().email().required(),
             password: Joi.string().min(6).required(),
             phone_number: customJoi.string().phoneNumber({ defaultCountry: 'BR', strict: true }).required(),
         })
     },
     QUERY: {
-        [Segments.QUERY]: Joi.object().keys({
-            email: Joi.string().email().max(70).required(),
-            password: Joi.string().min(6).max(25).required()
+        [Segments.PARAMS]: Joi.object().keys({
+            email: Joi.string().email().max(70).required()
         }),
     },
+    DELETE: {
+        [Segments.PARAMS]: Joi.object().keys({
+            email: Joi.string().email().max(70).required()
+        }),
+    }
 }
 
 export { userValidator };

@@ -11,14 +11,21 @@ export class UserRepositoryMemory implements UserRepository {
         return createdUser;
     };
 
-    async findUser(email: string, password: string): Promise<any> {
-        const user = this.createdUsers.find(user => user.email === email && user.password === password);
+    async findByEmail(email: string): Promise<any> {
+        const user = this.createdUsers.find(user => user.email === email);
         return user;
     }
 
-    async findUserByEmail(email: string): Promise<any> {
-        const user = this.createdUsers.find(user => user.email === email);
-        return user;
+    async update(email: string, data: any): Promise<any> {
+
+    }
+
+    async remove(email: string): Promise<any> {
+        this.createdUsers.find((user) => {
+            if (user.email === email) {
+                this.createdUsers.pop();
+            }
+        });
     }
 
 }

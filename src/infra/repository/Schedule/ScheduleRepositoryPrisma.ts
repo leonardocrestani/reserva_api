@@ -7,8 +7,26 @@ export class ScheduleRepositoryPrisma implements ScheduleRepository {
         return await prisma.schedules.create({ data: data });
     }
 
-    async find(court_id: string, hour: number, minutes: number): Promise<ScheduleModel> {
-        return await prisma.schedules.findFirst({ where: { AND: [{ court_id }, { hour }, { minutes }] } });
+    async findById(id: string): Promise<ScheduleModel> {
+        return await prisma.schedules.findFirst({ where: { id } });
+    }
+
+    async findAllByCourt(place_name: string, court_name: string): Promise<ScheduleModel[]> {
+        return await prisma.schedules.findMany({ where: { AND: [{ place_court_name: place_name }, { court_name }] } });
+    }
+
+    async updatePlaceName(id: string, place_name: string): Promise<ScheduleModel> {
+        return await prisma.schedules.update({
+            where: { id },
+            data: { place_court_name: place_name }
+        })
+    }
+
+    async updateCourtName(id: string, court_name: string): Promise<ScheduleModel> {
+        return await prisma.schedules.update({
+            where: { id },
+            data: { court_name }
+        })
     }
 
     async update(id: string, data: any): Promise<void> {
@@ -19,6 +37,12 @@ export class ScheduleRepositoryPrisma implements ScheduleRepository {
                 responsible_person_full_name: data.responsible_person_full_name,
                 is_rent: data.is_rent
             }
+        });
+    }
+
+    async delete(id: string): Promise<void> {
+        await prisma.schedules.delete({
+            where: { id }
         });
     }
 }

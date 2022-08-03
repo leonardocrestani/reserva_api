@@ -17,12 +17,13 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
                     phone_number: data.contact.phone_number
                 }, operation_time: {
                     open_hour: data.operation_time.open_hour,
-                    open_minutes: data.operation_time.open_minutes, close_hour: data.operation_time.close_hour,
-                    close_minutes: data.operation_time.close_minutes, days_open: data.operation_time.days_open
+                    close_hour: data.operation_time.close_hour,
+                    days_open: data.operation_time.days_open
                 },
                 courts: {
                     create: [
-                        ...data.courts
+                        // ver como fazer para criar a propriedade horarios array vazio para poder tirar schedules de opcional da entidade de court
+                        ...data.courts,
                     ]
                 }
             },
@@ -30,15 +31,49 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
         });
     }
 
-    async find(param: any): Promise<PlaceModel> {
-        return await prisma.place.findFirst({ where: param, include: { courts: true } })
+    async findAll(limit: number, offset: number): Promise<PlaceModel[]> {
+        return await prisma.place.findMany({
+            skip: offset,
+            take: limit,
+            select: {
+                created_at: false,
+                updated_at: false,
+                place_name: true,
+                cnpj: true,
+                number_of_courts: true,
+                address: true,
+                contact: true,
+                operation_time: true,
+                courts: {
+                    select: {
+                        place_court_name: true,
+                        court_name: true,
+                        schedules: true,
+                        created_at: false,
+                        updated_at: false,
+                    }
+                }
+            }
+        });
     }
 
     async findByName(place_name: string): Promise<PlaceModel> {
-        return await prisma.place.findUnique({ where: { place_name }, include: { courts: { include: { schedules: true } } } });
+        return await prisma.place.findUnique({ where: { place_name: place_name }, include: { courts: { include: { schedules: true } } } });
     };
 
     async findByCnpj(cnpj: string): Promise<PlaceModel> {
-        return await prisma.place.findUnique({ where: { cnpj }, include: { courts: true } });
+        return await prisma.place.findUnique({ where: { cnpj }, include: { courts: { include: { schedules: true } } } });
+    }
+
+    async update(place_name: string, data: any): Promise<PlaceModel> {
+        return await prisma.place.update({ where: { place_name }, data: data, include: { courts: true } });
+    }
+
+    async updateNumberOfCourts(place_name: string): Promise<PlaceModel> {
+        return await prisma.place.update({ where: { place_name }, data: { number_of_courts: { increment: 1 } }, include: { courts: true } });
+    }
+
+    async delete(place_name: string): Promise<void> {
+        await prisma.place.delete({ where: { place_name }, include: { courts: true } });
     }
 }

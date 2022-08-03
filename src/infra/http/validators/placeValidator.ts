@@ -21,16 +21,45 @@ const placeValidator = {
             }),
             operation_time: customJoi.object().keys({
                 open_hour: Joi.number().required(),
-                open_minutes: Joi.number().required(),
                 close_hour: Joi.number().required(),
-                close_minutes: Joi.number().required(),
                 days_open: Joi.array().items(Joi.string().valid(...Object.values(weekendDays)))
             }),
-            courts: Joi.array().items(Joi.object().keys({court_place_name: Joi.string(), court_name: Joi.string() })).required()
+            courts: Joi.array().items(Joi.object().keys({ place_court_name: Joi.string(), court_name: Joi.string() })).required()
         })
     },
     QUERY: {
-        [Segments.QUERY]: customJoi.object().keys({
+        [Segments.PARAMS]: customJoi.object().keys({
+            place_name: Joi.string().required()
+        })
+    },
+    UPDATE: {
+        [Segments.PARAMS]: customJoi.object().keys({
+            place_name: Joi.string().required()
+        }),
+        [Segments.BODY]: customJoi.object().keys({
+            place_name: Joi.string().trim().optional(),
+            cnpj: Joi.string().trim().optional(),
+            address: customJoi.object().keys({
+                city_code: Joi.number().optional(),
+                city_name: Joi.string().trim().optional(),
+                state: Joi.string().valid(...Object.values(states)).optional(),
+                country: Joi.string().trim().optional(),
+                street: Joi.string().trim().optional(),
+                neighborhood: Joi.string().trim().optional()
+            }),
+            contact: customJoi.object().keys({
+                name: Joi.string().trim().optional(),
+                phone_number: customJoi.string().phoneNumber({ defaultCountry: 'BR', strict: true }).optional(),
+            }),
+            operation_time: customJoi.object().keys({
+                open_hour: Joi.number().optional(),
+                close_hour: Joi.number().optional(),
+                days_open: Joi.array().items(Joi.string().valid(...Object.values(weekendDays)))
+            })
+        })
+    },
+    DELETE: {
+        [Segments.PARAMS]: customJoi.object().keys({
             place_name: Joi.string().required()
         })
     }

@@ -1,23 +1,26 @@
-import { GetPlaceService } from "..";
+import { FindPlaceService } from "..";
 import { CreateCourt } from "../../../core/use-cases";
-import { PlaceRepositoryPrisma } from "../../../infra/repository";
 import { CourtModel } from "../../models";
-import { CourtRepository } from "../../repository";
+import { CourtRepository, PlaceRepository } from "../../repository";
 import { Conflict } from "../../errors";
 
 export class CreateCourtService implements CreateCourt {
-    constructor(private readonly courtRepository: CourtRepository) { };
+    constructor(
+        private readonly courtRepository: CourtRepository,
+        private readonly placeRepository: PlaceRepository
+    ) { };
 
     async create(data: CourtModel): Promise<CourtModel> {
-        const placeRepository = new PlaceRepositoryPrisma();
-        const getPlaceService = new GetPlaceService(placeRepository);
-        const place = await getPlaceService.find({ place_name: data.court_place_name });
+        const getPlaceService = new FindPlaceService(this.placeRepository);
+        const place = await getPlaceService.findByName(data.place_court_name);
         place.courts.map((court: any) => {
             if (court.court_name === data.court_name) {
                 throw new Conflict("Quadra ja existente");
             }
         })
         data.place_id = place.id;
-        return await this.courtRepository.create(data);
+        const court = await this.courtRepository.create(data);
+        await this.placeRepository.updateNumberOfCourts(data.place_court_name);
+        return court;
     }
 }

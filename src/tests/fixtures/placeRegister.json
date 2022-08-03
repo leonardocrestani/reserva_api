@@ -1,0 +1,35 @@
+{
+    "body": {
+        "place_name": "sports",
+        "cnpj": "77.285.431/0001-76",
+        "address": {
+            "city_code": 95320000,
+            "city_name": "Nova Prata",
+            "state": "RS",
+            "country": "Brasil",
+            "street": "Estrada BR",
+            "neighborhood": "Industrial"
+        },
+        "contact": {
+            "name": "Leonardo",
+            "phone_number": "+5554999580934"
+        },
+        "operation_time": {
+            "open_hour": 8,
+            "close_hour": 21,
+            "days_open": [
+                "Wed"
+            ]
+        },
+        "courts": [
+            {
+                "place_court_name": "sports",
+                "court_name": "Quadra 1"
+            },
+            {
+                "place_court_name": "sports",
+                "court_name": "Quadra 2"
+            }
+        ]
+    }
+}

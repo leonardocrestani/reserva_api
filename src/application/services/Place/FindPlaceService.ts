@@ -1,17 +1,14 @@
-import { GetPlace } from "../../../core/use-cases";
+import { FindPlace } from "../../../core/use-cases";
 import { PlaceModel } from "../../models";
 import { NotFound } from "../../errors";
 import { PlaceRepository } from "../../repository";
 
-export class GetPlaceService implements GetPlace {
+export class FindPlaceService implements FindPlace {
     constructor(private readonly placeRepository: PlaceRepository) { }
 
-    async find(params: any): Promise<PlaceModel> {
-        const place = await this.placeRepository.find(params);
-        if (!place) {
-            throw new NotFound("Local nao encontrado")
-        }
-        return place;
+    async findAll(limit: number, offset: number): Promise<PlaceModel[]> {
+        const places = await this.placeRepository.findAll(limit, offset);
+        return places
     }
 
     async findByName(place_name: string): Promise<PlaceModel> {

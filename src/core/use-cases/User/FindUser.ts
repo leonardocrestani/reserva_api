@@ -1,7 +1,5 @@
 import { User } from '../../entities';
 
-export interface GetUser {
-    find: (email: string, password: string) => Promise<User>;
-
+export interface FindUser {
     findByEmail: (email: string) => Promise<User>;
 }
