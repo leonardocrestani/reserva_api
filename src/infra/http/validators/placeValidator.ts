@@ -1,5 +1,5 @@
 import { Joi, Segments } from 'celebrate';
-import { states, weekendDays } from '../../../common/enums';
+import { countries, states, weekendDays } from '../../../common/enums';
 const customJoi = Joi.extend(require('joi-phone-number'));
 
 const placeValidator = {
@@ -11,7 +11,7 @@ const placeValidator = {
                 city_code: Joi.number().required(),
                 city_name: Joi.string().trim().required(),
                 state: Joi.string().valid(...Object.values(states)).required(),
-                country: Joi.string().trim().required(),
+                country: Joi.string().valid(...Object.values(countries)).required(),
                 street: Joi.string().trim().required(),
                 neighborhood: Joi.string().trim().required()
             }),
