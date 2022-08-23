@@ -1,37 +1,27 @@
-import { prisma } from '../../database';
+import UserSchema from '../../database/models/User';
 import { UserRepository } from '../../../application/repository';
 import { UserModel } from '../../../application/models';
 
 export class UserRepositoryPrisma implements UserRepository {
     async create(data: any): Promise<UserModel> {
-        return await prisma.user.create({
-            data: {
+        console.log(data)
+        return await UserSchema.create(
+            {
                 first_name: data.first_name, last_name: data.last_name, cpf: data.cpf,
                 genre: data.genre, country: data.country, email: data.email, password: data.password, phone_number: data.phone_number
-            },
-            include: { schedules: true }
-        });
+            }
+        );
     }
 
     async findByEmail(email: string): Promise<any> {
-        // verificar como criar um retorno que aceite sem password
-        return await prisma.user.findUnique({
-            where: { email }, select: {
-                first_name: true, last_name: true, cpf: true,
-                genre: true, country: true, email: true, password: false, phone_number: true, schedules: true
-            }
-        });
+        return await UserSchema.findOne( { email });
     }
 
     async update(email: string, data: any): Promise<UserModel> {
-        return await prisma.user.update({
-            where: { email },
-            data,
-            include: { schedules: true }
-        });
+        return await UserSchema.findOneAndUpdate({ email }, data,);
     }
 
     async remove(email: string): Promise<UserModel> {
-        return await prisma.user.delete({ where: { email }, include: { schedules: true } });
+        return await UserSchema.findOneAndDelete({ email });
     }
 }

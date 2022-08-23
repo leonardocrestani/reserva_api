@@ -19,6 +19,10 @@ export class CourtRepositoryMemory implements CourtRepository {
         return courts;
     }
 
+    async pushCourts(place_id: string, court: any): Promise<void> {
+        
+    }
+
     async updatePlaceName(court_name: string, place_name: string): Promise<CourtModel> {
         let court = this.createdCourts.find(court => court.court_name === court_name);
         court.place_name = place_name;
