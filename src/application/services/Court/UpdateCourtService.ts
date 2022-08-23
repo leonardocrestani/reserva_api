@@ -1,13 +1,12 @@
-import { FindPlaceService } from "..";
 import { UpdateCourt } from "../../../core/use-cases";
-import { CourtRepository, PlaceRepository, ScheduleRepository } from "../../repository";
+import { CourtRepository, ScheduleRepository } from "../../repository";
 import { Conflict } from "../../errors";
 import { UpdateScheduleService } from "../Schedule/UpdateScheduleService";
+import { PlaceModel } from "../../models";
 
 export class UpdateCourtService implements UpdateCourt {
     constructor(
         private readonly courtRepository: CourtRepository,
-        private readonly placeRepository: PlaceRepository,
         private readonly scheduleRepository: ScheduleRepository
     ) { };
 
@@ -18,20 +17,14 @@ export class UpdateCourtService implements UpdateCourt {
         }
         const updatedCourt = await this.courtRepository.update(court.id, data);
         const updateScheduleService = new UpdateScheduleService(this.scheduleRepository);
-        for (const schedule of updatedCourt.schedules) {
-            await updateScheduleService.updateCourtName(schedule.id, updatedCourt.court_name);
-        }
+        await updateScheduleService.updateCourtName(updatedCourt);
     }
 
-    async updatePlaceName(place_name: string): Promise<void> {
-        const getPlaceService = new FindPlaceService(this.placeRepository);
-        const place = await getPlaceService.findByName(place_name);
+    async updatePlaceName(place: PlaceModel): Promise<void> {
         const updateScheduleService = new UpdateScheduleService(this.scheduleRepository);
         for (const court of place.courts) {
-            await this.courtRepository.updatePlaceName(court.id, place_name);
-            for (const schedule of court.schedules) {
-                await updateScheduleService.updatePlaceName(schedule.id, place_name);
-            }
+            const courtUpdated = await this.courtRepository.updatePlaceName(court.id, place.name);
+            await updateScheduleService.updatePlaceName(courtUpdated);
         }
     }
 }

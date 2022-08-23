@@ -18,12 +18,12 @@ describe('Find place', () => {
         await createPlace.create(data);
         const data2 = {
             ...body,
-            place_name: "place test",
+            name: "place test",
             cnpj: "79.487.553/0001-70",
             courts:
                 body.courts.map((court) => {
                     const name = court.court_name;
-                    return { place_court_name: "place test", court_name: `${name}` }
+                    return { place_name: "place test", court_name: `${name}` }
                 })
         }
         await createPlace.create(data2);
@@ -35,7 +35,7 @@ describe('Find place', () => {
         const data = body;
         await createPlace.create(data);
         const place = await getPlace.findByName('sports')
-        expect(place.place_name).toBe('sports');
+        expect(place.name).toBe('sports');
         expect(place.cnpj).toBe('77.285.431/0001-76');
         expect(place).toHaveProperty('address');
         expect(place).toHaveProperty('contact');
@@ -47,7 +47,7 @@ describe('Find place', () => {
         const data = body;
         await createPlace.create(data);
         const place = await getPlace.findByCnpj('77.285.431/0001-76')
-        expect(place.place_name).toBe('sports');
+        expect(place.name).toBe('sports');
         expect(place.cnpj).toBe('77.285.431/0001-76');
         expect(place).toHaveProperty('address');
         expect(place).toHaveProperty('contact');

@@ -6,7 +6,7 @@ export class CourtRepositoryPrisma implements CourtRepository {
     async create(data: any): Promise<CourtModel> {
         return await prisma.court.create({
             data: {
-                place_id: data.place_id, place_court_name: data.place_name, court_name: data.court_name,
+                place_id: data.place_id, place_name: data.place_name, court_name: data.court_name,
                 schedules: {
                     create: []
                 }
@@ -22,7 +22,7 @@ export class CourtRepositoryPrisma implements CourtRepository {
     async updatePlaceName(id: string, place_name: string): Promise<CourtModel> {
         return await prisma.court.update({
             where: { id },
-            data: { place_court_name: place_name },
+            data: { place_name: place_name },
             include: { schedules: true }
         })
     }

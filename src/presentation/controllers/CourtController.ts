@@ -22,7 +22,7 @@ export class CourtController {
         const courtRepository = new CourtRepositoryPrisma();
         const placeRepository = new PlaceRepositoryPrisma();
         const scheduleRepository = new ScheduleRepositoryPrisma();
-        const updateCourtService = new UpdateCourtService(courtRepository, placeRepository, scheduleRepository);
+        const updateCourtService = new UpdateCourtService(courtRepository, scheduleRepository);
         await updateCourtService.update(params.id, body);
         return noContent();
     }

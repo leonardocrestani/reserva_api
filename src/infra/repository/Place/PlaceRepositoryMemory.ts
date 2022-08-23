@@ -16,7 +16,7 @@ export class PlaceRepositoryMemory implements PlaceRepository {
     }
 
     async findByName(name: string): Promise<PlaceModel> {
-        const place = this.createdPlaces.find(place => place.place_name === name);
+        const place = this.createdPlaces.find(place => place.name === name);
         return place;
     }
 
@@ -31,8 +31,8 @@ export class PlaceRepositoryMemory implements PlaceRepository {
         return place;
     }
 
-    async updateNumberOfCourts(place_name: string): Promise<PlaceModel> {
-        const place = this.createdPlaces.find(place => place.place_name === place_name);
+    async updateNumberOfCourts(name: string): Promise<PlaceModel> {
+        const place = this.createdPlaces.find(place => place.name === name);
         place.number_of_courts += 1;
         return place;
     }

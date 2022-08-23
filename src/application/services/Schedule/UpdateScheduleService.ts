@@ -1,4 +1,5 @@
 import { UpdateSchedule } from "../../../core/use-cases/Schedule/UpdateSchedule";
+import { CourtModel } from "../../models";
 import { ScheduleRepository } from "../../repository";
 
 export class UpdateScheduleService implements UpdateSchedule {
@@ -6,11 +7,15 @@ export class UpdateScheduleService implements UpdateSchedule {
         private readonly scheduleRepository: ScheduleRepository
     ) { };
 
-    async updatePlaceName(id: string, place_name: string): Promise<void> {
-        await this.scheduleRepository.updatePlaceName(id, place_name);
+    async updatePlaceName(court: CourtModel): Promise<void> {
+        for (const schedule of court.schedules) {
+            await this.scheduleRepository.updatePlaceName(schedule.id, court.place_name);
+        }
     }
 
-    async updateCourtName(id: string, court_name: string): Promise<void> {
-        await this.scheduleRepository.updateCourtName(id, court_name);
+    async updateCourtName(court: CourtModel): Promise<void> {
+        for (const schedule of court.schedules) {
+            await this.scheduleRepository.updateCourtName(schedule.id, court.court_name);
+        }
     }
 }

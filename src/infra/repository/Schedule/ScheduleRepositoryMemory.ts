@@ -16,9 +16,9 @@ export class ScheduleRepositoryMemory implements ScheduleRepository {
         return schedule;
     }
 
-    async findAllByCourt(place_court_name: string, court_name: string): Promise<ScheduleModel[]> {
+    async findAllByCourt(place_name: string, court_name: string): Promise<ScheduleModel[]> {
         const schedules = this.createdSchedules.map((schedule) => {
-            if (schedule.place_court_name === place_court_name && schedule.court_name === court_name) {
+            if (schedule.place_name === place_name && schedule.court_name === court_name) {
                 return schedule;
             }
         });
@@ -27,7 +27,7 @@ export class ScheduleRepositoryMemory implements ScheduleRepository {
 
     async updatePlaceName(id: string, place_name: string): Promise<ScheduleModel> {
         let schedule = this.createdSchedules.find(schedule => schedule.id === id);
-        schedule.place_court_name = place_name;
+        schedule.place_name = place_name;
         return schedule;
     }
 

@@ -1,17 +1,17 @@
 import { Joi, Segments } from 'celebrate';
-import { states, weekendDays } from '../../../common/enums';
+import { countries, states, weekendDays } from '../../../common/enums';
 const customJoi = Joi.extend(require('joi-phone-number'));
 
 const placeValidator = {
     BODY: {
         [Segments.BODY]: customJoi.object().keys({
-            place_name: Joi.string().trim().required(),
+            name: Joi.string().trim().required(),
             cnpj: Joi.string().trim().required(),
             address: customJoi.object().keys({
                 city_code: Joi.number().required(),
                 city_name: Joi.string().trim().required(),
                 state: Joi.string().valid(...Object.values(states)).required(),
-                country: Joi.string().trim().required(),
+                country: Joi.string().valid(...Object.values(countries)).required(),
                 street: Joi.string().trim().required(),
                 neighborhood: Joi.string().trim().required()
             }),
@@ -24,20 +24,20 @@ const placeValidator = {
                 close_hour: Joi.number().required(),
                 days_open: Joi.array().items(Joi.string().valid(...Object.values(weekendDays)))
             }),
-            courts: Joi.array().items(Joi.object().keys({ place_court_name: Joi.string(), court_name: Joi.string() })).required()
+            courts: Joi.array().items(Joi.object().keys({ place_name: Joi.string(), court_name: Joi.string() })).required()
         })
     },
     QUERY: {
         [Segments.PARAMS]: customJoi.object().keys({
-            place_name: Joi.string().required()
+            name: Joi.string().required()
         })
     },
     UPDATE: {
         [Segments.PARAMS]: customJoi.object().keys({
-            place_name: Joi.string().required()
+            name: Joi.string().required()
         }),
         [Segments.BODY]: customJoi.object().keys({
-            place_name: Joi.string().trim().optional(),
+            name: Joi.string().trim().optional(),
             cnpj: Joi.string().trim().optional(),
             address: customJoi.object().keys({
                 city_code: Joi.number().optional(),
@@ -60,7 +60,7 @@ const placeValidator = {
     },
     DELETE: {
         [Segments.PARAMS]: customJoi.object().keys({
-            place_name: Joi.string().required()
+            name: Joi.string().required()
         })
     }
 }

@@ -1,5 +1,7 @@
-export interface UpdateSchedule {
-    updatePlaceName: (id: string, place_name: string) => Promise<void>;
+import { Court } from "../../entities";
 
-    updateCourtName: (id: string, court_name: string) => Promise<void>;
+export interface UpdateSchedule {
+    updatePlaceName: (court: Court) => Promise<void>;
+
+    updateCourtName: (court: Court) => Promise<void>;
 }
