@@ -37,10 +37,11 @@ export class ScheduleRepositoryMemory implements ScheduleRepository {
         return schedule;
     }
 
-    async update(id: string, data: any): Promise<void> {
+    async update(id: string, data: any): Promise<ScheduleModel> {
         const schedule = this.createdSchedules.find(schedule => schedule.id === id);
         schedule.is_rent = data.is_rent;
         schedule.responsible_person_email = data.responsible_person_email;
+        return schedule;
     }
 
     async delete(id: string): Promise<void> {

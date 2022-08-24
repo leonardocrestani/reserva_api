@@ -23,7 +23,7 @@ export class UserController {
     static async update(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const prismaRepository = new UserRepositoryPrisma();
         const updateUserService = new UpdateUserService(prismaRepository);
-        await updateUserService.update(params.id, body);
+        await updateUserService.update(params.email, body);
         return noContent();
     }
 

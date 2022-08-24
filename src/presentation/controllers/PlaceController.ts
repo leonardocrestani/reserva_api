@@ -6,7 +6,9 @@ import { ok, created, HttpResponse, noContent } from '../contracts/HttpResponse'
 export class PlaceController {
     static async register(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const placeRepository = new PlaceRepositoryPrisma();
-        const createPlaceService = new CreatePlaceService(placeRepository);
+        const courtRepository = new CourtRepositoryPrisma();
+        const scheduleRepository = new ScheduleRepositoryPrisma();
+        const createPlaceService = new CreatePlaceService(placeRepository, courtRepository, scheduleRepository );
         const newPlace = await createPlaceService.create(body);
         return created(newPlace);
     }
@@ -38,7 +40,8 @@ export class PlaceController {
 
     static async delete(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const placeRepository = new PlaceRepositoryPrisma();
-        const deletePlaceService = new DeletePlaceService(placeRepository);
+        const courtRepository = new CourtRepositoryPrisma();
+        const deletePlaceService = new DeletePlaceService(placeRepository, courtRepository);
         await deletePlaceService.delete(params.name);
         return noContent();
     }

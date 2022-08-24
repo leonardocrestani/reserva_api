@@ -1,8 +1,10 @@
 import { BookSchedule } from '../../../core/use-cases/Schedule/BookSchedule';
 import { ScheduleRepository } from '../../repository/ScheduleRepository';
-import { FindPlaceService, FindUserService, } from "../";
-import { PlaceRepository, UserRepository } from '../../repository';
-import { BadRequest, Conflict, NotFound } from '../../errors';
+import { FindUserService, } from "../";
+import { UserRepository } from '../../repository';
+import { Conflict, NotFound, UnprocessableEntity } from '../../errors';
+import { UpdateUserService } from '../User/UpdateUserService';
+import mongoose from 'mongoose';
 
 export class BookScheduleService implements BookSchedule {
     constructor(
@@ -11,6 +13,9 @@ export class BookScheduleService implements BookSchedule {
     ) { }
 
     async update(id: string, data: any): Promise<void> {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new UnprocessableEntity('Formato de ID incorreto');
+        }
         const schedule = await this.scheduleRepository.findById(id);
         if (!schedule) {
             throw new NotFound("Horario nao encontrado");
@@ -24,6 +29,12 @@ export class BookScheduleService implements BookSchedule {
         data.responsible_person_id = user.id;
         const fullName = user.first_name.concat(' ', `${user.last_name}`);
         data.responsible_person_full_name = fullName;
-        await this.scheduleRepository.update(id, data);
+        const operation: any = await this.scheduleRepository.update(id, data);
+        if(!operation) {
+            throw new UnprocessableEntity("Nao foi possivel reservar horario");
+        }
+        user.schedules.push(operation.id);
+        const updateUserService = new UpdateUserService(this.userRepository);
+        await updateUserService.update(user.email, user.schedules); 
     }
 }

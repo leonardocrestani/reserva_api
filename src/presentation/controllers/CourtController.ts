@@ -5,8 +5,9 @@ import { ok, created, HttpResponse, noContent } from '../contracts/HttpResponse'
 export class CourtController {
     static async register(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const courtRepository = new CourtRepositoryPrisma();
-        const placeRepository = new PlaceRepositoryPrisma()
-        const createCourtService = new CreateCourtService(courtRepository, placeRepository);
+        const placeRepository = new PlaceRepositoryPrisma();
+        const scheduleRepository = new ScheduleRepositoryPrisma();
+        const createCourtService = new CreateCourtService(courtRepository, placeRepository, scheduleRepository);
         const newCourt = await createCourtService.create(body);
         return created(newCourt);
     }

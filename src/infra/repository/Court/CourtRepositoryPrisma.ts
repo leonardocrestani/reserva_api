@@ -5,12 +5,7 @@ import { CourtModel } from '../../../application/models';
 
 export class CourtRepositoryPrisma implements CourtRepository {
     async create(data: any): Promise<CourtModel> {
-        return await CourtSchema.create(
-            {
-                place_id: data.place_id, place_court_name: data.place_court_name, court_name: data.court_name,
-                schedules: data.schedules
-            }
-        );
+        return await CourtSchema.create(data);
     }
 
     async pushCourts(place_id: string, court: any): Promise<void> {
@@ -24,7 +19,7 @@ export class CourtRepositoryPrisma implements CourtRepository {
     }
 
     async updatePlaceName(id: string, place_name: string): Promise<CourtModel> {
-        return await CourtSchema.findOneAndUpdate({ id }, { place_court_name: place_name });
+        return await CourtSchema.findOneAndUpdate({ id }, { place_name: place_name });
     }
 
     async update(id: string, data: any): Promise<CourtModel> {
