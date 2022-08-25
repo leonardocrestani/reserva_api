@@ -23,7 +23,7 @@ const courtValidator = {
         })
     },
     DELETE: {
-        [Segments.QUERY]: Joi.object().keys({
+        [Segments.PARAMS]: Joi.object().keys({
             id: Joi.string().trim().required()
         })
     }

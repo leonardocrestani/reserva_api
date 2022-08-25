@@ -21,7 +21,6 @@ export class CourtController {
 
     static async update(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const courtRepository = new CourtRepositoryPrisma();
-        const placeRepository = new PlaceRepositoryPrisma();
         const scheduleRepository = new ScheduleRepositoryPrisma();
         const updateCourtService = new UpdateCourtService(courtRepository, scheduleRepository);
         await updateCourtService.update(params.id, body);
@@ -31,7 +30,8 @@ export class CourtController {
     static async delete(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const courtRepository = new CourtRepositoryPrisma();
         const scheduleRepository = new ScheduleRepositoryPrisma();
-        const deleteCourtService = new DeleteCourtService(courtRepository, scheduleRepository);
+        const placeRepository = new PlaceRepositoryPrisma();
+        const deleteCourtService = new DeleteCourtService(courtRepository, scheduleRepository, placeRepository);
         await deleteCourtService.delete(params.id);
         return noContent();
     }

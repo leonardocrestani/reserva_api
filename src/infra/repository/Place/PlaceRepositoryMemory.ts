@@ -15,6 +15,11 @@ export class PlaceRepositoryMemory implements PlaceRepository {
         return places;
     }
 
+    async findById(id: string): Promise<PlaceModel> {
+        const place = this.createdPlaces.find(place => place.id === id);
+        return place;
+    }
+
     async findByName(name: string): Promise<PlaceModel> {
         const place = this.createdPlaces.find(place => place.name === name);
         return place;

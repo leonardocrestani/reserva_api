@@ -11,6 +11,11 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
         return await PlaceSchema.find().select('-created_at -updated_at').limit(limit).skip(offset);
     }
 
+    async findById(id: string): Promise<PlaceModel> {
+        console.log(id)
+        return await PlaceSchema.findById(id).populate("courts");
+    }
+
     async findByName(name: string): Promise<PlaceModel> {
         return await PlaceSchema.findOne({ name }).populate({
             path: "courts",

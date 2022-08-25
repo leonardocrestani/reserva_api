@@ -15,7 +15,7 @@ export class DeletePlaceService implements DeletePlace {
         if (!place) {
             throw new NotFound("Local nao encontrado");
         }
-        const deleteCourtService = new DeleteCourtService(this.courtRepository, this.scheduleRepository);
+        const deleteCourtService = new DeleteCourtService(this.courtRepository, this.scheduleRepository, this.placeRepository);
         for(const court of place.courts) {
             await deleteCourtService.delete(court.id);
         }
