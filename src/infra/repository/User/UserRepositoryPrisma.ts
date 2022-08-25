@@ -8,7 +8,7 @@ export class UserRepositoryPrisma implements UserRepository {
     }
 
     async findByEmail(email: string): Promise<any> {
-        return await UserSchema.findOne( { email });
+        return await UserSchema.findOne( { email }).populate("schedules");
     }
 
     async update(email: string, data: any): Promise<number> {
@@ -16,6 +16,7 @@ export class UserRepositoryPrisma implements UserRepository {
     }
 
     async remove(email: string): Promise<UserModel> {
+        console.log(email)
         return await UserSchema.findOneAndDelete({ email });
     }
 }

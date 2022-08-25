@@ -35,6 +35,6 @@ export class BookScheduleService implements BookSchedule {
         }
         user.schedules.push(operation.id);
         const updateUserService = new UpdateUserService(this.userRepository);
-        await updateUserService.update(user.email, user.schedules); 
+        await updateUserService.update(user.email, {schedules: user.schedules});
     }
 }

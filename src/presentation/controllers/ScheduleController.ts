@@ -4,13 +4,14 @@ import { BookScheduleService } from '../../application/services/Schedule/BookSch
 import { ScheduleRepositoryPrisma } from '../../infra/repository/Schedule/ScheduleRepositoryPrisma';
 import { ok, created, noContent, HttpResponse } from '../contracts/HttpResponse';
 import { CourtRepositoryPrisma, PlaceRepositoryPrisma, UserRepositoryPrisma } from '../../infra/repository';
-import { DeleteScheduleService } from '../../application/services';
+import { DeleteScheduleService, UnbookScheduleService } from '../../application/services';
 
 export class ScheduleController {
     static async register(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const scheduleRepository = new ScheduleRepositoryPrisma();
         const placeRepository = new PlaceRepositoryPrisma();
-        const createScheduleService = new CreateScheduleService(scheduleRepository, placeRepository);
+        const courtRepository = new CourtRepositoryPrisma();
+        const createScheduleService = new CreateScheduleService(scheduleRepository, placeRepository, courtRepository);
         const newPlace = await createScheduleService.create(body);
         return created(newPlace);
     }
@@ -22,12 +23,19 @@ export class ScheduleController {
         return ok(schedule);
     }
 
-    static async update(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
+    static async book(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const scheduleRepository = new ScheduleRepositoryPrisma();
-        const placeRepository = new PlaceRepositoryPrisma();
         const userRepository = new UserRepositoryPrisma();
         const bookScheduleService = new BookScheduleService(scheduleRepository, userRepository);
         await bookScheduleService.update(params.id, body);
+        return noContent();
+    }
+
+    static async unbook(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
+        const scheduleRepository = new ScheduleRepositoryPrisma();
+        const userRepository = new UserRepositoryPrisma();
+        const unbookScheduleService = new UnbookScheduleService(scheduleRepository, userRepository);
+        await unbookScheduleService.update(params.id);
         return noContent();
     }
 

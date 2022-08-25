@@ -24,7 +24,6 @@ export class UpdateUserService implements UpdateUser {
             }
         }
         const operation = await this.userRepository.update(email, data);
-        console.log(operation)
         if(!operation) {
             throw new UnprocessableEntity("Erro ao atualizar usuario");
         }

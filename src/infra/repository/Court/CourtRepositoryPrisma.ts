@@ -15,7 +15,7 @@ export class CourtRepositoryPrisma implements CourtRepository {
     }
 
     async findById(id: string): Promise<CourtModel> {
-        return await CourtSchema.findById(id);
+        return await CourtSchema.findById(id).populate("schedules");
     }
 
     async updatePlaceName(id: string, place_name: string): Promise<CourtModel> {

@@ -12,7 +12,12 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
     }
 
     async findByName(name: string): Promise<PlaceModel> {
-        return await PlaceSchema.findOne({ name }).populate("courts");
+        return await PlaceSchema.findOne({ name }).populate({
+            path: "courts",
+            populate: {
+               path: "schedules"
+            }
+        });
     };
 
     async findByCnpj(cnpj: string): Promise<PlaceModel> {

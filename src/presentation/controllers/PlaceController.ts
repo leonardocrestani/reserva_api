@@ -41,7 +41,8 @@ export class PlaceController {
     static async delete(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const placeRepository = new PlaceRepositoryPrisma();
         const courtRepository = new CourtRepositoryPrisma();
-        const deletePlaceService = new DeletePlaceService(placeRepository, courtRepository);
+        const scheduleRepository = new ScheduleRepositoryPrisma();
+        const deletePlaceService = new DeletePlaceService(placeRepository, courtRepository, scheduleRepository);
         await deletePlaceService.delete(params.name);
         return noContent();
     }

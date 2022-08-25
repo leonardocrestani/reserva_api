@@ -30,7 +30,8 @@ export class CourtController {
 
     static async delete(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const courtRepository = new CourtRepositoryPrisma();
-        const deleteCourtService = new DeleteCourtService(courtRepository);
+        const scheduleRepository = new ScheduleRepositoryPrisma();
+        const deleteCourtService = new DeleteCourtService(courtRepository, scheduleRepository);
         await deleteCourtService.delete(params.id);
         return noContent();
     }

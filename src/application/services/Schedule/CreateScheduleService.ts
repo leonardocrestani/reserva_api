@@ -3,12 +3,15 @@ import { CreateSchedule } from "../../../core/use-cases/Schedule/CreateSchedule"
 import { ScheduleRepository } from "../../repository/ScheduleRepository";
 import { FindPlaceService } from "../Place/FindPlaceService";
 import { BadRequest, Conflict, NotFound } from '../../errors';
-import { PlaceRepository } from '../../repository';
+import { CourtRepository, PlaceRepository } from '../../repository';
+import { FindCourtService } from '../Court/FindCourtService';
+import { UpdateCourtService } from '../Court/UpdateCourtService';
 
 export class CreateScheduleService implements CreateSchedule {
     constructor(
         private readonly scheduleRepository: ScheduleRepository,
         private readonly placeRepository: PlaceRepository,
+        private readonly courtRepository: CourtRepository
     ) { }
 
     async create(data: ScheduleModel): Promise<ScheduleModel> {
@@ -23,9 +26,10 @@ export class CreateScheduleService implements CreateSchedule {
         if (!exist) {
             throw new NotFound("Quadra nao encontrada");
         }
-        place.courts.find((court) => {
+        const court = place.courts.find((court) => {
             if (court.court_name === data.court_name) {
                 data.court_id = court.id;
+                return court;
             }
         })
         const schedules = await this.scheduleRepository.findAllByCourt(data.place_name, data.court_name);
@@ -34,6 +38,10 @@ export class CreateScheduleService implements CreateSchedule {
                 throw new Conflict('Horario ja cadastrado');
             }
         });
-        return await this.scheduleRepository.create(data);
+        const newSchedule: any = await this.scheduleRepository.create(data);
+        const updateCourtService = new UpdateCourtService(this.courtRepository, this.scheduleRepository);
+        court.schedules.push(newSchedule.id);
+        await updateCourtService.update(court.id, {schedules: court.schedules});
+        return newSchedule;
     }
 }

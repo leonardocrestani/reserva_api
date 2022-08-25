@@ -2,7 +2,7 @@ import { CreateUserService } from '../../application/services';
 import { FindUserService } from '../../application/services';
 import { DeleteUserService } from '../../application/services/User/DeleteUserService';
 import { UpdateUserService } from '../../application/services/User/UpdateUserService';
-import { UserRepositoryPrisma } from '../../infra/repository';
+import { ScheduleRepositoryPrisma, UserRepositoryPrisma } from '../../infra/repository';
 import { ok, created, noContent, HttpResponse } from '../contracts/HttpResponse';
 
 export class UserController {
@@ -28,8 +28,10 @@ export class UserController {
     }
 
     static async delete(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
-        const prismaRepository = new UserRepositoryPrisma();
-        const deleteUserService = new DeleteUserService(prismaRepository);
+        const userPrismaRepository = new UserRepositoryPrisma();
+        const scheduleRepository = new ScheduleRepositoryPrisma();
+        const deleteUserService = new DeleteUserService(userPrismaRepository, scheduleRepository);
+        console.log(params.email)
         await deleteUserService.remove(params.email);
         return noContent();
     }
