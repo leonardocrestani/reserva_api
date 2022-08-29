@@ -1,5 +1,5 @@
 import { DeletePlace } from "../../../core/use-cases";
-import { NotFound } from "../../errors";
+import { BadRequest, NotFound } from "../../errors";
 import { CourtRepository, PlaceRepository, ScheduleRepository } from "../../repository";
 import { DeleteCourtService } from "../Court/DeleteCourtService";
 
@@ -19,6 +19,9 @@ export class DeletePlaceService implements DeletePlace {
         for(const court of place.courts) {
             await deleteCourtService.delete(court.id);
         }
-        await this.placeRepository.delete(name);
+        const operation: number = await this.placeRepository.delete(name);
+        if(!operation) {
+            throw new BadRequest("Nao foi possivel deletar o local");
+        }
     }
 }

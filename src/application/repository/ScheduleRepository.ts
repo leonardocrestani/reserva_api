@@ -7,5 +7,5 @@ export interface ScheduleRepository {
     updatePlaceName: (id: string, place_name: string) => Promise<ScheduleModel>;
     updateCourtName: (id: string, court_name: string) => Promise<ScheduleModel>;
     update: (id: string, data: any) => Promise<ScheduleModel>;
-    delete: (id: string) => Promise<void>;
+    delete: (id: string) => Promise<number>;
 }

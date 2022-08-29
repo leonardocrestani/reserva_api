@@ -1,5 +1,5 @@
 import { DeleteCourt } from "../../../core/use-cases";
-import { BadRequest, NotFound } from "../../errors";
+import { NotFound } from "../../errors";
 import { CourtRepository, PlaceRepository, ScheduleRepository } from "../../repository";
 import { FindPlaceService } from "../Place/FindPlaceService";
 import { UpdatePlaceService } from "../Place/UpdatePlaceService";
@@ -15,7 +15,7 @@ export class DeleteCourtService implements DeleteCourt {
     async delete(id: string): Promise<void> {
         const court = await this.courtRepository.findById(id);
         if(!court) {
-            throw new BadRequest("Quadra nao encontrada");
+            throw new NotFound("Quadra nao encontrada");
         }
         const deleteScheduleService = new DeleteScheduleService(this.scheduleRepository);
         for(const schedule of court.schedules) {

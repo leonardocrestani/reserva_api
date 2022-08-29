@@ -12,7 +12,6 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
     }
 
     async findById(id: string): Promise<PlaceModel> {
-        console.log(id)
         return await PlaceSchema.findById(id).populate("courts");
     }
 
@@ -37,7 +36,7 @@ export class PlaceRepositoryPrisma implements PlaceRepository {
         return await PlaceSchema.findOneAndUpdate({ name }, {$inc : {'number_of_courts' : 1}});
     }
 
-    async delete(name: string): Promise<void> {
-        await PlaceSchema.findOneAndDelete({ name });
+    async delete(name: string): Promise<number> {
+        return await PlaceSchema.findOneAndDelete({ name });
     }
 }

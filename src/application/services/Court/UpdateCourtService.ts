@@ -1,6 +1,6 @@
 import { UpdateCourt } from "../../../core/use-cases";
 import { CourtRepository, ScheduleRepository } from "../../repository";
-import { Conflict } from "../../errors";
+import { Conflict, NotFound } from "../../errors";
 import { UpdateScheduleService } from "../Schedule/UpdateScheduleService";
 import { PlaceModel } from "../../models";
 
@@ -11,7 +11,10 @@ export class UpdateCourtService implements UpdateCourt {
     ) { };
 
     async update(id: string, data: any): Promise<void> {
-        const court = await this.courtRepository.findById(id)
+        const court = await this.courtRepository.findById(id);
+        if(!court) {
+            throw new NotFound("Quadra nao encontrada");
+        }
         if (court.court_name === data.court_name) {
             throw new Conflict("Quadra ja existente");
         }

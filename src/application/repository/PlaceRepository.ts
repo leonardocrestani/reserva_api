@@ -15,5 +15,5 @@ export interface PlaceRepository {
 
     updateNumberOfCourts: (name: string) => Promise<PlaceModel>;
 
-    delete: (name: string) => Promise<void>
+    delete: (name: string) => Promise<number>
 }

@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema<UserModel> ({
     genre: {type: String, required: true},
     country: {type: String, required: true},
     email: {type: String, required: true},
-    password: {type: String, required: true, select: false},
+    password: {type: String, required: true, select: true},
     phone_number: {type: String, required: true},
     schedules: [{type: Schema.Types.ObjectId, ref:'Schedule', default: [], required: false}]
 }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }, versionKey: false } );

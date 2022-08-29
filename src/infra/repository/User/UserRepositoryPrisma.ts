@@ -16,7 +16,6 @@ export class UserRepositoryPrisma implements UserRepository {
     }
 
     async remove(email: string): Promise<UserModel> {
-        console.log(email)
         return await UserSchema.findOneAndDelete({ email });
     }
 }

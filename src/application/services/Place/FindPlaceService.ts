@@ -1,6 +1,6 @@
 import { FindPlace } from "../../../core/use-cases";
 import { PlaceModel } from "../../models";
-import { NotFound } from "../../errors";
+import { BadRequest, NotFound } from "../../errors";
 import { PlaceRepository } from "../../repository";
 
 export class FindPlaceService implements FindPlace {

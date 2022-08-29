@@ -15,7 +15,7 @@ export class UnbookScheduleService implements UnbookSchedule {
     async update(id: string): Promise<void> {
         const data: any = {};
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            throw new UnprocessableEntity('Formato de ID incorreto');
+            throw new UnprocessableEntity('Formato de ID invalido');
         }
         const schedule = await this.scheduleRepository.findById(id);
         if (!schedule) {

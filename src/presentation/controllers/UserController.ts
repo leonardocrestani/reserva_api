@@ -31,7 +31,6 @@ export class UserController {
         const userPrismaRepository = new UserRepositoryPrisma();
         const scheduleRepository = new ScheduleRepositoryPrisma();
         const deleteUserService = new DeleteUserService(userPrismaRepository, scheduleRepository);
-        console.log(params.email)
         await deleteUserService.remove(params.email);
         return noContent();
     }

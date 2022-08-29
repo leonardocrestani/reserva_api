@@ -44,7 +44,7 @@ export class ScheduleRepositoryMemory implements ScheduleRepository {
         return schedule;
     }
 
-    async delete(id: string): Promise<void> {
-
+    async delete(id: string): Promise<number> {
+        return 1;
     }
 }

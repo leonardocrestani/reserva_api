@@ -33,7 +33,7 @@ export class ScheduleRepositoryPrisma implements ScheduleRepository {
         );
     }
 
-    async delete(id: string): Promise<void> {
-        await ScheduleSchema.findOneAndDelete({ id });
+    async delete(id: string): Promise<number> {
+        return await ScheduleSchema.findOneAndDelete({ id });
     }
 }
