@@ -35,7 +35,7 @@ export class ScheduleController {
         const scheduleRepository = new ScheduleRepositoryPrisma();
         const userRepository = new UserRepositoryPrisma();
         const unbookScheduleService = new UnbookScheduleService(scheduleRepository, userRepository);
-        await unbookScheduleService.update(params.id);
+        await unbookScheduleService.update(params.id, query.userId);
         return noContent();
     }
 

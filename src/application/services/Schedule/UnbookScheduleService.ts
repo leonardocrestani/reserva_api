@@ -12,12 +12,17 @@ export class UnbookScheduleService implements UnbookSchedule {
         private readonly userRepository: UserRepository
     ) { }
 
-    async update(id: string): Promise<void> {
+    async update(id: string, userId?: string): Promise<void> {
         const data: any = {};
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new UnprocessableEntity('Formato de ID invalido');
         }
         const schedule = await this.scheduleRepository.findById(id);
+        const getUserService = new FindUserService(this.userRepository);
+        const user = await getUserService.findById(userId);
+        if(schedule.responsible_person_email !== user.email) {
+            throw new BadRequest("Usuario desmarcando horario incorreto");
+        }
         if (!schedule) {
             throw new NotFound("Horario nao encontrado");
         }
@@ -32,8 +37,6 @@ export class UnbookScheduleService implements UnbookSchedule {
         if(!operation) {
             throw new UnprocessableEntity("Nao foi possivel desmarcar horario");
         }
-        const getUserService = new FindUserService(this.userRepository);
-        const user = await getUserService.findByEmail(schedule.responsible_person_email);
         user.schedules.map((canceledSchedule, index) => {
             if(canceledSchedule.id === schedule.id) {
                 user.schedules.splice(index, 1);

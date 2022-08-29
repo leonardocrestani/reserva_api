@@ -11,6 +11,10 @@ export class UserRepositoryPrisma implements UserRepository {
         return await UserSchema.findOne( { email }).populate("schedules");
     }
 
+    async findById(id: string): Promise<UserModel> {
+        return await UserSchema.findById(id);
+    }
+
     async update(email: string, data: any): Promise<number> {
         return await UserSchema.findOneAndUpdate({ email }, data);
     }

@@ -16,6 +16,11 @@ export class UserRepositoryMemory implements UserRepository {
         return user;
     }
 
+    async findById(id: string): Promise<UserModel> {
+        const user = this.createdUsers.find(user => user.id === id);
+        return user;
+    }
+
     async update(email: string, data: any): Promise<any> {
 
     }
