@@ -1,4 +1,4 @@
-import { UserRepositoryMemory } from '../../../infra/repository';
+import { ScheduleRepositoryMemory, UserRepositoryMemory } from '../../../infra/repository';
 import { CreateUserService, DeleteUserService, FindUserService } from '../../../application/services';
 
 describe('Delete user', () => {
@@ -9,8 +9,9 @@ describe('Delete user', () => {
 
     beforeEach(async () => {
         const userRepositoryMemory = new UserRepositoryMemory();
+        const scheduleRepositoryMemory = new ScheduleRepositoryMemory();
         createUser = new CreateUserService(userRepositoryMemory);
-        deleteUser = new DeleteUserService(userRepositoryMemory);
+        deleteUser = new DeleteUserService(userRepositoryMemory, scheduleRepositoryMemory);
         findUser = new FindUserService(userRepositoryMemory);
     });
 
@@ -30,7 +31,7 @@ describe('Delete user', () => {
         await createUser.create(data);
         try {
             await deleteUser.remove("leonardo@test.com");
-            await findUser.findOne("leonardo@test.com");
+            await findUser.findByEmail("leonardo@test.com");
         }
         catch (error: any) {
             expect(error.message).toBe("Usuario nao encontrado");

@@ -2,7 +2,7 @@ import PlaceSchema from '../../database/models/Place';
 import { PlaceRepository } from '../../../application/repository';
 import { PlaceModel } from '../../../application/models';
 
-export class PlaceRepositoryPrisma implements PlaceRepository {
+export class PlaceRepositoryMongoose implements PlaceRepository {
     async create(data: any): Promise<PlaceModel> {
         return await PlaceSchema.create(data);
     }

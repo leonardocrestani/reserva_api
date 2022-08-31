@@ -1,7 +1,7 @@
 import { ScheduleRepository } from '../../repository/ScheduleRepository';
 import { FindUserService, } from "../";
 import { UserRepository } from '../../repository';
-import { BadRequest, Conflict, NotFound, UnprocessableEntity } from '../../errors';
+import { BadRequest, NotFound, UnprocessableEntity } from '../../errors';
 import { UpdateUserService } from '../User/UpdateUserService';
 import mongoose from 'mongoose';
 import { UnbookSchedule } from '../../../core/use-cases';

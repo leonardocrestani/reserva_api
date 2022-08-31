@@ -12,9 +12,9 @@ describe('Find place', () => {
         const placeRepository = new PlaceRepositoryMemory();
         const scheduleRepository = new ScheduleRepositoryMemory();
         const courtRepository = new CourtRepositoryMemory();
-        createPlace = new CreatePlaceService(placeRepository);
-        createSchedule = new CreateScheduleService(scheduleRepository, placeRepository);
-        getSchedule = new FindScheduleService(scheduleRepository, courtRepository, placeRepository);
+        createPlace = new CreatePlaceService(placeRepository, courtRepository, scheduleRepository);
+        createSchedule = new CreateScheduleService(scheduleRepository, placeRepository, courtRepository);
+        getSchedule = new FindScheduleService(scheduleRepository);
         await createPlace.create(body);
     });
 
@@ -26,7 +26,7 @@ describe('Find place', () => {
             is_rent: false,
             day: "Wed"
         });
-        const schedule = await getSchedule.find('sports', 'Quadra 2', 10);
+        const schedule = await getSchedule.findById('sports');
         expect(schedule.court_name).toBe('Quadra 2');
         expect(schedule.hour).toBe(10);
         expect(schedule.is_rent).toBeFalsy();
@@ -41,7 +41,7 @@ describe('Find place', () => {
             day: "Wed"
         });
         try {
-            await getSchedule.find('sports', 'Quadra 2', 12);
+            await getSchedule.findById('sports');
         }
         catch (error) {
             expect(error.message).toBe('Horario nao encontrado');
@@ -57,7 +57,7 @@ describe('Find place', () => {
             day: "Wed"
         });
         try {
-            await getSchedule.find('incorrect place', 'Quadra 2', 10);
+            await getSchedule.findById('incorrect place');
         }
         catch (error) {
             expect(error.message).toBe('Local nao encontrado');
@@ -73,7 +73,7 @@ describe('Find place', () => {
             day: "Wed"
         });
         try {
-            await getSchedule.find('sports', 'Quadra 4', 10);
+            await getSchedule.findById('sports');
         }
         catch (error) {
             expect(error.message).toBe('Quadra nao encontrada');

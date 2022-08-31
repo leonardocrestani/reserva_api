@@ -1,4 +1,4 @@
-import { PlaceRepositoryMemory } from '../../../infra/repository';
+import { CourtRepositoryMemory, PlaceRepositoryMemory, ScheduleRepositoryMemory } from '../../../infra/repository';
 import { CreatePlaceService, DeletePlaceService, FindPlaceService } from '../../../application/services';
 import { body } from '../../fixtures/placeRegister.json';
 
@@ -10,9 +10,11 @@ describe('Delete place', () => {
 
     beforeEach(async () => {
         const placeRepository = new PlaceRepositoryMemory();
-        createPlace = new CreatePlaceService(placeRepository);
+        const courtRepository = new CourtRepositoryMemory();
+        const scheduleRepository = new ScheduleRepositoryMemory();
+        createPlace = new CreatePlaceService(placeRepository, courtRepository, scheduleRepository);
         findPlace = new FindPlaceService(placeRepository);
-        deletePlace = new DeletePlaceService(placeRepository);
+        deletePlace = new DeletePlaceService(placeRepository, courtRepository, scheduleRepository);
     });
 
     test('Should delete place', async () => {

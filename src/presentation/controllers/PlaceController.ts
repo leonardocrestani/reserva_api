@@ -1,20 +1,20 @@
 import { CreatePlaceService, UpdatePlaceService } from '../../application/services';
 import { FindPlaceService, DeletePlaceService } from '../../application/services';
-import { CourtRepositoryPrisma, PlaceRepositoryPrisma, ScheduleRepositoryPrisma } from '../../infra/repository';
+import { CourtRepositoryMongoose, PlaceRepositoryMongoose, ScheduleRepositoryMongoose } from '../../infra/repository';
 import { ok, created, HttpResponse, noContent } from '../contracts/HttpResponse';
 
 export class PlaceController {
     static async register(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
-        const placeRepository = new PlaceRepositoryPrisma();
-        const courtRepository = new CourtRepositoryPrisma();
-        const scheduleRepository = new ScheduleRepositoryPrisma();
+        const placeRepository = new PlaceRepositoryMongoose();
+        const courtRepository = new CourtRepositoryMongoose();
+        const scheduleRepository = new ScheduleRepositoryMongoose();
         const createPlaceService = new CreatePlaceService(placeRepository, courtRepository, scheduleRepository );
         const newPlace = await createPlaceService.create(body);
         return created(newPlace);
     }
 
     static async findAll(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
-        const placeRepository = new PlaceRepositoryPrisma();
+        const placeRepository = new PlaceRepositoryMongoose();
         const getPlaceService = new FindPlaceService(placeRepository);
         const limit = parseInt(query.limit, 10);
         const offset = parseInt(query.offset, 10);
@@ -23,25 +23,25 @@ export class PlaceController {
     }
 
     static async findByName(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
-        const placeRepository = new PlaceRepositoryPrisma();
+        const placeRepository = new PlaceRepositoryMongoose();
         const getPlaceService = new FindPlaceService(placeRepository);
         const place = await getPlaceService.findByName(params.name);
         return ok(place);
     }
 
     static async update(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
-        const placeRepository = new PlaceRepositoryPrisma();
-        const courtRepository = new CourtRepositoryPrisma();
-        const scheduleRepository = new ScheduleRepositoryPrisma();
+        const placeRepository = new PlaceRepositoryMongoose();
+        const courtRepository = new CourtRepositoryMongoose();
+        const scheduleRepository = new ScheduleRepositoryMongoose();
         const updatePlaceService = new UpdatePlaceService(placeRepository, courtRepository, scheduleRepository);
         await updatePlaceService.update(params.name, body);
         return noContent();
     }
 
     static async delete(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
-        const placeRepository = new PlaceRepositoryPrisma();
-        const courtRepository = new CourtRepositoryPrisma();
-        const scheduleRepository = new ScheduleRepositoryPrisma();
+        const placeRepository = new PlaceRepositoryMongoose();
+        const courtRepository = new CourtRepositoryMongoose();
+        const scheduleRepository = new ScheduleRepositoryMongoose();
         const deletePlaceService = new DeletePlaceService(placeRepository, courtRepository, scheduleRepository);
         await deletePlaceService.delete(params.name);
         return noContent();

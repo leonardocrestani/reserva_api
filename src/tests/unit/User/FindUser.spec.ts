@@ -27,7 +27,7 @@ describe('Find user', () => {
             schedules: schedules
         }
         await createUser.create(data);
-        const user = await findUser.findOne("leonardo@test.com");
+        const user = await findUser.findByEmail("leonardo@test.com");
         expect(user.email).toBe("leonardo@test.com");
     });
 
@@ -46,7 +46,7 @@ describe('Find user', () => {
         }
         await createUser.create(data);
         try {
-            await findUser.findOne("leonardo@erro.com");
+            await findUser.findByEmail("leonardo@erro.com");
         }
         catch (error: any) {
             expect(error.message).toBe("Usuario nao encontrado");
@@ -68,7 +68,7 @@ describe('Find user', () => {
         }
         await createUser.create(data);
         try {
-            await findUser.findOne("leonardo@test.com");
+            await findUser.findByEmail("leonardo@test.com");
         }
         catch (error: any) {
             expect(error.message).toBe("User not found");

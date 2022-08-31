@@ -10,7 +10,7 @@ describe('Register user', () => {
         createUser = new CreateUserService(userRepositoryMemory);
     });
 
-    test('Should register new user', async () => {
+    test.only('Should register new user', async () => {
         let schedules: Array<any> = []
         const data = {
             first_name: "Leonardo",
@@ -24,6 +24,7 @@ describe('Register user', () => {
             schedules: schedules
         }
         const user = await createUser.create(data);
+        console.log(user)
         expect(user.user.email).toBe("leonardo@test.com");
         expect(user).toHaveProperty('access_token');
     });

@@ -2,7 +2,7 @@ import ScheduleSchema from '../../database/models/Schedules';
 import { ScheduleRepository } from '../../../application/repository/ScheduleRepository';
 import { ScheduleModel } from '../../../application/models';
 
-export class ScheduleRepositoryPrisma implements ScheduleRepository {
+export class ScheduleRepositoryMongoose implements ScheduleRepository {
     async create(data: any): Promise<ScheduleModel> {
         return await ScheduleSchema.create(data);
     }

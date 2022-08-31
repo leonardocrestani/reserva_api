@@ -1,4 +1,4 @@
-import { CourtRepositoryMemory, PlaceRepositoryMemory } from '../../../infra/repository';
+import { CourtRepositoryMemory, PlaceRepositoryMemory, ScheduleRepositoryMemory } from '../../../infra/repository';
 import { CreateCourtService, CreatePlaceService } from '../../../application/services';
 import { body } from '../../fixtures/placeRegister.json';
 
@@ -12,8 +12,9 @@ describe('Register court', () => {
     beforeEach(async () => {
         courtRepository = new CourtRepositoryMemory();
         placeRepository = new PlaceRepositoryMemory();
-        createCourt = new CreateCourtService(courtRepository, placeRepository);
-        createPlace = new CreatePlaceService(placeRepository);
+        const scheduleRepository = new ScheduleRepositoryMemory();
+        createCourt = new CreateCourtService(courtRepository, placeRepository, scheduleRepository);
+        createPlace = new CreatePlaceService(placeRepository, courtRepository, scheduleRepository);
     });
 
     test('Should register new court', async () => {

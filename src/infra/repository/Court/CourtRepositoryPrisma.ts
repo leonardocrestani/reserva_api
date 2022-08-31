@@ -3,7 +3,7 @@ import PlaceSchema from '../../database/models/Place'
 import { CourtRepository } from "../../../application/repository";
 import { CourtModel } from '../../../application/models';
 
-export class CourtRepositoryPrisma implements CourtRepository {
+export class CourtRepositoryMongoose implements CourtRepository {
     async create(data: any): Promise<CourtModel> {
         return await CourtSchema.create(data);
     }

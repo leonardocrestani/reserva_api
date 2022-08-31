@@ -1,4 +1,4 @@
-import { CourtRepositoryMemory, PlaceRepositoryMemory } from '../../../infra/repository';
+import { CourtRepositoryMemory, PlaceRepositoryMemory, ScheduleRepositoryMemory } from '../../../infra/repository';
 import { CreateCourtService, CreatePlaceService, FindCourtService } from '../../../application/services';
 import { body } from '../../fixtures/placeRegister.json';
 
@@ -13,9 +13,10 @@ describe('Find court', () => {
     beforeEach(async () => {
         courtRepository = new CourtRepositoryMemory();
         placeRepository = new PlaceRepositoryMemory();
-        createCourt = new CreateCourtService(courtRepository, placeRepository);
-        createPlace = new CreatePlaceService(placeRepository);
-        getCourt = new FindCourtService(courtRepository, placeRepository);
+        const scheduleRepository = new ScheduleRepositoryMemory();
+        createCourt = new CreateCourtService(courtRepository, placeRepository, scheduleRepository);
+        createPlace = new CreatePlaceService(placeRepository, courtRepository, scheduleRepository);
+        getCourt = new FindCourtService(courtRepository);
     });
 
     test('Should find court', async () => {
@@ -25,7 +26,7 @@ describe('Find court', () => {
             court_name: "Quadra 3"
         };
         await createCourt.create(data);
-        const court = await getCourt.find('sports', 'Quadra 3');
+        const court = await getCourt.findById('sports');
         expect(court.place_name).toBe('sports');
         expect(court.court_name).toBe('Quadra 3');
     });
@@ -33,7 +34,7 @@ describe('Find court', () => {
     test('Should get error when try to find inexistent court', async () => {
         await createPlace.create(body);
         try {
-            await getCourt.find('sports', 'Quadra 3');
+            await getCourt.findById('sports');
         }
         catch (error) {
             expect(error.message).toBe('Quadra nao encontrada');

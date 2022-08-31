@@ -88,7 +88,6 @@ O swagger foi implementado no projeto assim sendo possível realizar requisiçõ
 
 ## Testes
 - Testes de integração foram implementados e podem ser rodados a partir do comando
-Rodar testes
 ```bash
 npm run test:integration
 ```

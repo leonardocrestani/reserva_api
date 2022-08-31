@@ -15,10 +15,10 @@ describe('Book place', () => {
         const scheduleRepository = new ScheduleRepositoryMemory();
         const courtRepository = new CourtRepositoryMemory();
         const userRepository = new UserRepositoryMemory();
-        createPlace = new CreatePlaceService(placeRepository);
-        createSchedule = new CreateScheduleService(scheduleRepository, placeRepository);
-        bookSchedule = new BookScheduleService(scheduleRepository, placeRepository, userRepository);
-        getSchedule = new FindScheduleService(scheduleRepository, courtRepository, placeRepository);
+        createPlace = new CreatePlaceService(placeRepository, courtRepository, scheduleRepository);
+        createSchedule = new CreateScheduleService(scheduleRepository, placeRepository, courtRepository);
+        bookSchedule = new BookScheduleService(scheduleRepository, userRepository);
+        getSchedule = new FindScheduleService(scheduleRepository);
         createUser = new CreateUserService(userRepository);
         await createPlace.create(body);
         let schedules: Array<any> = [];
@@ -47,8 +47,8 @@ describe('Book place', () => {
             responsible_person_email: "leonardo@test.com",
             is_rent: true
         }
-        await bookSchedule.update('sports', 'Quadra 2', 10, data);
-        const schedule = await getSchedule.find('sports', 'Quadra 2', 10);
+        await bookSchedule.update('sports', data);
+        const schedule = await getSchedule.findById('sports');
         expect(schedule.is_rent).toBeTruthy();
         expect(schedule.responsible_person_email).toBe('leonardo@test.com');
     });
@@ -66,7 +66,7 @@ describe('Book place', () => {
             is_rent: true
         }
         try {
-            await bookSchedule.update('place incorrect', 'Quadra 2', 10, data);
+            await bookSchedule.update('place incorrect', data);
         }
         catch (error) {
             expect(error.message).toBe('Local nao encontrado');
@@ -86,7 +86,7 @@ describe('Book place', () => {
             is_rent: true
         }
         try {
-            await bookSchedule.update('sports', 'Quadra 3', 10, data);
+            await bookSchedule.update('sports', data);
         }
         catch (error) {
             expect(error.message).toBe('Quadra nao encontrada');
@@ -106,7 +106,7 @@ describe('Book place', () => {
             is_rent: true
         }
         try {
-            await bookSchedule.update('sports', 'Quadra 2', 10, data);
+            await bookSchedule.update('sports', data);
         }
         catch (error) {
             expect(error.message).toBe('Usuario nao encontrado');
@@ -126,7 +126,7 @@ describe('Book place', () => {
             is_rent: true
         }
         try {
-            await bookSchedule.update('sports', 'Quadra 2', 15, data);
+            await bookSchedule.update('sports', data);
         }
         catch (error) {
             expect(error.message).toBe('Horario nao encontrado');

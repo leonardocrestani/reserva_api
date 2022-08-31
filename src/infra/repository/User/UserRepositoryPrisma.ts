@@ -2,7 +2,7 @@ import UserSchema from '../../database/models/User';
 import { UserRepository } from '../../../application/repository';
 import { UserModel } from '../../../application/models';
 
-export class UserRepositoryPrisma implements UserRepository {
+export class UserRepositoryMongoose implements UserRepository {
     async create(data: any): Promise<UserModel> {
         return await UserSchema.create(data);
     }

@@ -1,4 +1,4 @@
-import { PlaceRepositoryMemory } from '../../../infra/repository';
+import { CourtRepositoryMemory, PlaceRepositoryMemory, ScheduleRepositoryMemory } from '../../../infra/repository';
 import { CreatePlaceService } from '../../../application/services';
 import { body } from '../../fixtures/placeRegister.json';
 
@@ -8,7 +8,9 @@ describe('Register place', () => {
 
     beforeEach(async () => {
         const placeRepository = new PlaceRepositoryMemory();
-        createPlace = new CreatePlaceService(placeRepository);
+        const courtRepository = new CourtRepositoryMemory();
+        const scheduleRepository = new ScheduleRepositoryMemory();
+        createPlace = new CreatePlaceService(placeRepository, courtRepository, scheduleRepository);
     });
 
     test('Should register new place', async () => {
