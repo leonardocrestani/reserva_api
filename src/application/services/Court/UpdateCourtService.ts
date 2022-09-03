@@ -1,12 +1,14 @@
 import { UpdateCourt } from "../../../core/use-cases";
-import { CourtRepository, ScheduleRepository } from "../../repository";
+import { CourtRepository, PlaceRepository, ScheduleRepository } from "../../repository";
 import { Conflict, NotFound } from "../../errors";
 import { UpdateScheduleService } from "../Schedule/UpdateScheduleService";
 import { PlaceModel } from "../../models";
+import { FindPlaceService } from "../Place/FindPlaceService";
 
 export class UpdateCourtService implements UpdateCourt {
     constructor(
         private readonly courtRepository: CourtRepository,
+        private readonly placeRepository: PlaceRepository,
         private readonly scheduleRepository: ScheduleRepository
     ) { };
 
@@ -15,19 +17,26 @@ export class UpdateCourtService implements UpdateCourt {
         if(!court) {
             throw new NotFound("Quadra nao encontrada");
         }
-        if (court.court_name === data.court_name) {
-            throw new Conflict("Quadra ja existente");
-        }
+        const findPlaceService = new FindPlaceService(this.placeRepository);
+        const place = await findPlaceService.findById(court.place_id);
+        place.courts.map((court) => {
+            if(data.court_name === court.court_name) {
+                throw new Conflict("Quadra ja existente");
+            }
+        });
         const updatedCourt = await this.courtRepository.update(court.id, data);
-        const updateScheduleService = new UpdateScheduleService(this.scheduleRepository);
-        await updateScheduleService.updateCourtName(updatedCourt);
+        if(data.court_name) {
+            const updateScheduleService = new UpdateScheduleService(this.scheduleRepository);
+            await updateScheduleService.updatePlaceAndCourtName(updatedCourt);
+        }
     }
 
     async updatePlaceName(place: PlaceModel): Promise<void> {
-        const updateScheduleService = new UpdateScheduleService(this.scheduleRepository);
-        for (const court of place.courts) {
-            const courtUpdated = await this.courtRepository.updatePlaceName(court.id, place.name);
-            await updateScheduleService.updatePlaceName(courtUpdated);
-        }
+        await Promise.all(place.courts.map(async court => {
+            const courtId : string = court.toString();
+            const courtUpdated = await this.courtRepository.updatePlaceName(courtId, place.name);
+            const updateScheduleService = new UpdateScheduleService(this.scheduleRepository);
+            await updateScheduleService.updatePlaceAndCourtName(courtUpdated);
+        }));
     }
 }

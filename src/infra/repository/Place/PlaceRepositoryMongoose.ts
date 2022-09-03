@@ -17,9 +17,9 @@ export class PlaceRepositoryMongoose implements PlaceRepository {
 
     async findByName(name: string): Promise<PlaceModel> {
         return await PlaceSchema.findOne({ name }).populate({
-            path: "courts",
+            path: 'courts',
             populate: {
-               path: "schedules"
+                path: 'schedules'
             }
         });
     };
@@ -29,7 +29,7 @@ export class PlaceRepositoryMongoose implements PlaceRepository {
     }
 
     async update(name: string, data: any): Promise<PlaceModel> {
-        return await PlaceSchema.findOneAndUpdate({ name }, data);
+        return await PlaceSchema.findOneAndUpdate({ name }, data, {new: true});
     }
 
     async updateNumberOfCourts(name: string): Promise<PlaceModel> {

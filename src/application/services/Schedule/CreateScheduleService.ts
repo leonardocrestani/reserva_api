@@ -31,15 +31,15 @@ export class CreateScheduleService implements CreateSchedule {
                 data.court_id = court.id;
                 return court;
             }
-        })
+        });
         const schedules = await this.scheduleRepository.findAllByCourt(data.place_name, data.court_name);
         schedules.find((schedule) => {
             if (schedule.hour === data.hour) {
-                throw new Conflict('Horario ja cadastrado');
+                throw new Conflict("Horario ja cadastrado");
             }
         });
         const newSchedule: any = await this.scheduleRepository.create(data);
-        const updateCourtService = new UpdateCourtService(this.courtRepository, this.scheduleRepository);
+        const updateCourtService = new UpdateCourtService(this.courtRepository, this.placeRepository, this.scheduleRepository);
         court.schedules.push(newSchedule.id);
         await updateCourtService.update(court.id, {schedules: court.schedules});
         return newSchedule;

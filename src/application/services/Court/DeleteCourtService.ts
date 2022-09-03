@@ -29,8 +29,8 @@ export class DeleteCourtService implements DeleteCourt {
             }
         });
         const updatePlaceService = new UpdatePlaceService(this.placeRepository, this.courtRepository, this.scheduleRepository);
-        await updatePlaceService.update(place.name, {courts: place.courts});
         await this.courtRepository.delete(id);
+        await updatePlaceService.update(place.name, {courts: place.courts});
     }
 
 }

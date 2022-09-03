@@ -19,14 +19,14 @@ export class CourtRepositoryMongoose implements CourtRepository {
     }
 
     async updatePlaceName(id: string, place_name: string): Promise<CourtModel> {
-        return await CourtSchema.findOneAndUpdate({ id }, { place_name: place_name });
+        return await CourtSchema.findOneAndUpdate({ _id: id }, { place_name: place_name }, {new: true});
     }
 
     async update(id: string, data: any): Promise<CourtModel> {
-        return await CourtSchema.findOneAndUpdate({ id }, data);
+        return await CourtSchema.findOneAndUpdate({ _id: id }, data, {new: true});
     }
 
     async delete(id: string): Promise<void> {
-        await CourtSchema.findOneAndDelete({ id });
+        await CourtSchema.findOneAndDelete({ _id: id });
     }
 }

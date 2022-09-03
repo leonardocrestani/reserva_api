@@ -245,6 +245,58 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete user",
+        "description": "Delete user",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful delete"
+          },
+          "400": {
+            "description": "Bad Resquest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/user": {
@@ -338,58 +390,6 @@
           },
           "422": {
             "description": "Unprocessable entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Delete user",
-        "description": "Delete user",
-        "parameters": [
-          {
-            "name": "email",
-            "in": "path",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Successful delete"
-          },
-          "400": {
-            "description": "Bad Resquest",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
             "content": {
               "application/json": {
                 "schema": {
@@ -757,7 +757,75 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#components/schemas/Place"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "sports place"
+                  },
+                  "cnpj": {
+                    "type": "string",
+                    "example": "61.672.831/0001-02"
+                  },
+                  "address": {
+                    "type": "object",
+                    "properties": {
+                      "city_code": {
+                        "type": "number",
+                        "example": "03647-010"
+                      },
+                      "city_name": {
+                        "type": "string",
+                        "example": "Sao Paulo"
+                      },
+                      "state": {
+                        "type": "string",
+                        "example": "SP"
+                      },
+                      "street": {
+                        "type": "string",
+                        "example": "Rua Mapunaro"
+                      },
+                      "neighborhood": {
+                        "type": "string",
+                        "example": "Centro"
+                      }
+                    }
+                  },
+                  "contact": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "Leonardo"
+                      },
+                      "phone_number": {
+                        "type": "string",
+                        "example": "(11) 98768-6400"
+                      }
+                    }
+                  },
+                  "operation_time": {
+                    "type": "object",
+                    "properties": {
+                      "open_hour": {
+                        "type": "number",
+                        "example": 9
+                      },
+                      "close_hour": {
+                        "type": "number",
+                        "example": 21
+                      },
+                      "days_open": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": "Sun"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }

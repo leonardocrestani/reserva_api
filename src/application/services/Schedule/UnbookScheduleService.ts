@@ -18,16 +18,16 @@ export class UnbookScheduleService implements UnbookSchedule {
             throw new UnprocessableEntity('Formato de ID invalido');
         }
         const schedule = await this.scheduleRepository.findById(id);
-        const getUserService = new FindUserService(this.userRepository);
-        const user = await getUserService.findById(userId);
-        if(schedule.responsible_person_email !== user.email) {
-            throw new BadRequest("Usuario desmarcando horario incorreto");
-        }
         if (!schedule) {
             throw new NotFound("Horario nao encontrado");
         }
         if (schedule.is_rent === false) {
             throw new BadRequest("Nao e possivel desmarcar horario nao reservado");
+        }
+        const getUserService = new FindUserService(this.userRepository);
+        const user = await getUserService.findById(userId);
+        if(schedule.is_rent === true && schedule.responsible_person_email !== user.email) {
+            throw new BadRequest("Usuario desmarcando horario incorreto");
         }
         data.is_rent = false;
         data.responsible_person_id = null;

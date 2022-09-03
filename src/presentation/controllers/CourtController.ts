@@ -21,8 +21,9 @@ export class CourtController {
 
     static async update(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
         const courtRepository = new CourtRepositoryMongoose();
+        const placeRepository = new PlaceRepositoryMongoose();
         const scheduleRepository = new ScheduleRepositoryMongoose();
-        const updateCourtService = new UpdateCourtService(courtRepository, scheduleRepository);
+        const updateCourtService = new UpdateCourtService(courtRepository, placeRepository, scheduleRepository);
         await updateCourtService.update(params.id, body);
         return noContent();
     }

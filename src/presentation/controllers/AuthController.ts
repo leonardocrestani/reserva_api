@@ -1,4 +1,4 @@
-import { UserRepositoryMongoose } from '../../infra/repository/index';
+import { UserRepositoryMongoose } from '../../infra/repository';
 import { AuthenticateUserService } from '../../application/services/User/AuthenticateUserService';
 import { ok, HttpResponse } from '../contracts/HttpResponse';
 

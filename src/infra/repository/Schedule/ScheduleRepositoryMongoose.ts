@@ -1,4 +1,4 @@
-import ScheduleSchema from '../../database/models/Schedules';
+import ScheduleSchema from '../../database/models/Schedule';
 import { ScheduleRepository } from '../../../application/repository/ScheduleRepository';
 import { ScheduleModel } from '../../../application/models';
 
@@ -16,11 +16,11 @@ export class ScheduleRepositoryMongoose implements ScheduleRepository {
     }
 
     async updatePlaceName(id: string, place_name: string): Promise<ScheduleModel> {
-        return await ScheduleSchema.findOneAndUpdate({ id }, { place_name: place_name });
+        return await ScheduleSchema.findOneAndUpdate({ _id: id }, { place_name: place_name });
     }
 
     async updateCourtName(id: string, court_name: string): Promise<ScheduleModel> {
-        return await ScheduleSchema.findOneAndUpdate({ id }, { court_name });
+        return await ScheduleSchema.findOneAndUpdate({ _id: id }, { court_name });
     }
 
     async update(id: string, data: any): Promise<ScheduleModel> {
@@ -34,6 +34,6 @@ export class ScheduleRepositoryMongoose implements ScheduleRepository {
     }
 
     async delete(id: string): Promise<number> {
-        return await ScheduleSchema.findOneAndDelete({ id });
+        return await ScheduleSchema.findOneAndDelete({ _id: id });
     }
 }

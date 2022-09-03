@@ -23,15 +23,15 @@ export class CreatePlaceService implements CreatePlace {
            throw new Conflict("Local ja cadastrado");
         }
         if (!cpnjValidator(placeData.cnpj)) {
-            throw new UnprocessableEntity('CNPJ invalido');
+            throw new UnprocessableEntity("CNPJ invalido");
         }
         if (placeData.operation_time.open_hour < 0 || placeData.operation_time.close_hour > 23 || placeData.operation_time.open_hour >= placeData.operation_time.close_hour) {
             throw new BadRequest("Horario de funcionamento invalido");
         }
-        const validCep = await makeRequest('get', `https://cep.awesomeapi.com.br/json/${placeData.address.city_code}`);
-        if (validCep.status === 400) {
+        /*const validCep = await makeRequest('get', `https://viacep.com.br/ws/${placeData.address.city_code}/json/`);
+        if (validCep.hasOwnProperty('erro')) {
             throw new UnprocessableEntity("CEP invalido");
-        }
+        }*/
         placeData.number_of_courts = 0;
         if(courts.length > 0) {
             courts.map((court: any) => {

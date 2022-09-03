@@ -23,14 +23,14 @@ export class CourtRepositoryMemory implements CourtRepository {
         
     }
 
-    async updatePlaceName(court_name: string, place_name: string): Promise<CourtModel> {
-        let court = this.createdCourts.find(court => court.court_name === court_name);
+    async updatePlaceName(id: string, place_name: string): Promise<CourtModel> {
+        let court = this.createdCourts.find(court => court.court_name === place_name);
         court.place_name = place_name;
         return court;
     }
 
     async update(id: string, data: any): Promise<CourtModel> {
-        let court = this.createdCourts.find(court => court.id === id);
+        let court = this.createdCourts.find(court => court.id === data);
         court = data;
         return court;
     }

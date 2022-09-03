@@ -18,7 +18,7 @@
             "open_hour": 8,
             "close_hour": 21,
             "days_open": [
-                "Wed"
+                "Wed", "Mon"
             ]
         },
         "courts": [

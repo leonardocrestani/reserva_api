@@ -8,7 +8,7 @@ const ScheduleSchema = new mongoose.Schema<ScheduleModel> ({
     court_id: {type: Schema.Types.ObjectId, ref: 'Court'},
     hour: {type: Number, required: true},
     day : {type: String, required: true},
-    is_rent: {type: Boolean, required: false},
+    is_rent: {type: Boolean, default: false, required: false},
     responsible_person_email: {type: String, default: null, required: false},
     responsible_person_id: {type: Schema.Types.ObjectId, default: null, ref: 'User', required: false},
     responsible_person_full_name: {type: String, default: null, required: false}

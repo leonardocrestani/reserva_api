@@ -96,6 +96,6 @@
     "src/**/*"
   ],
   "exclude": [
-    "src/tests"
-  ],
+    "src/__tests__"
+  ]
 }
