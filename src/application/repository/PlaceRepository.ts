@@ -5,6 +5,8 @@ export interface PlaceRepository {
 
     findAll: (limit: number, offset: number) => Promise<PlaceModel[]>
 
+    findById: (id: string) => Promise<PlaceModel>;
+
     findByName: (name: string) => Promise<PlaceModel>;
 
     findByCnpj: (cnpj: string) => Promise<PlaceModel>;
@@ -13,5 +15,5 @@ export interface PlaceRepository {
 
     updateNumberOfCourts: (name: string) => Promise<PlaceModel>;
 
-    delete: (name: string) => Promise<void>
+    delete: (name: string) => Promise<number>
 }

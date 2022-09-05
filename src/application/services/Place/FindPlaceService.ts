@@ -1,6 +1,6 @@
 import { FindPlace } from "../../../core/use-cases";
 import { PlaceModel } from "../../models";
-import { NotFound } from "../../errors";
+import { BadRequest, NotFound } from "../../errors";
 import { PlaceRepository } from "../../repository";
 
 export class FindPlaceService implements FindPlace {
@@ -10,6 +10,14 @@ export class FindPlaceService implements FindPlace {
         const places = await this.placeRepository.findAll(limit, offset);
         return places
     }
+
+    async findById(id: string): Promise<PlaceModel> {
+        const place = await this.placeRepository.findById(id);
+        if (!place) {
+            throw new NotFound("Local nao encontrado");
+        }
+        return place;
+    };
 
     async findByName(name: string): Promise<PlaceModel> {
         const place = await this.placeRepository.findByName(name);

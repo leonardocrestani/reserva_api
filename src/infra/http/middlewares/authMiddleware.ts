@@ -6,7 +6,7 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { Unauhtorized } from '../../../application/errors/Unauthorized';
 
-export default (req: Request, res: Response, next: NextFunction) => {
+export default (req: any, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
         throw new Unauhtorized('No token provided');
@@ -16,6 +16,9 @@ export default (req: Request, res: Response, next: NextFunction) => {
         if (error) {
             throw new Unauhtorized('Invalid token');
         }
+        const decodedToken : any = jwt.verify(token, `${process.env.SECRET_KEY}`);
+        const userId = decodedToken.id;
+        req.query = {userId: userId};
         return next();
     });
 }

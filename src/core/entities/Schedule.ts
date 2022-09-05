@@ -7,9 +7,9 @@ export class Schedule {
         public day: string,
         public is_rent?: boolean,
         public responsible_person_email?: string | null,
-        public responsible_person_id?: string | null,
+        public responsible_person_id?: any,
         public responsible_person_full_name?: string | null,
-        public court_id?: string,
+        public court_id?: any,
         public id?: string
     ) { }
 

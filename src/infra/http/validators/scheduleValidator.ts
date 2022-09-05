@@ -12,16 +12,19 @@ const scheduleValidator = {
         })
     },
     QUERY: {
-        [Segments.QUERY]: Joi.object().keys({
-            place_name: Joi.string().trim().required(),
-            court_name: Joi.string().trim().required(),
-            hour: Joi.number().required()
+        [Segments.PARAMS]: Joi.object().keys({
+            id: Joi.string().trim().required()
         })
     },
-    UPDATE: {
+    BOOK: {
         [Segments.BODY]: customJoi.object().keys({
             responsible_person_email: Joi.string().trim().required()
         }),
+        [Segments.PARAMS]: Joi.object().keys({
+            id: Joi.string().trim().required()
+        })
+    },
+    UNBOOK: {
         [Segments.PARAMS]: Joi.object().keys({
             id: Joi.string().trim().required()
         })

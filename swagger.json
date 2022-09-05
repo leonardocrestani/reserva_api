@@ -1,0 +1,1761 @@
+﻿{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Reserva API",
+    "contact": {
+      "email": "leonardo.crestani@hotmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "GitHub API",
+    "url": "https://github.com/leonardocrestani/reserva_api"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api"
+    }
+  ],
+  "paths": {
+    "/auth": {
+      "post": {
+        "tags": [
+          "Authenticate"
+        ],
+        "summary": "Authenticate user",
+        "description": "Authenticate user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#components/schemas/Auth"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "string"
+                    },
+                    "access_token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{email}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user by email",
+        "description": "Get user by email",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string"
+                    },
+                    "first_name": {
+                      "type": "string"
+                    },
+                    "last_name": {
+                      "type": "string"
+                    },
+                    "cpf": {
+                      "type": "string"
+                    },
+                    "genre": {
+                      "type": "string"
+                    },
+                    "country": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "phone_number": {
+                      "type": "string"
+                    },
+                    "schedules": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation field",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuario nao encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update user",
+        "description": "Update user",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful update"
+          },
+          "400": {
+            "description": "Bad Resquest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete user",
+        "description": "Delete user",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful delete"
+          },
+          "400": {
+            "description": "Bad Resquest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create new user",
+        "description": "Create new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#components/schemas/User"
+              }
+            }
+          }
+        },
+        "security": [],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "first_name": {
+                          "type": "string"
+                        },
+                        "last_name": {
+                          "type": "string"
+                        },
+                        "cpf": {
+                          "type": "string"
+                        },
+                        "genre": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "phone_number": {
+                          "type": "string"
+                        },
+                        "schedules": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "_id": {
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "access_token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Resquest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/place": {
+      "get": {
+        "tags": [
+          "Place"
+        ],
+        "summary": "Get all places",
+        "description": "Get all places",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "number"
+            },
+            "required": true,
+            "description": "The ammount of returned places by page"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "number"
+            },
+            "required": true,
+            "description": "The ammout of skipped places in the return"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Resquest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Place"
+        ],
+        "summary": "Create new place",
+        "description": "Create new place",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#components/schemas/Place"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "cnpj": {
+                      "type": "string"
+                    },
+                    "number_of:courts": {
+                      "type": "number"
+                    },
+                    "address": {
+                      "type": "object",
+                      "properties": {
+                        "city_code": {
+                          "type": "number"
+                        },
+                        "city_name": {
+                          "type": "string"
+                        },
+                        "state": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "street": {
+                          "type": "string"
+                        },
+                        "neighborhood": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "contact": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "phone_number": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "operation_time": {
+                      "type": "object",
+                      "properties": {
+                        "open_hour": {
+                          "type": "number"
+                        },
+                        "close_hour": {
+                          "type": "number"
+                        },
+                        "days_open": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "courts": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "_id": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Resquest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/place/{name}": {
+      "get": {
+        "tags": [
+          "Place"
+        ],
+        "summary": "Get place by name",
+        "description": "Get place by name",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "cnpj": {
+                      "type": "string"
+                    },
+                    "number_of:courts": {
+                      "type": "number"
+                    },
+                    "address": {
+                      "type": "object",
+                      "properties": {
+                        "city_code": {
+                          "type": "number"
+                        },
+                        "city_name": {
+                          "type": "string"
+                        },
+                        "state": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "street": {
+                          "type": "string"
+                        },
+                        "neighborhood": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "contact": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "phone_number": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "operation_time": {
+                      "type": "object",
+                      "properties": {
+                        "open_hour": {
+                          "type": "number"
+                        },
+                        "close_hour": {
+                          "type": "number"
+                        },
+                        "days_open": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "courts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "_id": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Place"
+        ],
+        "summary": "Update place",
+        "description": "Update place",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "sports place"
+                  },
+                  "cnpj": {
+                    "type": "string",
+                    "example": "61.672.831/0001-02"
+                  },
+                  "address": {
+                    "type": "object",
+                    "properties": {
+                      "city_code": {
+                        "type": "number",
+                        "example": "03647-010"
+                      },
+                      "city_name": {
+                        "type": "string",
+                        "example": "Sao Paulo"
+                      },
+                      "state": {
+                        "type": "string",
+                        "example": "SP"
+                      },
+                      "street": {
+                        "type": "string",
+                        "example": "Rua Mapunaro"
+                      },
+                      "neighborhood": {
+                        "type": "string",
+                        "example": "Centro"
+                      }
+                    }
+                  },
+                  "contact": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "example": "Leonardo"
+                      },
+                      "phone_number": {
+                        "type": "string",
+                        "example": "(11) 98768-6400"
+                      }
+                    }
+                  },
+                  "operation_time": {
+                    "type": "object",
+                    "properties": {
+                      "open_hour": {
+                        "type": "number",
+                        "example": 9
+                      },
+                      "close_hour": {
+                        "type": "number",
+                        "example": 21
+                      },
+                      "days_open": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": "Sun"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful update"
+          },
+          "400": {
+            "description": "Bad Resquest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Place"
+        ],
+        "summary": "Delete place",
+        "description": "Delete place",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful delete"
+          },
+          "400": {
+            "description": "Bad Resquest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/court/{id}": {
+      "get": {
+        "tags": [
+          "Court"
+        ],
+        "summary": "Get court by id",
+        "description": "Get court by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string"
+                    },
+                    "place_name": {
+                      "type": "string"
+                    },
+                    "court_name": {
+                      "type": "number"
+                    },
+                    "schedules": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "place_id": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Court"
+        ],
+        "summary": "Update court",
+        "description": "Update court",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "court_name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful update"
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Court"
+        ],
+        "summary": "Delete court",
+        "description": "Delete court",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful delete"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/court": {
+      "post": {
+        "tags": [
+          "Court"
+        ],
+        "summary": "Get court by id",
+        "description": "Get court by id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#components/schemas/Court"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "place_name": {
+                      "type": "string"
+                    },
+                    "court_name": {
+                      "type": "string"
+                    },
+                    "schedules": {
+                      "type": "array",
+                      "example": []
+                    },
+                    "place_id": {
+                      "type": "string"
+                    },
+                    "_id": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule": {
+      "post": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Create new schedule",
+        "description": "Create new schedule",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#components/schemas/Schedule"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "place_name": {
+                      "type": "string"
+                    },
+                    "court_name": {
+                      "type": "string"
+                    },
+                    "hour": {
+                      "type": "number"
+                    },
+                    "day": {
+                      "type": "string"
+                    },
+                    "responsible_person_email": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "responsible_person_id": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "responsible_person_full_name": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "_id": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/{id}": {
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Get schedule by id",
+        "description": "Get schedule by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string"
+                    },
+                    "place_name": {
+                      "type": "string"
+                    },
+                    "court_name": {
+                      "type": "string"
+                    },
+                    "hour": {
+                      "type": "number"
+                    },
+                    "day": {
+                      "type": "string"
+                    },
+                    "responsible_person_email": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "responsible_person_id": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "responsible_person_full_name": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Delete schedule",
+        "description": "Delete schedule",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful delete"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/book/{id}": {
+      "put": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Book schedule",
+        "description": "Book schedule",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "responsible_person_email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful book"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/unbook/{id}": {
+      "put": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Unook schedule",
+        "description": "Unook schedule",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful unbook"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Auth": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "example": "Leonardo"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Da silva"
+          },
+          "cpf": {
+            "type": "string",
+            "example": "781.130.490-29"
+          },
+          "genre": {
+            "type": "string",
+            "example": "Male"
+          },
+          "country": {
+            "type": "string",
+            "example": "Brasil"
+          },
+          "email": {
+            "type": "string",
+            "example": "leonardo@teste.com.br"
+          },
+          "password": {
+            "type": "string",
+            "example": "123Ldf*%"
+          },
+          "phone_number": {
+            "type": "string",
+            "example": "(61) 99921-5681"
+          }
+        }
+      },
+      "Place": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "sports place"
+          },
+          "cnpj": {
+            "type": "string",
+            "example": "61.672.831/0001-02"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "city_code": {
+                "type": "number",
+                "example": "03647-010"
+              },
+              "city_name": {
+                "type": "string",
+                "example": "Sao Paulo"
+              },
+              "state": {
+                "type": "string",
+                "example": "SP"
+              },
+              "street": {
+                "type": "string",
+                "example": "Rua Mapunaro"
+              },
+              "neighborhood": {
+                "type": "string",
+                "example": "Centro"
+              }
+            }
+          },
+          "contact": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "Leonardo"
+              },
+              "phone_number": {
+                "type": "string",
+                "example": "(11) 98768-6400"
+              }
+            }
+          },
+          "operation_time": {
+            "type": "object",
+            "properties": {
+              "open_hour": {
+                "type": "number",
+                "example": 9
+              },
+              "close_hour": {
+                "type": "number",
+                "example": 21
+              },
+              "days_open": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Sun"
+                }
+              }
+            }
+          },
+          "courts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "place_name": {
+                  "type": "string",
+                  "example": "sports place"
+                },
+                "court_name": {
+                  "type": "string",
+                  "example": "Quadra 1 Areia"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Court": {
+        "type": "object",
+        "properties": {
+          "place_name": {
+            "type": "string",
+            "example": "Sports Place"
+          },
+          "court_name": {
+            "type": "string",
+            "example": "Quadra 1 Society"
+          }
+        }
+      },
+      "Schedule": {
+        "type": "object",
+        "properties": {
+          "place_name": {
+            "type": "string",
+            "example": "Sports Place"
+          },
+          "court_name": {
+            "type": "string",
+            "example": "Quadra 1 Areia"
+          },
+          "hour": {
+            "type": "number",
+            "example": "18"
+          },
+          "day": {
+            "type": "string",
+            "example": "Sun"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "auth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "auth": []
+    }
+  ]
+}

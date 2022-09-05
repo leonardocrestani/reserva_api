@@ -9,11 +9,11 @@ import errorMiddleware from '../middlewares/errorMiddleware';
 
 const router = Router();
 
-router.use(`'/api/auth'`, authRouter);
-router.use('/api/users', userRouter);
-router.use('/api/places', placeRouter);
-router.use('/api/courts', courtRouter);
-router.use('/api/schedules', scheduleRouter);
+router.use('/api/auth', authRouter);
+router.use('/api/user', userRouter);
+router.use('/api/place', placeRouter);
+router.use('/api/court', courtRouter);
+router.use('/api/schedule', scheduleRouter);
 router.use(errors());
 router.use(errorMiddleware);
 

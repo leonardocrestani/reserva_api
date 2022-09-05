@@ -2,34 +2,35 @@ import { CreateUserService } from '../../application/services';
 import { FindUserService } from '../../application/services';
 import { DeleteUserService } from '../../application/services/User/DeleteUserService';
 import { UpdateUserService } from '../../application/services/User/UpdateUserService';
-import { UserRepositoryPrisma } from '../../infra/repository';
+import { ScheduleRepositoryMongoose, UserRepositoryMongoose } from '../../infra/repository';
 import { ok, created, noContent, HttpResponse } from '../contracts/HttpResponse';
 
 export class UserController {
     static async register(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
-        const prismaRepository = new UserRepositoryPrisma();
-        const createUserService = new CreateUserService(prismaRepository);
+        const mongooseRepository = new UserRepositoryMongoose();
+        const createUserService = new CreateUserService(mongooseRepository);
         const newUser = await createUserService.create(body);
         return created(newUser);
     }
 
     static async findByEmail(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
-        const prismaRepository = new UserRepositoryPrisma();
-        const getUserService = new FindUserService(prismaRepository);
+        const mongooseRepository = new UserRepositoryMongoose();
+        const getUserService = new FindUserService(mongooseRepository);
         const user = await getUserService.findByEmail(params.email);
         return ok(user);
     }
 
     static async update(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
-        const prismaRepository = new UserRepositoryPrisma();
-        const updateUserService = new UpdateUserService(prismaRepository);
-        await updateUserService.update(params.id, body);
+        const mongooseRepository = new UserRepositoryMongoose();
+        const updateUserService = new UpdateUserService(mongooseRepository);
+        await updateUserService.update(params.email, body);
         return noContent();
     }
 
     static async delete(query: any, params: any, body: any, next: any): Promise<HttpResponse> {
-        const prismaRepository = new UserRepositoryPrisma();
-        const deleteUserService = new DeleteUserService(prismaRepository);
+        const userMongooseRepository = new UserRepositoryMongoose();
+        const scheduleRepository = new ScheduleRepositoryMongoose();
+        const deleteUserService = new DeleteUserService(userMongooseRepository, scheduleRepository);
         await deleteUserService.remove(params.email);
         return noContent();
     }

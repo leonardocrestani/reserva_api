@@ -14,4 +14,12 @@ export class FindUserService implements FindUser {
         return user;
     };
 
+    async findById(id: string): Promise<UserModel> {
+        const user = await this.userRepository.findById(id);
+        if (!user) {
+            throw new NotFound('Usuario nao encontrado');
+        }
+        return user;
+    };
+
 }
