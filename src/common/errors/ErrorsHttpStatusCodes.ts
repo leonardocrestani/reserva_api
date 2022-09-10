@@ -8,4 +8,4 @@ enum ErrorsHttpStatusCodes {
   INTERNAL_SERVER_ERROR = 500
 }
 
-export { ErrorsHttpStatusCodes };
+export { ErrorsHttpStatusCodes }

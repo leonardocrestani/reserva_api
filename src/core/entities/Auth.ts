@@ -1,6 +1,6 @@
 export class Auth {
-    constructor(
+  constructor (
         public user: string,
         public access_token: string
-    ) { }
+  ) { }
 }

@@ -1,4 +1,4 @@
-import { CourtModel } from "../models";
+import { CourtModel } from '../models'
 
 export interface CourtRepository {
     create: (court: CourtModel) => Promise<CourtModel>;

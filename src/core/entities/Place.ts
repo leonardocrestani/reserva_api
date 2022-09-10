@@ -1,4 +1,4 @@
-import { Court } from "./";
+import { Court } from './'
 
 export type Address = {
     city_code: number,
@@ -21,8 +21,7 @@ export type Operation_Time = {
 }
 
 export class Place {
-
-    constructor(
+  constructor (
         public name: string,
         public cnpj: string,
         public number_of_courts: number,
@@ -31,16 +30,15 @@ export class Place {
         public operation_time: Operation_Time,
         public courts: Array<Court>,
         public id?: string
-    ) { }
+  ) { }
 
-    static isOpen(day_schedule: string, hour: number, days_open: Array<string>, close_hour: number, open_hour: number) {
-        if (days_open.some(day => day === day_schedule)) {
-            if (hour < close_hour && hour > open_hour) {
-                return true;
-            }
-        }
-        else {
-            return false;
-        }
+  static isOpen (day_schedule: string, hour: number, days_open: Array<string>, close_hour: number, open_hour: number) {
+    if (days_open.some(day => day === day_schedule)) {
+      if (hour < close_hour && hour > open_hour) {
+        return true
+      }
+    } else {
+      return false
     }
+  }
 }

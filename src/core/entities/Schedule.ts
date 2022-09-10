@@ -1,6 +1,5 @@
 export class Schedule {
-
-    constructor(
+  constructor (
         public place_name: string,
         public court_name: string,
         public hour: number,
@@ -11,6 +10,5 @@ export class Schedule {
         public responsible_person_full_name?: string | null,
         public court_id?: any,
         public id?: string
-    ) { }
-
+  ) { }
 }

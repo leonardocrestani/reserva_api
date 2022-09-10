@@ -1,8 +1,7 @@
 import { Schedule } from './'
 
 export class User {
-
-    constructor(
+  constructor (
         public first_name: string,
         public last_name: string,
         public cpf: string,
@@ -13,6 +12,5 @@ export class User {
         public phone_number: string,
         public schedules: Array<Schedule> = [],
         public id?: string
-    ) { }
-
+  ) { }
 }

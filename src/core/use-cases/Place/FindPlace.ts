@@ -1,4 +1,4 @@
-import { Place } from '../../entities';
+import { Place } from '../../entities'
 
 export interface FindPlace {
     findAll: (limit: number, offset: number) => Promise<Place[]>;

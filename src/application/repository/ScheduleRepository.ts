@@ -1,4 +1,4 @@
-import { ScheduleModel } from '../models/ScheduleModel';
+import { ScheduleModel } from '../models/ScheduleModel'
 
 export interface ScheduleRepository {
     create: (schedule: ScheduleModel) => Promise<ScheduleModel>;
