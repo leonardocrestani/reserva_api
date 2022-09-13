@@ -8,7 +8,7 @@
     "build": "tsc --build",
     "start": "export NODE_ENV=local&& node ./dist/src/infra/http/server.js",
     "dev": "tsnd --respawn ./src/infra/http/server.ts",
-    "test:integration": "export NODE_ENV=test&& jest --silent=true",
+    "test:integration:local": "export NODE_ENV=test&& jest --silent=true",
     "lint": "eslint --ext js,ts,tsx ./src"
   },
   "author": "Leonardo Crestani",

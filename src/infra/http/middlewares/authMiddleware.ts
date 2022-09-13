@@ -3,9 +3,8 @@ import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 import { Unauhtorized } from '../../../application/errors/Unauthorized'
 dotenv.config({
-  path: process.env.NODE_ENV === 'test' ? '.env.test' : process.env.NODE_ENV === 'local' ? '.env.local' : '.env'
+  path: process.env.NODE_ENV === 'test' ? '.env.local' : '.env'
 })
-
 export default (req: any, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization
   if (!authHeader) {
