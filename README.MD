@@ -88,10 +88,11 @@ O swagger foi implementado no projeto assim sendo possível realizar requisiçõ
 
 ## Testes
 - Testes de integração foram implementados utilizando o Jest testando todos os endpoints e serviços da aplicação integrados<br>
-- É necessário estar com os containers da aplicação ativos para a execução dos testes no banco de testes do container mongoDB
+- É necessário estar com o container de banco de dados da aplicação ativo para a execução dos testes dentro do container mongoDB, para isso utilizar o comando
 ```bash
-docker compose up --build
+docker compose up db --build
 ```
+Também é possivel trocar a URL do banco de dados no ".env.test" para um banco de dados mongoDB local na máquina, para isso é necessário ter o mongoDB instalado localmente, ativo e utilizar o host da URL como "127.0.0.1"
 ```bash
 npm run test:integration
 ```

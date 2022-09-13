@@ -57,7 +57,7 @@ describe('Register place', () => {
     expect(response.body.message).toBe('CNPJ invalido')
   })
 
-  test.skip('Should get error when trying to register a place with unexistent CEP', async () => {
+  test('Should get error when trying to register a place with unexistent CEP', async () => {
     // teste skipped para nao fazer requisicoes a API externa sem necessidade
     const data = {
       ...body,

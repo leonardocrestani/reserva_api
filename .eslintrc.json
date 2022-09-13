@@ -19,6 +19,7 @@
         "indent": ["error", 2],
         "no-unused-vars": "off",
         "camelcase": "off",
-        "array-callback-return": "off"
+        "array-callback-return": "off",
+        "no-prototype-builtins": "off"
     }
 }

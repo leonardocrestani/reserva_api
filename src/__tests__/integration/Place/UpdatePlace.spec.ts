@@ -89,10 +89,11 @@ describe('Update place', () => {
     expect(response.body.message).toBe('Horario de funcionamento invalido')
   })
 
-  test.skip('Should get error when trying to update place with invalid CEP', async () => {
+  test('Should get error when trying to update place with invalid CEP', async () => {
     const data = body
     await request(app).post('/api/place').set('Authorization', `Bearer ${token}`).send(data)
-    const response : any = await request(app).put('/api/place/inexistent place').set('Authorization', `Bearer ${token}`).send({ city_code: 95320010 })
+    const response : any = await request(app).put(`/api/place/${data.name}`).set('Authorization', `Bearer ${token}`).send({ address: { city_code: 95320010 } })
+    console.log(response)
     expect(response.status).toBe(422)
     expect(response.body.message).toBe('CEP invalido')
   })

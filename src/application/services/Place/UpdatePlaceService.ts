@@ -27,12 +27,12 @@ export class UpdatePlaceService implements UpdatePlace {
         throw new BadRequest('Horario de funcionamento invalido')
       }
     }
-    /* if (data.address) {
-            const validCep = await makeRequest('get', `https://cep.awesomeapi.com.br/json/${data.address.city_code}`);
-            if (validCep.status === 400) {
-                throw new UnprocessableEntity("CEP invalido");
-            }
-        } */
+    if (data.address) {
+      const validCep = await makeRequest('get', `https://viacep.com.br/ws/${data.address.city_code}/json/`)
+      if (validCep.hasOwnProperty('erro')) {
+        throw new UnprocessableEntity('CEP invalido')
+      }
+    }
     const placeUpdated = await this.placeRepository.update(name, data)
     if (data.name) {
       const updateCourtService = new UpdateCourtService(this.courtRepository, this.placeRepository, this.scheduleRepository)

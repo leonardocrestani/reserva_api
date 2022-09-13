@@ -4,11 +4,13 @@ import { userRouter } from './userRoute'
 import { placeRouter } from './placeRoute'
 import { courtRouter } from './courtRoute'
 import { scheduleRouter } from './scheduleRoute'
+import { healthCheckRoute } from './healthCheckRoute'
 import { errors } from 'celebrate'
 import errorMiddleware from '../middlewares/errorMiddleware'
 
 const router = Router()
 
+router.use('/api/health', healthCheckRoute)
 router.use('/api/auth', authRouter)
 router.use('/api/user', userRouter)
 router.use('/api/place', placeRouter)
