@@ -1,3 +1,3 @@
-import { Schedule } from '../../core/entities';
+import { Schedule } from '../../core/entities'
 
 export class ScheduleModel extends Schedule { };

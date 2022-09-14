@@ -1,4 +1,4 @@
-import { Court } from "../../entities";
+import { Court } from '../../entities'
 
 export interface CreateCourt {
     create: (court: Court) => Promise<Court>

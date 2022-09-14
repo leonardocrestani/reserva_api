@@ -87,12 +87,9 @@ O swagger foi implementado no projeto assim sendo possível realizar requisiçõ
 <div align="center"><img src="./assets/swagger.png" width="600px" /></div>
 
 ## Testes
-- Testes de integração foram implementados utilizando o Jest testando todos os endpoints e serviços da aplicação integrados<br>
-- É necessário estar com os containers da aplicação ativos para a execução dos testes no banco de testes do container mongoDB
-```bash
-docker compose up --build
-```
+- Os testes de integração foram implementados utilizando o framework Jest, testando todos os endpoints e serviços da aplicação integrados<br>
+- É necessário ter o mongoDB instalado localmente, ativo e utilizar o host local na URL "127.0.0.1" no ".env.local"
 ```bash
 npm run test:integration
 ```
-> Os testes serão rodados localmente e os resultados mostrados, os testes de integração chamam os endpoints assim testando o fluxo completo de cada um deles
+> Os testes serão rodados localmente e os resultados mostrados, os testes de integração chamam os endpoints assim testando o fluxo e funcionamento completo de cada um deles

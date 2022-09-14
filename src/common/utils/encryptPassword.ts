@@ -1,6 +1,6 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt'
 
-export default async function encryptPassword(password: string) {
-    const saltRounds = 10
-    return await bcrypt.hash(password, saltRounds);
+export default async function encryptPassword (password: string) {
+  const saltRounds = 10
+  return await bcrypt.hash(password, saltRounds)
 }

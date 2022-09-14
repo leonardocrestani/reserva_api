@@ -1,5 +1,5 @@
-import { cpf } from 'cpf-cnpj-validator';
+import { cpf } from 'cpf-cnpj-validator'
 
 export default (userCpf: string) => {
-    return cpf.isValid(userCpf);
+  return cpf.isValid(userCpf)
 }
