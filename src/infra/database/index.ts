@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 dotenv.config({
-  path: process.env.NODE_ENV === 'test' ? '.env.local' : '.env'
+  path: process.env.NODE_ENV === 'local' ? '.env.local' : '.env'
 })
 
 const databaseConfig = {

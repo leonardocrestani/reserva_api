@@ -2,3 +2,4 @@ node_modules
 jest.config.ts
 pacakge.json
 pacakge-lock.json
+dist

@@ -12,7 +12,7 @@ export class UnbookScheduleService implements UnbookSchedule {
         private readonly userRepository: UserRepository
   ) { }
 
-  async update (id: string, userId?: string): Promise<void> {
+  async update (id: string, userEmail?: string): Promise<void> {
     const data: any = {}
     if (!mongoose.Types.ObjectId.isValid(id)) {
       throw new UnprocessableEntity('Formato de ID invalido')
@@ -25,7 +25,7 @@ export class UnbookScheduleService implements UnbookSchedule {
       throw new BadRequest('Nao e possivel desmarcar horario nao reservado')
     }
     const getUserService = new FindUserService(this.userRepository)
-    const user = await getUserService.findById(userId)
+    const user = await getUserService.findByEmail(userEmail)
     if (schedule.is_rent === true && schedule.responsible_person_email !== user.email) {
       throw new BadRequest('Usuario desmarcando horario incorreto')
     }

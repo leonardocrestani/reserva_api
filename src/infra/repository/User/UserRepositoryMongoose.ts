@@ -3,7 +3,7 @@ import { UserRepository } from '../../../application/repository'
 import { UserModel } from '../../../application/models'
 
 export class UserRepositoryMongoose implements UserRepository {
-  async create (data: any): Promise<UserModel> {
+  async create (data: UserModel): Promise<UserModel> {
     return await UserSchema.create(data)
   }
 

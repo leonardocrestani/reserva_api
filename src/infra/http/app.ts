@@ -14,7 +14,7 @@ mongoose.connection.once('open', () => { console.log('Connected DB') }).on('erro
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV === 'test' }))
+app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV === '' }))
 app.use(corsMiddleware)
 app.use(router)
 
