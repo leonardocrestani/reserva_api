@@ -18,6 +18,7 @@ export class CreateUserService implements CreateUser {
     }
     const encryptedPassword = await encryptPassword(data.password)
     data.password = encryptedPassword
+    data = new UserModel(data.first_name, data.last_name, data.cpf, data.genre, data.country, data.email, data.password, data.phone_number, [])
     const user = await this.userRepository.create(data)
     if (!user) {
       throw new BadRequest('Nao foi possivel cadastrar novo usuario')

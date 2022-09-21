@@ -3,7 +3,7 @@
         "name": "sports",
         "cnpj": "77.285.431/0001-76",
         "address": {
-            "city_code": 95320000,
+            "city_code": "95320000",
             "city_name": "Nova Prata",
             "state": "RS",
             "country": "Brasil",

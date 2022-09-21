@@ -22,7 +22,8 @@ export class CreateCourtService implements CreateCourt {
       })
     };
     data.place_id = place.id
-    const court: any = await this.courtRepository.create(data)
+    const courtData = new CourtModel(data.place_name, data.court_name, [], data.place_id)
+    const court: any = await this.courtRepository.create(courtData)
     await this.placeRepository.updateNumberOfCourts(data.place_name)
     const updatePlaceService = new UpdatePlaceService(this.placeRepository, this.courtRepository, this.scheduleRepository)
     place.courts.push(court.id)

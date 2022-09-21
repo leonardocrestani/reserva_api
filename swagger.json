@@ -533,7 +533,7 @@
                       "type": "object",
                       "properties": {
                         "city_code": {
-                          "type": "number"
+                          "type": "string"
                         },
                         "city_name": {
                           "type": "string"
@@ -1672,7 +1672,7 @@
             "type": "object",
             "properties": {
               "city_code": {
-                "type": "number",
+                "type": "string",
                 "example": "03647-010"
               },
               "city_name": {
@@ -1682,6 +1682,10 @@
               "state": {
                 "type": "string",
                 "example": "SP"
+              },
+              "country": {
+                "type": "string",
+                "example": "Brasil"
               },
               "street": {
                 "type": "string",

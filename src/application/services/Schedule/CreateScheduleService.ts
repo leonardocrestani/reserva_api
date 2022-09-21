@@ -38,7 +38,8 @@ export class CreateScheduleService implements CreateSchedule {
         throw new Conflict('Horario ja cadastrado')
       }
     })
-    const newSchedule: any = await this.scheduleRepository.create(data)
+    const scheduleData = new ScheduleModel(data.place_name, data.court_name, data.hour, data.day, data.court_id)
+    const newSchedule: any = await this.scheduleRepository.create(scheduleData)
     const updateCourtService = new UpdateCourtService(this.courtRepository, this.placeRepository, this.scheduleRepository)
     court.schedules.push(newSchedule.id)
     await updateCourtService.update(court.id, { schedules: court.schedules })

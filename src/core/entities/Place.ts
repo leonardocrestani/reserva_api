@@ -1,7 +1,7 @@
 import { Court } from './'
 
 export type Address = {
-    city_code: number,
+    city_code: string,
     city_name: string,
     state: string,
     country: string,

@@ -34,7 +34,7 @@ describe('Register place', () => {
     const response : any = await request(app).post('/api/place').set('Authorization', `Bearer ${token}`).send(data)
     expect(response.status).toBe(201)
     expect(response.body.name).toBe('sports')
-    expect(typeof (response.body.address.city_code)).toBe('number')
+    expect(typeof (response.body.address.city_code)).toBe('string')
     expect(response.body.operation_time.days_open.length).toBeGreaterThan(1)
     expect(response.body.courts.length).toBeGreaterThan(1)
   })
@@ -58,12 +58,11 @@ describe('Register place', () => {
   })
 
   test('Should get error when trying to register a place with unexistent CEP', async () => {
-    // teste skipped para nao fazer requisicoes a API externa sem necessidade
     const data = {
       ...body,
       address: {
         ...body.address,
-        city_code: 95320010
+        city_code: '95320010'
       }
     }
     const response : any = await request(app).post('/api/place').set('Authorization', `Bearer ${token}`).send(data)

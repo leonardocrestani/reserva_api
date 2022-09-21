@@ -54,7 +54,7 @@ describe('Find place', () => {
     await request(app).post('/api/place').set('Authorization', `Bearer ${token}`).send(data)
     const response : any = await request(app).get(`/api/place/${data.name}`).set('Authorization', `Bearer ${token}`)
     expect(response.body.name).toBe('sports')
-    expect(typeof (response.body.address.city_code)).toBe('number')
+    expect(typeof (response.body.address.city_code)).toBe('string')
     expect(response.body.operation_time.days_open.length).toBeGreaterThan(1)
     expect(response.body.courts.length).toBeGreaterThan(1)
   })
