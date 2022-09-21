@@ -1,4 +1,4 @@
-import { CreatePlaceService, UpdatePlaceService, FindPlaceService, DeletePlaceService } from '../../application/services'
+import { CreatePlaceService, UpdatePlaceService, FindPlaceService, DeletePlaceService, FindAllPlacesService } from '../../application/services'
 import { CourtRepositoryMongoose, PlaceRepositoryMongoose, ScheduleRepositoryMongoose } from '../../infra/repository'
 import { ok, created, HttpResponse, noContent } from '../contracts/HttpResponse'
 
@@ -14,7 +14,7 @@ export class PlaceController {
 
   static async findAll (query: any, params: any, body: any, next: any): Promise<HttpResponse> {
     const placeRepository = new PlaceRepositoryMongoose()
-    const getPlaceService = new FindPlaceService(placeRepository)
+    const getPlaceService = new FindAllPlacesService(placeRepository)
     const limit = parseInt(query.limit, 10)
     const offset = parseInt(query.offset, 10)
     const places = await getPlaceService.findAll(limit, offset)

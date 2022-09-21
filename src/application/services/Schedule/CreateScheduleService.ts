@@ -4,7 +4,6 @@ import { ScheduleRepository } from '../../repository/ScheduleRepository'
 import { FindPlaceService } from '../Place/FindPlaceService'
 import { BadRequest, Conflict, NotFound } from '../../errors'
 import { CourtRepository, PlaceRepository } from '../../repository'
-import { FindCourtService } from '../Court/FindCourtService'
 import { UpdateCourtService } from '../Court/UpdateCourtService'
 
 export class CreateScheduleService implements CreateSchedule {

@@ -6,11 +6,6 @@ import { PlaceRepository } from '../../repository'
 export class FindPlaceService implements FindPlace {
   constructor (private readonly placeRepository: PlaceRepository) { }
 
-  async findAll (limit: number, offset: number): Promise<PlaceModel[]> {
-    const places = await this.placeRepository.findAll(limit, offset)
-    return places
-  }
-
   async findById (id: string): Promise<PlaceModel> {
     const place = await this.placeRepository.findById(id)
     if (!place) {
