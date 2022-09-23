@@ -10,7 +10,7 @@ export class FindAllPlacesService implements FindAllPlaces {
     const places = await this.placeRepository.findAll(limit, offset)
     const totalRecords = await this.placeRepository.countPlaces()
     const currentPage = (offset === 0) ? 1 : offset + 1
-    const infos = { limit, currentPage, pages: calculatePages(limit, offset, totalRecords), totalRecords }
+    const infos = { limit, currentPage, pages: calculatePages(limit, currentPage, totalRecords), totalRecords }
     const object = Object.assign({ places }, infos)
     return object
   }

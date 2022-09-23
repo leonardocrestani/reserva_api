@@ -29,7 +29,7 @@ describe('Find all places', () => {
     mongoose.connection.close()
   })
 
-  test('Should get all places', async () => {
+  test.only('Should get all places', async () => {
     const data = body
     await request(app).post('/api/place').set('Authorization', `Bearer ${token}`).send(data)
     await request(app).post('/api/place').set('Authorization', `Bearer ${token}`).send({
@@ -45,7 +45,7 @@ describe('Find all places', () => {
         place_name: 'sports np'
       }]
     })
-    const response : any = await request(app).get('/api/place').set('Authorization', `Bearer ${token}`)
-    expect(response.body.length).toBeGreaterThan(1)
+    const response : any = await request(app).get('/api/place?limit=0&offset=0').set('Authorization', `Bearer ${token}`)
+    expect(response.body.places.length).toBeGreaterThan(1)
   })
 })
