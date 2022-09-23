@@ -5,7 +5,6 @@ export class Court {
         public place_name: string,
         public court_name: string,
         public schedules: Array<Schedule>,
-        public place_id: any,
-        public id?: string
+        public place_id: any
   ) { }
 }

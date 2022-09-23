@@ -7,6 +7,7 @@ import cpnjValidator from '../../../common/utils/cnpjValidator'
 import cnpjFormatter from '../../../common/utils/cnpjFormatter'
 import { CourtRepository, ScheduleRepository } from '../../repository'
 import { CreateCourtService } from '../Court/CreateCourtService'
+import { InputCreatePlaceDTO, OutputCreatePlaceDTO } from '../../dtos/Place/CreatePlaceDTO'
 
 export class CreatePlaceService implements CreatePlace {
   constructor (
@@ -15,7 +16,7 @@ export class CreatePlaceService implements CreatePlace {
         private readonly scheduleRepository: ScheduleRepository
   ) { }
 
-  async create (data: any): Promise<PlaceModel> {
+  async create (data: InputCreatePlaceDTO): Promise<OutputCreatePlaceDTO> {
     const { courts, ...placeFields } = data
     placeFields.cnpj = cnpjFormatter(placeFields.cnpj)
     const place = !!(await this.placeRepository.findByCnpj(placeFields.cnpj) || await this.placeRepository.findByName(placeFields.name))
@@ -40,15 +41,14 @@ export class CreatePlaceService implements CreatePlace {
         }
       })
     }
-    console.log(placeFields)
     const placeData = new PlaceModel(placeFields.name, placeFields.cnpj, 0, placeFields.address, placeFields.contact, placeFields.operation_time, [])
-    const newPlace: any = await this.placeRepository.create(placeData)
+    const newPlace = await this.placeRepository.create(placeData)
     newPlace.number_of_courts = courts.length
     const createCourtService = new CreateCourtService(this.courtRepository, this.placeRepository, this.scheduleRepository)
     if (courts.length > 0) {
       for (const court of courts) {
         const newCourt = await createCourtService.create(court)
-        newPlace.courts.push(newCourt.id)
+        newPlace.courts.push(newCourt)
       }
     }
     return newPlace

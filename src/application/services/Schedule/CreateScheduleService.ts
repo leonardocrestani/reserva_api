@@ -5,6 +5,7 @@ import { FindPlaceService } from '../Place/FindPlaceService'
 import { BadRequest, Conflict, NotFound } from '../../errors'
 import { CourtRepository, PlaceRepository } from '../../repository'
 import { UpdateCourtService } from '../Court/UpdateCourtService'
+import { InputCreateScheduleDTO, OutputCreateScheduleDTO, OutputFindCourtDTO } from '../../dtos'
 
 export class CreateScheduleService implements CreateSchedule {
   constructor (
@@ -13,7 +14,7 @@ export class CreateScheduleService implements CreateSchedule {
         private readonly courtRepository: CourtRepository
   ) { }
 
-  async create (data: ScheduleModel): Promise<ScheduleModel> {
+  async create (data: InputCreateScheduleDTO): Promise<OutputCreateScheduleDTO> {
     const getPlaceService = new FindPlaceService(this.placeRepository)
     const place = await getPlaceService.findByName(data.place_name)
     if (!PlaceModel.isOpen(data.day, data.hour, place.operation_time.days_open, place.operation_time.close_hour, place.operation_time.open_hour)) {
@@ -25,7 +26,7 @@ export class CreateScheduleService implements CreateSchedule {
     if (!exist) {
       throw new NotFound('Quadra nao encontrada')
     }
-    const court = place.courts.find((court) => {
+    const court: OutputFindCourtDTO = place.courts.find((court: OutputFindCourtDTO) => {
       if (court.court_name === data.court_name) {
         data.court_id = court.id
         return court
@@ -38,9 +39,9 @@ export class CreateScheduleService implements CreateSchedule {
       }
     })
     const scheduleData = new ScheduleModel(data.place_name, data.court_name, data.hour, data.day, data.court_id)
-    const newSchedule: any = await this.scheduleRepository.create(scheduleData)
+    const newSchedule = await this.scheduleRepository.create(scheduleData)
     const updateCourtService = new UpdateCourtService(this.courtRepository, this.placeRepository, this.scheduleRepository)
-    court.schedules.push(newSchedule.id)
+    court.schedules.push(newSchedule)
     await updateCourtService.update(court.id, { schedules: court.schedules })
     return newSchedule
   }

@@ -5,6 +5,7 @@ import { BadRequest, NotFound, UnprocessableEntity } from '../../errors'
 import { UpdateUserService } from '../User/UpdateUserService'
 import mongoose from 'mongoose'
 import { UnbookSchedule } from '../../../core/use-cases'
+import { OutputFindScheduleDTO, OutputFindUserDTO } from '../../dtos'
 
 export class UnbookScheduleService implements UnbookSchedule {
   constructor (
@@ -17,7 +18,7 @@ export class UnbookScheduleService implements UnbookSchedule {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       throw new UnprocessableEntity('Formato de ID invalido')
     }
-    const schedule = await this.scheduleRepository.findById(id)
+    const schedule : OutputFindScheduleDTO = await this.scheduleRepository.findById(id)
     if (!schedule) {
       throw new NotFound('Horario nao encontrado')
     }
@@ -25,7 +26,7 @@ export class UnbookScheduleService implements UnbookSchedule {
       throw new BadRequest('Nao e possivel desmarcar horario nao reservado')
     }
     const getUserService = new FindUserService(this.userRepository)
-    const user = await getUserService.findByEmail(userEmail)
+    const user : OutputFindUserDTO = await getUserService.findByEmail(userEmail)
     if (schedule.is_rent === true && schedule.responsible_person_email !== user.email) {
       throw new BadRequest('Usuario desmarcando horario incorreto')
     }
@@ -33,7 +34,7 @@ export class UnbookScheduleService implements UnbookSchedule {
     data.responsible_person_id = null
     data.responsible_person_full_name = null
     data.responsible_person_email = null
-    const operation: any = await this.scheduleRepository.update(id, data)
+    const operation = await this.scheduleRepository.update(id, data)
     if (!operation) {
       throw new UnprocessableEntity('Nao foi possivel desmarcar horario')
     }

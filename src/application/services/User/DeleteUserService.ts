@@ -1,4 +1,5 @@
 import { DeleteUser } from '../../../core/use-cases'
+import { OutputFindUserDTO } from '../../dtos'
 import { NotFound } from '../../errors'
 import { ScheduleRepository, UserRepository } from '../../repository'
 import { UnbookScheduleService } from '../Schedule/UnbookScheduleService'
@@ -10,7 +11,7 @@ export class DeleteUserService implements DeleteUser {
   ) { }
 
   async remove (email: string): Promise<void> {
-    const user = await this.userRepository.findByEmail(email)
+    const user : OutputFindUserDTO = await this.userRepository.findByEmail(email)
     if (!user) {
       throw new NotFound('Nao foi possivel encontrar usuario')
     }
