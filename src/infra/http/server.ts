@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import { app } from './app'
 dotenv.config({
-  path: process.env.NODE_ENV === 'test' ? '.env.local' : '.env'
+  path: process.env.NODE_ENV === 'local' ? '.env.local' : '.env'
 })
 
 app.listen(process.env.API_PORT, () => {

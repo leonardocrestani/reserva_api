@@ -1,4 +1,5 @@
 import { DeleteCourt } from '../../../core/use-cases'
+import { OutputFindCourtDTO, OutputFindPlaceDTO } from '../../dtos'
 import { NotFound } from '../../errors'
 import { CourtRepository, PlaceRepository, ScheduleRepository } from '../../repository'
 import { FindPlaceService } from '../Place/FindPlaceService'
@@ -13,7 +14,7 @@ export class DeleteCourtService implements DeleteCourt {
   ) { };
 
   async delete (id: string): Promise<void> {
-    const court = await this.courtRepository.findById(id)
+    const court : OutputFindCourtDTO = await this.courtRepository.findById(id)
     if (!court) {
       throw new NotFound('Quadra nao encontrada')
     }
@@ -22,7 +23,7 @@ export class DeleteCourtService implements DeleteCourt {
       await deleteScheduleService.delete(schedule.id)
     }
     const findPlaceService = new FindPlaceService(this.placeRepository)
-    const place = await findPlaceService.findById(court.place_id)
+    const place : OutputFindPlaceDTO = await findPlaceService.findById(court.place_id)
     place.courts.map((deletedCourt, index) => {
       if (deletedCourt.id === court.id) {
         place.courts.splice(index, 1)

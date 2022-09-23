@@ -10,7 +10,6 @@ export class User {
         public email: string,
         public password: string,
         public phone_number: string,
-        public schedules: Array<Schedule> = [],
-        public id?: string
+        public schedules: Array<Schedule> = []
   ) { }
 }

@@ -39,7 +39,7 @@ describe('Update place', () => {
     expect(response.status).toBe(204)
     const responseFind : any = await request(app).get('/api/place/sports').set('Authorization', `Bearer ${token}`)
     expect(responseFind.body.cnpj).toBe('75.781.760/0001-82')
-    expect(typeof (responseFind.body.address.city_code)).toBe('number')
+    expect(typeof (responseFind.body.address.city_code)).toBe('string')
     expect(responseFind.body.operation_time.days_open.length).toBeGreaterThan(1)
   })
 
@@ -51,7 +51,7 @@ describe('Update place', () => {
     expect(response.status).toBe(204)
     const responseFind : any = await request(app).get('/api/place/sports np').set('Authorization', `Bearer ${token}`)
     expect(responseFind.body.name).toBe('sports np')
-    expect(typeof (responseFind.body.address.city_code)).toBe('number')
+    expect(typeof (responseFind.body.address.city_code)).toBe('string')
     expect(responseFind.body.operation_time.days_open.length).toBeGreaterThan(1)
     expect(responseFind.body.courts[0].place_name).toBe('sports np')
     expect(responseFind.body.courts[1].place_name).toBe('sports np')
@@ -92,8 +92,7 @@ describe('Update place', () => {
   test('Should get error when trying to update place with invalid CEP', async () => {
     const data = body
     await request(app).post('/api/place').set('Authorization', `Bearer ${token}`).send(data)
-    const response : any = await request(app).put(`/api/place/${data.name}`).set('Authorization', `Bearer ${token}`).send({ address: { city_code: 95320010 } })
-    console.log(response)
+    const response : any = await request(app).put(`/api/place/${data.name}`).set('Authorization', `Bearer ${token}`).send({ address: { city_code: '95320010' } })
     expect(response.status).toBe(422)
     expect(response.body.message).toBe('CEP invalido')
   })

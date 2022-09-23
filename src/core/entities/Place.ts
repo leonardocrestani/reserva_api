@@ -1,7 +1,7 @@
 import { Court } from './'
 
 export type Address = {
-    city_code: number,
+    city_code: string,
     city_name: string,
     state: string,
     country: string,
@@ -28,8 +28,7 @@ export class Place {
         public address: Address,
         public contact: Contact,
         public operation_time: Operation_Time,
-        public courts: Array<Court>,
-        public id?: string
+        public courts: Array<Court>
   ) { }
 
   static isOpen (day_schedule: string, hour: number, days_open: Array<string>, close_hour: number, open_hour: number) {

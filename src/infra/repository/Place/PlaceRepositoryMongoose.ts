@@ -8,7 +8,11 @@ export class PlaceRepositoryMongoose implements PlaceRepository {
   }
 
   async findAll (limit: number, offset: number): Promise<PlaceModel[]> {
-    return await PlaceSchema.find().select('-created_at -updated_at').limit(limit).skip(offset)
+    return await PlaceSchema.find().select('-created_at -updated_at').limit(limit).skip(limit * offset)
+  }
+
+  async countPlaces (): Promise<number> {
+    return await PlaceSchema.find().count()
   }
 
   async findById (id: string): Promise<PlaceModel> {

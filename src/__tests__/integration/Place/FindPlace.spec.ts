@@ -29,32 +29,12 @@ describe('Find place', () => {
     mongoose.connection.close()
   })
 
-  test('Should get all places', async () => {
-    const data = body
-    await request(app).post('/api/place').set('Authorization', `Bearer ${token}`).send(data)
-    const responseTest: any = await request(app).post('/api/place').set('Authorization', `Bearer ${token}`).send({
-      ...data,
-      name: 'sports np',
-      cnpj: '44.027.321/0001-55',
-      courts: [{
-        ...body.courts[0],
-        place_name: 'sports np'
-      },
-      {
-        ...body.courts[1],
-        place_name: 'sports np'
-      }]
-    })
-    const response : any = await request(app).get('/api/place').set('Authorization', `Bearer ${token}`)
-    expect(response.body.length).toBeGreaterThan(1)
-  })
-
   test('Should get place by name', async () => {
     const data = body
     await request(app).post('/api/place').set('Authorization', `Bearer ${token}`).send(data)
     const response : any = await request(app).get(`/api/place/${data.name}`).set('Authorization', `Bearer ${token}`)
     expect(response.body.name).toBe('sports')
-    expect(typeof (response.body.address.city_code)).toBe('number')
+    expect(typeof (response.body.address.city_code)).toBe('string')
     expect(response.body.operation_time.days_open.length).toBeGreaterThan(1)
     expect(response.body.courts.length).toBeGreaterThan(1)
   })

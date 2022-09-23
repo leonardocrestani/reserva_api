@@ -1,9 +1,9 @@
-import { CreatePlaceService, UpdatePlaceService, FindPlaceService, DeletePlaceService } from '../../application/services'
+import { CreatePlaceService, UpdatePlaceService, FindPlaceService, DeletePlaceService, FindAllPlacesService } from '../../application/services'
 import { CourtRepositoryMongoose, PlaceRepositoryMongoose, ScheduleRepositoryMongoose } from '../../infra/repository'
 import { ok, created, HttpResponse, noContent } from '../contracts/HttpResponse'
 
 export class PlaceController {
-  static async register (query: any, params: any, body: any, next: any): Promise<HttpResponse> {
+  static async register (query: any, params: any, body: any): Promise<HttpResponse> {
     const placeRepository = new PlaceRepositoryMongoose()
     const courtRepository = new CourtRepositoryMongoose()
     const scheduleRepository = new ScheduleRepositoryMongoose()
@@ -12,23 +12,23 @@ export class PlaceController {
     return created(newPlace)
   }
 
-  static async findAll (query: any, params: any, body: any, next: any): Promise<HttpResponse> {
+  static async findAll (query: any, params: any, body: any): Promise<HttpResponse> {
     const placeRepository = new PlaceRepositoryMongoose()
-    const getPlaceService = new FindPlaceService(placeRepository)
+    const getPlaceService = new FindAllPlacesService(placeRepository)
     const limit = parseInt(query.limit, 10)
     const offset = parseInt(query.offset, 10)
     const places = await getPlaceService.findAll(limit, offset)
     return ok(places)
   }
 
-  static async findByName (query: any, params: any, body: any, next: any): Promise<HttpResponse> {
+  static async findByName (query: any, params: any, body: any): Promise<HttpResponse> {
     const placeRepository = new PlaceRepositoryMongoose()
     const getPlaceService = new FindPlaceService(placeRepository)
     const place = await getPlaceService.findByName(params.name)
     return ok(place)
   }
 
-  static async update (query: any, params: any, body: any, next: any): Promise<HttpResponse> {
+  static async update (query: any, params: any, body: any): Promise<HttpResponse> {
     const placeRepository = new PlaceRepositoryMongoose()
     const courtRepository = new CourtRepositoryMongoose()
     const scheduleRepository = new ScheduleRepositoryMongoose()
@@ -37,7 +37,7 @@ export class PlaceController {
     return noContent()
   }
 
-  static async delete (query: any, params: any, body: any, next: any): Promise<HttpResponse> {
+  static async delete (query: any, params: any, body: any): Promise<HttpResponse> {
     const placeRepository = new PlaceRepositoryMongoose()
     const courtRepository = new CourtRepositoryMongoose()
     const scheduleRepository = new ScheduleRepositoryMongoose()

@@ -3,6 +3,7 @@ import { CreateCourt } from '../../../core/use-cases'
 import { CourtModel } from '../../models'
 import { CourtRepository, PlaceRepository, ScheduleRepository } from '../../repository'
 import { Conflict } from '../../errors'
+import { InputCreateCourtDTO, OutputCreateCourtDTO } from '../../dtos'
 
 export class CreateCourtService implements CreateCourt {
   constructor (
@@ -11,7 +12,7 @@ export class CreateCourtService implements CreateCourt {
         private readonly scheduleRepository: ScheduleRepository
   ) { };
 
-  async create (data: CourtModel): Promise<CourtModel> {
+  async create (data: InputCreateCourtDTO): Promise<OutputCreateCourtDTO> {
     const getPlaceService = new FindPlaceService(this.placeRepository)
     const place = await getPlaceService.findByName(data.place_name)
     if (place.courts.length !== 0) {
@@ -22,7 +23,8 @@ export class CreateCourtService implements CreateCourt {
       })
     };
     data.place_id = place.id
-    const court: any = await this.courtRepository.create(data)
+    const courtData = new CourtModel(data.place_name, data.court_name, [], data.place_id)
+    const court: any = await this.courtRepository.create(courtData)
     await this.placeRepository.updateNumberOfCourts(data.place_name)
     const updatePlaceService = new UpdatePlaceService(this.placeRepository, this.courtRepository, this.scheduleRepository)
     place.courts.push(court.id)

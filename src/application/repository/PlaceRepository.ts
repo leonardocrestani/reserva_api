@@ -5,6 +5,8 @@ export interface PlaceRepository {
 
     findAll: (limit: number, offset: number) => Promise<PlaceModel[]>
 
+    countPlaces: () => Promise<number>
+
     findById: (id: string) => Promise<PlaceModel>;
 
     findByName: (name: string) => Promise<PlaceModel>;

@@ -35,7 +35,7 @@ export class ScheduleController {
     const scheduleRepository = new ScheduleRepositoryMongoose()
     const userRepository = new UserRepositoryMongoose()
     const unbookScheduleService = new UnbookScheduleService(scheduleRepository, userRepository)
-    await unbookScheduleService.update(params.id, query.userId)
+    await unbookScheduleService.update(params.id, query.userEmail)
     return noContent()
   }
 

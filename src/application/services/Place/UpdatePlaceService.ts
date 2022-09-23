@@ -4,6 +4,7 @@ import { CourtRepository, PlaceRepository, ScheduleRepository } from '../../repo
 import cnpjValidator from '../../../common/utils/cnpjValidator'
 import { makeRequest } from '../../../common/utils/makeRequest'
 import { UpdateCourtService } from '../Court/UpdateCourtService'
+import { InputUpdatePlaceDTO } from '../../dtos/Place/UpdatePlaceDTO'
 
 export class UpdatePlaceService implements UpdatePlace {
   constructor (
@@ -12,7 +13,7 @@ export class UpdatePlaceService implements UpdatePlace {
         private readonly scheduleRepository: ScheduleRepository
   ) { }
 
-  async update (name: string, data: any): Promise<void> {
+  async update (name: string, data: InputUpdatePlaceDTO): Promise<void> {
     const place = await this.placeRepository.findByName(name)
     if (!place) {
       throw new NotFound('Local nao encontrado')

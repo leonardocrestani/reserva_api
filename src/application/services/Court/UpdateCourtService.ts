@@ -4,6 +4,7 @@ import { Conflict, NotFound } from '../../errors'
 import { UpdateScheduleService } from '../Schedule/UpdateScheduleService'
 import { PlaceModel } from '../../models'
 import { FindPlaceService } from '../Place/FindPlaceService'
+import { InputUpdateCourtDTO, OutputFindCourtDTO } from '../../dtos'
 
 export class UpdateCourtService implements UpdateCourt {
   constructor (
@@ -12,8 +13,8 @@ export class UpdateCourtService implements UpdateCourt {
         private readonly scheduleRepository: ScheduleRepository
   ) { };
 
-  async update (id: string, data: any): Promise<void> {
-    const court = await this.courtRepository.findById(id)
+  async update (id: string, data: InputUpdateCourtDTO): Promise<void> {
+    const court : OutputFindCourtDTO = await this.courtRepository.findById(id)
     if (!court) {
       throw new NotFound('Quadra nao encontrada')
     }

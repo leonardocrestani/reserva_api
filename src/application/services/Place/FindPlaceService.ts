@@ -1,17 +1,12 @@
 import { FindPlace } from '../../../core/use-cases'
-import { PlaceModel } from '../../models'
-import { BadRequest, NotFound } from '../../errors'
+import { NotFound } from '../../errors'
 import { PlaceRepository } from '../../repository'
+import { OutputFindPlaceDTO } from '../../dtos/Place/FindPlaceDTO'
 
 export class FindPlaceService implements FindPlace {
   constructor (private readonly placeRepository: PlaceRepository) { }
 
-  async findAll (limit: number, offset: number): Promise<PlaceModel[]> {
-    const places = await this.placeRepository.findAll(limit, offset)
-    return places
-  }
-
-  async findById (id: string): Promise<PlaceModel> {
+  async findById (id: string): Promise<OutputFindPlaceDTO> {
     const place = await this.placeRepository.findById(id)
     if (!place) {
       throw new NotFound('Local nao encontrado')
@@ -19,7 +14,7 @@ export class FindPlaceService implements FindPlace {
     return place
   };
 
-  async findByName (name: string): Promise<PlaceModel> {
+  async findByName (name: string): Promise<OutputFindPlaceDTO> {
     const place = await this.placeRepository.findByName(name)
     if (!place) {
       throw new NotFound('Local nao encontrado')
@@ -27,7 +22,7 @@ export class FindPlaceService implements FindPlace {
     return place
   };
 
-  async findByCnpj (cnpj: string): Promise<PlaceModel> {
+  async findByCnpj (cnpj: string): Promise<OutputFindPlaceDTO> {
     const place = await this.placeRepository.findByCnpj(cnpj)
     if (!place) {
       throw new NotFound('Local nao encontrado')

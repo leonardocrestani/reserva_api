@@ -2,13 +2,13 @@ import cpfValidator from '../../../common/utils/cpfValidator'
 import encryptPassword from '../../../common/utils/encryptPassword'
 import { UpdateUser } from '../../../core/use-cases'
 import { Conflict, UnprocessableEntity } from '../../errors'
-import { UserModel } from '../../models'
 import { UserRepository } from '../../repository'
+import { InputUpdateUserDTO } from '../../dtos'
 
 export class UpdateUserService implements UpdateUser {
   constructor (private readonly userRepository: UserRepository) { };
 
-  async update (email: string, data: any): Promise<void> {
+  async update (email: string, data: InputUpdateUserDTO): Promise<void> {
     if (data.email) {
       if (await this.userRepository.findByEmail(data.email)) {
         throw new Conflict('Email ja cadastrado')

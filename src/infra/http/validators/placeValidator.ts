@@ -3,12 +3,19 @@ import { countries, states, weekendDays } from '../../../common/enums'
 const customJoi = Joi.extend(require('joi-phone-number'))
 
 const placeValidator = {
+  FIND_ALL: {
+    [Segments.QUERY]: Joi.object().keys({
+      userEmail: Joi.string().trim().optional(),
+      limit: Joi.number().required(),
+      offset: Joi.number().required()
+    })
+  },
   BODY: {
     [Segments.BODY]: customJoi.object().keys({
       name: Joi.string().trim().required(),
       cnpj: Joi.string().trim().required(),
       address: customJoi.object().keys({
-        city_code: Joi.number().required(),
+        city_code: Joi.string().trim().required(),
         city_name: Joi.string().trim().required(),
         state: Joi.string().valid(...Object.values(states)).required(),
         country: Joi.string().valid(...Object.values(countries)).required(),
@@ -40,7 +47,7 @@ const placeValidator = {
       name: Joi.string().trim().optional(),
       cnpj: Joi.string().trim().optional(),
       address: customJoi.object().keys({
-        city_code: Joi.number().optional(),
+        city_code: Joi.string().trim().optional(),
         city_name: Joi.string().trim().optional(),
         state: Joi.string().valid(...Object.values(states)).optional(),
         country: Joi.string().trim().optional(),

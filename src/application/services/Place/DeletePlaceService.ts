@@ -2,6 +2,7 @@ import { DeletePlace } from '../../../core/use-cases'
 import { BadRequest, NotFound } from '../../errors'
 import { CourtRepository, PlaceRepository, ScheduleRepository } from '../../repository'
 import { DeleteCourtService } from '../Court/DeleteCourtService'
+import { OutputFindPlaceDTO } from '../../dtos'
 
 export class DeletePlaceService implements DeletePlace {
   constructor (
@@ -11,7 +12,7 @@ export class DeletePlaceService implements DeletePlace {
   ) { }
 
   async delete (name: string): Promise<void> {
-    const place = await this.placeRepository.findByName(name)
+    const place : OutputFindPlaceDTO = await this.placeRepository.findByName(name)
     if (!place) {
       throw new NotFound('Local nao encontrado')
     }
