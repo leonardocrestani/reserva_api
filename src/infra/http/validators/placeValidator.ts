@@ -3,6 +3,13 @@ import { countries, states, weekendDays } from '../../../common/enums'
 const customJoi = Joi.extend(require('joi-phone-number'))
 
 const placeValidator = {
+  FIND_ALL: {
+    [Segments.QUERY]: Joi.object().keys({
+      userEmail: Joi.string().trim().optional(),
+      limit: Joi.number().required(),
+      offset: Joi.number().required()
+    })
+  },
   BODY: {
     [Segments.BODY]: customJoi.object().keys({
       name: Joi.string().trim().required(),

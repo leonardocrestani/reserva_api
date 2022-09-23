@@ -8,7 +8,7 @@ import authMiddleware from '../middlewares/authMiddleware'
 const placeRouter = Router()
 
 placeRouter.use(authMiddleware)
-placeRouter.get('/', ExpressAdapter.create(PlaceController.findAll))
+placeRouter.get('/', celebrate(placeValidator.FIND_ALL, { abortEarly: true }), ExpressAdapter.create(PlaceController.findAll))
 placeRouter.get('/:name', celebrate(placeValidator.QUERY, { abortEarly: true }), ExpressAdapter.create(PlaceController.findByName))
 placeRouter.post('/', celebrate(placeValidator.BODY, { abortEarly: true }), ExpressAdapter.create(PlaceController.register))
 placeRouter.put('/:name', celebrate(placeValidator.UPDATE, { abortEarly: true }), ExpressAdapter.create(PlaceController.update))

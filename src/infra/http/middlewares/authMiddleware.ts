@@ -17,7 +17,7 @@ export default (req: Request, res: Response, next: NextFunction) => {
     }
     const decodedToken : any = jwt.verify(token, `${process.env.SECRET_KEY}`)
     const userEmail = decodedToken.email
-    req.query = { userEmail }
+    req.query = { ...req.query, userEmail }
     return next()
   })
 }
