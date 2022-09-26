@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prebuild": "rm -rf ./dist",
-    "build": "tsc --build",
-    "start": "export NODE_ENV=local&& node ./dist/src/infra/http/server.js",
-    "dev": "export NODE_ENV=local&& tsnd --respawn ./src/infra/http/server.ts",
+    "build": "tsc --build --force",
+    "prestart": "tsc --build --force",
+    "start": "node ./dist/src/infra/http/server.js",
+    "dev": "tsnd --respawn ./src/infra/http/server.ts",
     "test:integration:local": "export NODE_ENV=local&& jest --silent=true",
     "lint": "eslint --ext js,ts,tsx ./src"
   },

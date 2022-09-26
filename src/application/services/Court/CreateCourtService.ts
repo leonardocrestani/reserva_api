@@ -16,7 +16,7 @@ export class CreateCourtService implements CreateCourt {
     const getPlaceService = new FindPlaceService(this.placeRepository)
     const place = await getPlaceService.findByName(data.place_name)
     if (place.courts.length !== 0) {
-      place.courts.map((court: any) => {
+      place.courts.map((court) => {
         if (court.court_name === data.court_name) {
           throw new Conflict('Quadra ja existente')
         }
@@ -24,10 +24,10 @@ export class CreateCourtService implements CreateCourt {
     };
     data.place_id = place.id
     const courtData = new CourtModel(data.place_name, data.court_name, [], data.place_id)
-    const court: any = await this.courtRepository.create(courtData)
+    const court: OutputCreateCourtDTO = await this.courtRepository.create(courtData)
     await this.placeRepository.updateNumberOfCourts(data.place_name)
     const updatePlaceService = new UpdatePlaceService(this.placeRepository, this.courtRepository, this.scheduleRepository)
-    place.courts.push(court.id)
+    place.courts.push(court)
     await updatePlaceService.update(place.name, { courts: place.courts })
     return court
   }

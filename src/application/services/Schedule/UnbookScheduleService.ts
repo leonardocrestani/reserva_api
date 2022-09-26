@@ -5,7 +5,7 @@ import { BadRequest, NotFound, UnprocessableEntity } from '../../errors'
 import { UpdateUserService } from '../User/UpdateUserService'
 import mongoose from 'mongoose'
 import { UnbookSchedule } from '../../../core/use-cases'
-import { OutputFindScheduleDTO, OutputFindUserDTO } from '../../dtos'
+import { OutputFindScheduleDTO, OutputFindUserDTO, InputUnbookScheduleDTO } from '../../dtos'
 
 export class UnbookScheduleService implements UnbookSchedule {
   constructor (
@@ -14,7 +14,7 @@ export class UnbookScheduleService implements UnbookSchedule {
   ) { }
 
   async update (id: string, userEmail?: string): Promise<void> {
-    const data: any = {}
+    const data: InputUnbookScheduleDTO = {}
     if (!mongoose.Types.ObjectId.isValid(id)) {
       throw new UnprocessableEntity('Formato de ID invalido')
     }

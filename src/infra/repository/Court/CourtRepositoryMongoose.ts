@@ -1,17 +1,10 @@
 import CourtSchema from '../../database/models/Court'
-import PlaceSchema from '../../database/models/Place'
 import { CourtRepository } from '../../../application/repository'
 import { CourtModel } from '../../../application/models'
 
 export class CourtRepositoryMongoose implements CourtRepository {
-  async create (data: any): Promise<CourtModel> {
+  async create (data: CourtModel): Promise<CourtModel> {
     return await CourtSchema.create(data)
-  }
-
-  async pushCourts (place_id: string, court: any): Promise<void> {
-    const place = await PlaceSchema.findById(place_id)
-    place.courts.push(court)
-    await place.save()
   }
 
   async findById (id: string): Promise<CourtModel> {
@@ -22,7 +15,7 @@ export class CourtRepositoryMongoose implements CourtRepository {
     return await CourtSchema.findOneAndUpdate({ _id: id }, { place_name }, { new: true })
   }
 
-  async update (id: string, data: any): Promise<CourtModel> {
+  async update (id: string, data: object): Promise<CourtModel> {
     return await CourtSchema.findOneAndUpdate({ _id: id }, data, { new: true })
   }
 

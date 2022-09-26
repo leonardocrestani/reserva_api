@@ -1,14 +1,14 @@
 export type HttpResponse = {
     statusCode: number,
-    body: any
+    body: object
 }
 
-const ok = (data: any): HttpResponse => ({
+const ok = (data: object): HttpResponse => ({
   statusCode: 200,
   body: data
 })
 
-const created = (data: any): HttpResponse => ({
+const created = (data: object): HttpResponse => ({
   statusCode: 201,
   body: data
 })

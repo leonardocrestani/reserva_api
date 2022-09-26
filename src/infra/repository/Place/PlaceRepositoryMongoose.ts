@@ -3,7 +3,7 @@ import { PlaceRepository } from '../../../application/repository'
 import { PlaceModel } from '../../../application/models'
 
 export class PlaceRepositoryMongoose implements PlaceRepository {
-  async create (data: any): Promise<PlaceModel> {
+  async create (data: PlaceModel): Promise<PlaceModel> {
     return await PlaceSchema.create(data)
   }
 
@@ -32,7 +32,7 @@ export class PlaceRepositoryMongoose implements PlaceRepository {
     return await PlaceSchema.findOne({ cnpj }).populate('courts')
   }
 
-  async update (name: string, data: any): Promise<PlaceModel> {
+  async update (name: string, data: object): Promise<PlaceModel> {
     return await PlaceSchema.findOneAndUpdate({ name }, data, { new: true })
   }
 

@@ -3,7 +3,7 @@ import { ScheduleRepository } from '../../../application/repository/ScheduleRepo
 import { ScheduleModel } from '../../../application/models'
 
 export class ScheduleRepositoryMongoose implements ScheduleRepository {
-  async create (data: any): Promise<ScheduleModel> {
+  async create (data: ScheduleModel): Promise<ScheduleModel> {
     return await ScheduleSchema.create(data)
   }
 
@@ -23,7 +23,7 @@ export class ScheduleRepositoryMongoose implements ScheduleRepository {
     return await ScheduleSchema.findOneAndUpdate({ _id: id }, { court_name })
   }
 
-  async update (id: string, data: any): Promise<ScheduleModel> {
+  async update (id: string, data: ScheduleModel): Promise<ScheduleModel> {
     return await ScheduleSchema.findOneAndUpdate({ id }, {
       responsible_person_email: data.responsible_person_email,
       responsible_person_id: data.responsible_person_id,

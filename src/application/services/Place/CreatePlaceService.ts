@@ -35,7 +35,7 @@ export class CreatePlaceService implements CreatePlace {
     }
     placeFields.number_of_courts = 0
     if (courts.length > 0) {
-      courts.map((court: any) => {
+      courts.map((court) => {
         if (court.place_name !== placeFields.name) {
           throw new UnprocessableEntity('Local da quadra invalido')
         }

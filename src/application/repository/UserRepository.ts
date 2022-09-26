@@ -7,7 +7,7 @@ export interface UserRepository {
 
     findById: (id: string) => Promise<UserModel>;
 
-    update: (email: string, data: any) => Promise<number>;
+    update: (email: string, data: object) => Promise<number>;
 
     remove: (email: string) => Promise<UserModel>;
 }

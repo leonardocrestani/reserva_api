@@ -20,7 +20,7 @@ export class CreateScheduleService implements CreateSchedule {
     if (!PlaceModel.isOpen(data.day, data.hour, place.operation_time.days_open, place.operation_time.close_hour, place.operation_time.open_hour)) {
       throw new BadRequest('Local fechado não é possivel cadastrar horario')
     }
-    const exist = place.courts.some((court: any) => {
+    const exist = place.courts.some((court) => {
       return court.court_name === data.court_name
     })
     if (!exist) {
