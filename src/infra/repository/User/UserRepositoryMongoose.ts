@@ -7,7 +7,7 @@ export class UserRepositoryMongoose implements UserRepository {
     return await UserSchema.create(data)
   }
 
-  async findByEmail (email: string): Promise<any> {
+  async findByEmail (email: string): Promise<UserModel> {
     return await UserSchema.findOne({ email }).populate('schedules')
   }
 
@@ -15,7 +15,7 @@ export class UserRepositoryMongoose implements UserRepository {
     return await UserSchema.findById(id)
   }
 
-  async update (email: string, data: any): Promise<number> {
+  async update (email: string, data: object): Promise<number> {
     return await UserSchema.findOneAndUpdate({ email }, data)
   }
 

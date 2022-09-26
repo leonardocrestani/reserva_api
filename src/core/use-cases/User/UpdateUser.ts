@@ -1,3 +1,3 @@
 export interface UpdateUser {
-    update: (email: string, data: any) => Promise<void>;
+    update: (email: string, data: object) => Promise<void>;
 }

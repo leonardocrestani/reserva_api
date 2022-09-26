@@ -13,7 +13,7 @@ export interface PlaceRepository {
 
     findByCnpj: (cnpj: string) => Promise<PlaceModel>;
 
-    update: (name: string, data: any) => Promise<PlaceModel>;
+    update: (name: string, data: object) => Promise<PlaceModel>;
 
     updateNumberOfCourts: (name: string) => Promise<PlaceModel>;
 

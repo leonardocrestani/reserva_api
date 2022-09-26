@@ -7,7 +7,7 @@ export interface CourtRepository {
 
     updatePlaceName: (id: string, place_name: string) => Promise<CourtModel>;
 
-    update: (id: string, data: any) => Promise<CourtModel>;
+    update: (id: string, data: object) => Promise<CourtModel>;
 
     delete: (id: string) => Promise<void>;
 }
