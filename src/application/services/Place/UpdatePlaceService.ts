@@ -5,6 +5,7 @@ import cnpjValidator from '../../../common/utils/cnpjValidator'
 import { makeRequest } from '../../../common/utils/makeRequest'
 import { UpdateCourtService } from '../Court/UpdateCourtService'
 import { InputUpdatePlaceDTO } from '../../dtos/Place/UpdatePlaceDTO'
+import cnpjFormatter from '../../../common/utils/cnpjFormatter'
 
 export class UpdatePlaceService implements UpdatePlace {
   constructor (
@@ -22,6 +23,7 @@ export class UpdatePlaceService implements UpdatePlace {
       if (!cnpjValidator(data.cnpj)) {
         throw new UnprocessableEntity('CNPJ invalido')
       }
+      data.cnpj = cnpjFormatter(data.cnpj)
     }
     if (data.operation_time) {
       if (data.operation_time.open_hour < 0 || data.operation_time.close_hour > 23 || data.operation_time.open_hour >= data.operation_time.close_hour) {

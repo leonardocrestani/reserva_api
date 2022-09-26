@@ -472,9 +472,26 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object"
+                    "type": "object",
+                    "properties": {
+                      "places" : {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        }
+                      },
+                      "limit": {
+                        "type": "number"
+                      },
+                      "currentPage": {
+                        "type": "number"
+                      },
+                      "pages": {
+                        "type": "number"
+                      },
+                      "totalRecords": {
+                        "type": "number"
+                      }
                   }
                 }
               }
@@ -1147,8 +1164,8 @@
         "tags": [
           "Court"
         ],
-        "summary": "Get court by id",
-        "description": "Get court by id",
+        "summary": "Create new court",
+        "description": "Create new court",
         "requestBody": {
           "content": {
             "application/json": {

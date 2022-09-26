@@ -18,6 +18,9 @@ export class UpdateCourtService implements UpdateCourt {
     if (!court) {
       throw new NotFound('Quadra nao encontrada')
     }
+    if (data.court_name === court.court_name) {
+      throw new Conflict('Nao e possivel atualizar para o mesmo nome')
+    }
     const findPlaceService = new FindPlaceService(this.placeRepository)
     const place = await findPlaceService.findById(court.place_id)
     place.courts.map((court) => {

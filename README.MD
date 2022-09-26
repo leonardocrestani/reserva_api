@@ -41,7 +41,7 @@
     - O usuário que reservou um horário pode desmarcar ele respectivamente, o horário vai voltar a possuir a "flag" de reservado como falso e os campos de email, nome e id do usuário que tinha reservado voltam ficar nulos
 
 ## Instalação local
-Para instalação local é preciso trocar o DATABASE_URL no arquivo .env para a URL do mongoDB da sua máquina, as collections serão geradas automaticamente pelo mongoose, é necessário ter o mongoDB instalado na máquina ou utilizar o mongoDB Atlas para acessar o banco de dados<br>
+Para instalação local é preciso trocar o DATABASE_URL no arquivo .env para a URL do mongoDB da sua máquina '127.0.0.1', as collections serão geradas automaticamente pelo mongoose, é necessário ter o mongoDB instalado na máquina ou utilizar o mongoDB Atlas para acessar o banco de dados<br>
 
 Instalar dependências
 ```bash
@@ -49,12 +49,13 @@ npm install
 ```
 
 Compilar o projeto <br>
+É possível compilar o projeto separadamente ou rodar o comando start o projeto vai ser compilado automaticamente
 ```bash
 npm run build
 ```
 
 Executar aplicação <br>
-Após a compilação o arquivo compilado de TS para JS vai ser criado na pasta "/dist" e assim disponível para execução
+Após a compilação o arquivo compilado de TS para JS vai ser criado na pasta "/dist" e assim disponível para execução<br>
 ```bash
 npm run start
 ```
